@@ -2,7 +2,8 @@
 
 2026-10-21 18:24后更新：主控明确批准一次修复后v3 GPU验证。
 `parscale-20261021-cache-diagnostic-v3` 已固定为单次执行，沿用18GiB/10%单次准入、
-16GiB cap及BF16 .03门槛；正在提交/同步，尚未宣称启动或通过。旧v2取消仅结束旧任务。
+16GiB cap及BF16 .03门槛；已真实启动：systemd MainPID1959608、RuntimeMaxSec1800、KillMode=control-group，
+启动提交1f1aeed。当前会话直接监督并拉取证据，无并发resume。尚未形成通过结论。旧v2取消仅结束旧任务。
 
 最新执行更新：用户已授权继续 validation 诊断与修复。已设计
 `parscale-20261021-cache-diagnostic-v2`，资源准入明确修订为每模型
