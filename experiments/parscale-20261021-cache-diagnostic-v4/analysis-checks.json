@@ -1,0 +1,126 @@
+{
+  "actual_block_nll": {
+    "P1": [
+      {
+        "nll_sum_nats": 2583.4150390625,
+        "token_count": 1023
+      },
+      {
+        "nll_sum_nats": 2866.578857421875,
+        "token_count": 1023
+      }
+    ],
+    "P2": [
+      {
+        "nll_sum_nats": 2527.74853515625,
+        "token_count": 1023
+      },
+      {
+        "nll_sum_nats": 2775.93505859375,
+        "token_count": 1023
+      }
+    ],
+    "P4": [
+      {
+        "nll_sum_nats": 2493.47705078125,
+        "token_count": 1023
+      },
+      {
+        "nll_sum_nats": 2767.83935546875,
+        "token_count": 1023
+      }
+    ]
+  },
+  "actual_validation_two_block_bootstrap": {
+    "P2-P1": {
+      "bootstrap_mean": -0.07173265277045913,
+      "ci95_high": -0.05441495983015665,
+      "ci95_low": -0.08860586395711145,
+      "method": "shared paired contiguous-block draws; sum NLL/sum tokens per draw",
+      "observed_delta_nll": -0.07151041189363383,
+      "replicates": 2000,
+      "seed": 20261021
+    },
+    "P4-P1": {
+      "bootstrap_mean": -0.09227366075860681,
+      "ci95_high": -0.08791592207355814,
+      "ci95_low": -0.09651955225134401,
+      "method": "shared paired contiguous-block draws; sum NLL/sum tokens per draw",
+      "observed_delta_nll": -0.0922177371624513,
+      "replicates": 2000,
+      "seed": 20261021
+    },
+    "P4-P2": {
+      "bootstrap_mean": -0.020541007988147647,
+      "ci95_high": -0.007913688294232557,
+      "ci95_low": -0.03350096224340149,
+      "method": "shared paired contiguous-block draws; sum NLL/sum tokens per draw",
+      "observed_delta_nll": -0.020707325268817467,
+      "replicates": 2000,
+      "seed": 20261021
+    }
+  },
+  "bootstrap_config": {
+    "note": "Only two blocks exist in this validation diagnostic; the CI is correspondingly coarse.",
+    "replicates": 2000,
+    "seed": 20261021,
+    "unit": "contiguous 1024-token validation blocks"
+  },
+  "created_at": "2026-10-21T10:47:16.264603+00:00",
+  "fixtures": {
+    "paired_effect": {
+      "P1": [
+        [
+          10.0,
+          10
+        ],
+        [
+          12.0,
+          10
+        ]
+      ],
+      "P2": [
+        [
+          9.0,
+          10
+        ],
+        [
+          11.0,
+          10
+        ]
+      ],
+      "bootstrap": {
+        "P2-P1": {
+          "bootstrap_mean": -0.1,
+          "ci95_high": -0.09999999999999987,
+          "ci95_low": -0.10000000000000009,
+          "method": "shared paired contiguous-block draws; sum NLL/sum tokens per draw",
+          "observed_delta_nll": -0.10000000000000009,
+          "replicates": 2000,
+          "seed": 20261021
+        }
+      },
+      "expected_delta": -0.1
+    },
+    "unequal_blocks_token_weighted": {
+      "blocks": [
+        [
+          1.0,
+          3
+        ],
+        [
+          4.0,
+          7
+        ]
+      ],
+      "detects_mean_of_means_error": true,
+      "mean_of_block_means": 0.45238095238095233,
+      "sum_nll": 5.0,
+      "sum_tokens": 10,
+      "token_weighted": 0.5
+    }
+  },
+  "fixtures_passed": true,
+  "run_id": "parscale-20261021-cache-diagnostic-v4",
+  "schema_version": 1
+}

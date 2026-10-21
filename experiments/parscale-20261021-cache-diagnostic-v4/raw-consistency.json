@@ -1,0 +1,399 @@
+{
+  "array_hashes": {
+    "checked": 48,
+    "mismatches": []
+  },
+  "created_at": "2026-10-21T10:54:25.727828+00:00",
+  "data_checks": {
+    "block_hashes_match": true,
+    "blocks_used": 2,
+    "text_sha256_match": true,
+    "token_ids_sha256_match": true
+  },
+  "failures": [],
+  "file_hashes": {
+    "checked": 18,
+    "mismatches": []
+  },
+  "max_abs_deviations": {
+    "P1/block0/fp32_per_position": 1.9371509552001953e-06,
+    "P1/block1/fp32_per_position": 2.0563602447509766e-06,
+    "P1/seq0/cached_p1/per_position": 9.059906005859375e-06,
+    "P1/seq0/cached_p32/per_position": 9.298324584960938e-06,
+    "P1/seq0/full/per_position": 1.9073486328125e-06,
+    "P1/seq1/cached_p1/per_position": 1.2159347534179688e-05,
+    "P1/seq1/cached_p32/per_position": 1.4066696166992188e-05,
+    "P1/seq1/full/per_position": 1.9073486328125e-06,
+    "P2/block0/fp32_per_position": 2.0265579223632812e-06,
+    "P2/block1/fp32_per_position": 2.175569534301758e-06,
+    "P2/seq0/cached_p1/per_position": 1.1920928955078125e-05,
+    "P2/seq0/cached_p32/per_position": 1.0967254638671875e-05,
+    "P2/seq0/full/per_position": 1.9073486328125e-06,
+    "P2/seq1/cached_p1/per_position": 1.0013580322265625e-05,
+    "P2/seq1/cached_p32/per_position": 1.1920928955078125e-05,
+    "P2/seq1/full/per_position": 9.5367431640625e-07,
+    "P4/block0/fp32_per_position": 2.205371856689453e-06,
+    "P4/block1/fp32_per_position": 2.1830201148986816e-06,
+    "P4/seq0/cached_p1/per_position": 2.002716064453125e-05,
+    "P4/seq0/cached_p32/per_position": 1.6689300537109375e-05,
+    "P4/seq0/full/per_position": 9.5367431640625e-07,
+    "P4/seq1/cached_p1/per_position": 1.424551010131836e-05,
+    "P4/seq1/cached_p32/per_position": 1.430511474609375e-05,
+    "P4/seq1/full/per_position": 9.5367431640625e-07
+  },
+  "metric_recompute": {
+    "P1": {
+      "loss": {
+        "block0": {
+          "bf16_minus_fp32_recomputed": -1.0033202583363163,
+          "bf16_nll_from_stored_logprobs": 2582.4126953666637,
+          "bf16_nll_stored": 2582.41259765625,
+          "fp32_nll_recomputed": 2583.416015625,
+          "fp32_nll_stored": 2583.4150390625,
+          "fp32_target_logprob_max_abs_diff": 1.9371509552001953e-06
+        },
+        "block1": {
+          "bf16_minus_fp32_recomputed": -0.35163115020259283,
+          "bf16_nll_from_stored_logprobs": 2866.2282028341724,
+          "bf16_nll_stored": 2866.22802734375,
+          "fp32_nll_recomputed": 2866.579833984375,
+          "fp32_nll_stored": 2866.578857421875,
+          "fp32_target_logprob_max_abs_diff": 2.0563602447509766e-06
+        }
+      },
+      "sequences": {
+        "0/bfloat16": {
+          "cached_p1_vs_fp32": {
+            "elements": 9723904,
+            "max_abs": 0.18683862686157227,
+            "mean_abs": 0.01647351309657097,
+            "p99_abs": 0.05858551740646378
+          },
+          "cached_p32_vs_fp32": {
+            "elements": 9723904,
+            "max_abs": 0.14756667613983154,
+            "mean_abs": 0.016037581488490105,
+            "p99_abs": 0.057718753814697266
+          },
+          "full_vs_cached_p1": {
+            "elements": 9723904,
+            "max_abs": 0.203125,
+            "mean_abs": 0.017109068110585213,
+            "p99_abs": 0.0625
+          },
+          "full_vs_cached_p32": {
+            "elements": 9723904,
+            "max_abs": 0.1875,
+            "mean_abs": 0.01664762757718563,
+            "p99_abs": 0.0625
+          },
+          "full_vs_fp32": {
+            "elements": 9723904,
+            "max_abs": 0.15796852111816406,
+            "mean_abs": 0.015690715983510017,
+            "p99_abs": 0.0567645955085756
+          }
+        },
+        "0/float32": {
+          "full_vs_cached_p1": {
+            "elements": 9723904,
+            "max_abs": 2.288818359375e-05,
+            "mean_abs": 1.6863201608430245e-06,
+            "p99_abs": 6.198883056640625e-06
+          },
+          "full_vs_cached_p32": {
+            "elements": 9723904,
+            "max_abs": 2.288818359375e-05,
+            "mean_abs": 1.7232468962902203e-06,
+            "p99_abs": 6.67572021484375e-06
+          }
+        },
+        "1/bfloat16": {
+          "cached_p1_vs_fp32": {
+            "elements": 9723904,
+            "max_abs": 0.13787841796875,
+            "mean_abs": 0.014462806284427643,
+            "p99_abs": 0.05055379867553711
+          },
+          "cached_p32_vs_fp32": {
+            "elements": 9723904,
+            "max_abs": 0.14140290021896362,
+            "mean_abs": 0.014774413779377937,
+            "p99_abs": 0.05277442932128906
+          },
+          "full_vs_cached_p1": {
+            "elements": 9723904,
+            "max_abs": 0.15625,
+            "mean_abs": 0.014852914027869701,
+            "p99_abs": 0.0625
+          },
+          "full_vs_cached_p32": {
+            "elements": 9723904,
+            "max_abs": 0.16015625,
+            "mean_abs": 0.014885114505887032,
+            "p99_abs": 0.0625
+          },
+          "full_vs_fp32": {
+            "elements": 9723904,
+            "max_abs": 0.1659247875213623,
+            "mean_abs": 0.014949406497180462,
+            "p99_abs": 0.05336809158325195
+          }
+        },
+        "1/float32": {
+          "full_vs_cached_p1": {
+            "elements": 9723904,
+            "max_abs": 2.09808349609375e-05,
+            "mean_abs": 1.6153556998688146e-06,
+            "p99_abs": 6.198883056640625e-06
+          },
+          "full_vs_cached_p32": {
+            "elements": 9723904,
+            "max_abs": 2.193450927734375e-05,
+            "mean_abs": 1.6687296238160343e-06,
+            "p99_abs": 6.67572021484375e-06
+          }
+        }
+      }
+    },
+    "P2": {
+      "loss": {
+        "block0": {
+          "bf16_minus_fp32_recomputed": 0.13047369393098052,
+          "bf16_nll_from_stored_logprobs": 2527.879497131431,
+          "bf16_nll_stored": 2527.87939453125,
+          "fp32_nll_recomputed": 2527.7490234375,
+          "fp32_nll_stored": 2527.74853515625,
+          "fp32_target_logprob_max_abs_diff": 2.0265579223632812e-06
+        },
+        "block1": {
+          "bf16_minus_fp32_recomputed": -0.0675276169058634,
+          "bf16_nll_from_stored_logprobs": 2775.868507539344,
+          "bf16_nll_stored": 2775.86865234375,
+          "fp32_nll_recomputed": 2775.93603515625,
+          "fp32_nll_stored": 2775.93505859375,
+          "fp32_target_logprob_max_abs_diff": 2.175569534301758e-06
+        }
+      },
+      "sequences": {
+        "0/bfloat16": {
+          "cached_p1_vs_fp32": {
+            "elements": 9723904,
+            "max_abs": 0.1678674817085266,
+            "mean_abs": 0.01394322793930769,
+            "p99_abs": 0.04974186062812813
+          },
+          "cached_p32_vs_fp32": {
+            "elements": 9723904,
+            "max_abs": 0.1372399628162384,
+            "mean_abs": 0.01405680738389492,
+            "p99_abs": 0.049803733825683594
+          },
+          "full_vs_cached_p1": {
+            "elements": 9723904,
+            "max_abs": 0.21875,
+            "mean_abs": 0.015240291133522987,
+            "p99_abs": 0.0625
+          },
+          "full_vs_cached_p32": {
+            "elements": 9723904,
+            "max_abs": 0.171875,
+            "mean_abs": 0.015099025331437588,
+            "p99_abs": 0.0625
+          },
+          "full_vs_fp32": {
+            "elements": 9723904,
+            "max_abs": 0.14470863342285156,
+            "mean_abs": 0.013984899036586285,
+            "p99_abs": 0.05009174346923828
+          }
+        },
+        "0/float32": {
+          "full_vs_cached_p1": {
+            "elements": 9723904,
+            "max_abs": 2.193450927734375e-05,
+            "mean_abs": 1.6718686310923658e-06,
+            "p99_abs": 6.67572021484375e-06
+          },
+          "full_vs_cached_p32": {
+            "elements": 9723904,
+            "max_abs": 2.384185791015625e-05,
+            "mean_abs": 1.7063728137145517e-06,
+            "p99_abs": 6.67572021484375e-06
+          }
+        },
+        "1/bfloat16": {
+          "cached_p1_vs_fp32": {
+            "elements": 9723904,
+            "max_abs": 0.12207436561584473,
+            "mean_abs": 0.012026023119688034,
+            "p99_abs": 0.04105567932128906
+          },
+          "cached_p32_vs_fp32": {
+            "elements": 9723904,
+            "max_abs": 0.11521387100219727,
+            "mean_abs": 0.012315160594880581,
+            "p99_abs": 0.0416610801219941
+          },
+          "full_vs_cached_p1": {
+            "elements": 9723904,
+            "max_abs": 0.15625,
+            "mean_abs": 0.012099416926503181,
+            "p99_abs": 0.0625
+          },
+          "full_vs_cached_p32": {
+            "elements": 9723904,
+            "max_abs": 0.15625,
+            "mean_abs": 0.011915921233594418,
+            "p99_abs": 0.0625
+          },
+          "full_vs_fp32": {
+            "elements": 9723904,
+            "max_abs": 0.12709331512451172,
+            "mean_abs": 0.011905289255082607,
+            "p99_abs": 0.040964603424072266
+          }
+        },
+        "1/float32": {
+          "full_vs_cached_p1": {
+            "elements": 9723904,
+            "max_abs": 2.193450927734375e-05,
+            "mean_abs": 1.5624391380697489e-06,
+            "p99_abs": 6.198883056640625e-06
+          },
+          "full_vs_cached_p32": {
+            "elements": 9723904,
+            "max_abs": 2.384185791015625e-05,
+            "mean_abs": 1.6103007283163606e-06,
+            "p99_abs": 6.198883056640625e-06
+          }
+        }
+      }
+    },
+    "P4": {
+      "loss": {
+        "block0": {
+          "bf16_minus_fp32_recomputed": 0.8350658263238984,
+          "bf16_nll_from_stored_logprobs": 2494.312849029449,
+          "bf16_nll_stored": 2494.31298828125,
+          "fp32_nll_recomputed": 2493.477783203125,
+          "fp32_nll_stored": 2493.47705078125,
+          "fp32_target_logprob_max_abs_diff": 2.205371856689453e-06
+        },
+        "block1": {
+          "bf16_minus_fp32_recomputed": 0.06934882716905122,
+          "bf16_nll_from_stored_logprobs": 2767.909436717794,
+          "bf16_nll_stored": 2767.909423828125,
+          "fp32_nll_recomputed": 2767.840087890625,
+          "fp32_nll_stored": 2767.83935546875,
+          "fp32_target_logprob_max_abs_diff": 2.1830201148986816e-06
+        }
+      },
+      "sequences": {
+        "0/bfloat16": {
+          "cached_p1_vs_fp32": {
+            "elements": 9723904,
+            "max_abs": 0.1612025499343872,
+            "mean_abs": 0.01245683990418911,
+            "p99_abs": 0.04540657997131348
+          },
+          "cached_p32_vs_fp32": {
+            "elements": 9723904,
+            "max_abs": 0.1429429054260254,
+            "mean_abs": 0.0124053955078125,
+            "p99_abs": 0.04449820518493652
+          },
+          "full_vs_cached_p1": {
+            "elements": 9723904,
+            "max_abs": 0.1875,
+            "mean_abs": 0.012347309850156307,
+            "p99_abs": 0.0625
+          },
+          "full_vs_cached_p32": {
+            "elements": 9723904,
+            "max_abs": 0.1875,
+            "mean_abs": 0.01248965598642826,
+            "p99_abs": 0.0625
+          },
+          "full_vs_fp32": {
+            "elements": 9723904,
+            "max_abs": 0.16000521183013916,
+            "mean_abs": 0.01223018579185009,
+            "p99_abs": 0.04454086780548128
+          }
+        },
+        "0/float32": {
+          "full_vs_cached_p1": {
+            "elements": 9723904,
+            "max_abs": 2.288818359375e-05,
+            "mean_abs": 1.7664439155851142e-06,
+            "p99_abs": 6.67572021484375e-06
+          },
+          "full_vs_cached_p32": {
+            "elements": 9723904,
+            "max_abs": 2.47955322265625e-05,
+            "mean_abs": 1.8190995660916087e-06,
+            "p99_abs": 6.67572021484375e-06
+          }
+        },
+        "1/bfloat16": {
+          "cached_p1_vs_fp32": {
+            "elements": 9723904,
+            "max_abs": 0.1290629357099533,
+            "mean_abs": 0.010987834073603153,
+            "p99_abs": 0.03819751739501953
+          },
+          "cached_p32_vs_fp32": {
+            "elements": 9723904,
+            "max_abs": 0.12920379638671875,
+            "mean_abs": 0.011061766184866428,
+            "p99_abs": 0.038138389587402344
+          },
+          "full_vs_cached_p1": {
+            "elements": 9723904,
+            "max_abs": 0.1494140625,
+            "mean_abs": 0.011143120937049389,
+            "p99_abs": 0.0625
+          },
+          "full_vs_cached_p32": {
+            "elements": 9723904,
+            "max_abs": 0.140625,
+            "mean_abs": 0.01058125589042902,
+            "p99_abs": 0.046875
+          },
+          "full_vs_fp32": {
+            "elements": 9723904,
+            "max_abs": 0.11921310424804688,
+            "mean_abs": 0.011262081563472748,
+            "p99_abs": 0.038830872774124225
+          }
+        },
+        "1/float32": {
+          "full_vs_cached_p1": {
+            "elements": 9723904,
+            "max_abs": 2.86102294921875e-05,
+            "mean_abs": 1.6964881979220081e-06,
+            "p99_abs": 6.67572021484375e-06
+          },
+          "full_vs_cached_p32": {
+            "elements": 9723904,
+            "max_abs": 2.86102294921875e-05,
+            "mean_abs": 1.7354215060549905e-06,
+            "p99_abs": 6.67572021484375e-06
+          }
+        }
+      }
+    }
+  },
+  "purpose": "CPU-only recomputation from saved raw arrays and validation tokens; no GPU model rerun.",
+  "run_id": "parscale-20261021-cache-diagnostic-v4",
+  "schema_version": 1,
+  "status": "PASSED",
+  "tolerances": {
+    "error_stats_abs": 0.0001,
+    "fp32_cache_abs": 1e-06,
+    "nll_nats": 0.01,
+    "per_position_logprob_abs": 5e-05,
+    "target_logprob_abs": 2e-05
+  }
+}

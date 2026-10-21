@@ -1,0 +1,295 @@
+{
+  "admission_requirement": {
+    "allocator_cap_gib": 16.0,
+    "free_mib_min": 18432,
+    "gpu_uuid": "GPU-REDACTED",
+    "sampling": "one observation before each model; no conditional retry",
+    "scope": "before every creation of an FP32 or BF16 GPU model",
+    "utilization_percent_max": null,
+    "utilization_record_only": true
+  },
+  "budget": {
+    "known_prior_active_wall_seconds": {
+      "parscale-20261021-smoke": 84.136,
+      "parscale-20261021-smoke-r2": 1782.092,
+      "parscale-20261021-smoke-r3": 2487.346,
+      "sum": 4353.574
+    },
+    "known_prior_gpu_hours": {
+      "note": "Earlier runs were download/preparation or short smoke; not independently metered. This run records per-model active seconds and wall; GPT must reconcile cumulative totals.",
+      "parscale-20261021-smoke-r3_reported_estimate": 0.06
+    },
+    "project_active_hours_ceiling": 6,
+    "project_gpu_hours_ceiling": 4,
+    "systemd_runtime_max_sec": 1800,
+    "task_gpu_hours_ceiling": 0.25,
+    "task_wall_seconds_ceiling": 1740
+  },
+  "checks": [
+    {
+      "created_at": "2026-10-21T10:44:48.858671+00:00",
+      "decision": "admit",
+      "label": "P1/float32",
+      "passed": true,
+      "requirement": {
+        "free_mib_min": 18432,
+        "max_samples": 1,
+        "utilization_percent_max": null,
+        "utilization_record_only": true
+      },
+      "samples": [
+        {
+          "free_mib": 18798,
+          "sampled_at": "2026-10-21T10:44:48.858625+00:00",
+          "utilization_percent": 19.0,
+          "uuid": "GPU-REDACTED"
+        }
+      ]
+    },
+    {
+      "created_at": "2026-10-21T10:45:05.915964+00:00",
+      "decision": "admit",
+      "label": "P1/bfloat16",
+      "passed": true,
+      "requirement": {
+        "free_mib_min": 18432,
+        "max_samples": 1,
+        "utilization_percent_max": null,
+        "utilization_record_only": true
+      },
+      "samples": [
+        {
+          "free_mib": 18726,
+          "sampled_at": "2026-10-21T10:45:05.915918+00:00",
+          "utilization_percent": 7.0,
+          "uuid": "GPU-REDACTED"
+        }
+      ]
+    },
+    {
+      "created_at": "2026-10-21T10:45:39.446299+00:00",
+      "decision": "admit",
+      "label": "P2/float32",
+      "passed": true,
+      "requirement": {
+        "free_mib_min": 18432,
+        "max_samples": 1,
+        "utilization_percent_max": null,
+        "utilization_record_only": true
+      },
+      "samples": [
+        {
+          "free_mib": 18720,
+          "sampled_at": "2026-10-21T10:45:39.446246+00:00",
+          "utilization_percent": 18.0,
+          "uuid": "GPU-REDACTED"
+        }
+      ]
+    },
+    {
+      "created_at": "2026-10-21T10:45:53.470116+00:00",
+      "decision": "admit",
+      "label": "P2/bfloat16",
+      "passed": true,
+      "requirement": {
+        "free_mib_min": 18432,
+        "max_samples": 1,
+        "utilization_percent_max": null,
+        "utilization_record_only": true
+      },
+      "samples": [
+        {
+          "free_mib": 18720,
+          "sampled_at": "2026-10-21T10:45:53.470076+00:00",
+          "utilization_percent": 12.0,
+          "uuid": "GPU-REDACTED"
+        }
+      ]
+    },
+    {
+      "created_at": "2026-10-21T10:46:26.256120+00:00",
+      "decision": "admit",
+      "label": "P4/float32",
+      "passed": true,
+      "requirement": {
+        "free_mib_min": 18432,
+        "max_samples": 1,
+        "utilization_percent_max": null,
+        "utilization_record_only": true
+      },
+      "samples": [
+        {
+          "free_mib": 18720,
+          "sampled_at": "2026-10-21T10:46:26.256091+00:00",
+          "utilization_percent": 7.0,
+          "uuid": "GPU-REDACTED"
+        }
+      ]
+    },
+    {
+      "created_at": "2026-10-21T10:46:41.148156+00:00",
+      "decision": "admit",
+      "label": "P4/bfloat16",
+      "passed": true,
+      "requirement": {
+        "free_mib_min": 18432,
+        "max_samples": 1,
+        "utilization_percent_max": null,
+        "utilization_record_only": true
+      },
+      "samples": [
+        {
+          "free_mib": 18720,
+          "sampled_at": "2026-10-21T10:46:41.148120+00:00",
+          "utilization_percent": 11.0,
+          "uuid": "GPU-REDACTED"
+        }
+      ]
+    },
+    {
+      "created_at": "2026-10-21T10:47:16.327251+00:00",
+      "decision": "admit",
+      "label": "P1/timing_bfloat16",
+      "passed": true,
+      "requirement": {
+        "free_mib_min": 18432,
+        "max_samples": 1,
+        "utilization_percent_max": null,
+        "utilization_record_only": true
+      },
+      "samples": [
+        {
+          "free_mib": 18720,
+          "sampled_at": "2026-10-21T10:47:16.327204+00:00",
+          "utilization_percent": 3.0,
+          "uuid": "GPU-REDACTED"
+        }
+      ]
+    },
+    {
+      "created_at": "2026-10-21T10:47:36.413621+00:00",
+      "decision": "admit",
+      "label": "P2/timing_bfloat16",
+      "passed": true,
+      "requirement": {
+        "free_mib_min": 18432,
+        "max_samples": 1,
+        "utilization_percent_max": null,
+        "utilization_record_only": true
+      },
+      "samples": [
+        {
+          "free_mib": 18720,
+          "sampled_at": "2026-10-21T10:47:36.413592+00:00",
+          "utilization_percent": 11.0,
+          "uuid": "GPU-REDACTED"
+        }
+      ]
+    },
+    {
+      "created_at": "2026-10-21T10:47:55.786745+00:00",
+      "decision": "admit",
+      "label": "P4/timing_bfloat16",
+      "passed": true,
+      "requirement": {
+        "free_mib_min": 18432,
+        "max_samples": 1,
+        "utilization_percent_max": null,
+        "utilization_record_only": true
+      },
+      "samples": [
+        {
+          "free_mib": 18720,
+          "sampled_at": "2026-10-21T10:47:55.786699+00:00",
+          "utilization_percent": 10.0,
+          "uuid": "GPU-REDACTED"
+        }
+      ]
+    }
+  ],
+  "created_at": "2026-10-21T10:44:48.708470+00:00",
+  "dataset": {
+    "evaluation_split": "test",
+    "id": "Salesforce/wikitext",
+    "revision": "b08601e04326c79dfdd32d625aee71d232d685c3",
+    "smoke_split": "validation",
+    "subset": "wikitext-2-raw-v1"
+  },
+  "disk": {
+    "data_root_free_bytes": 151563186176,
+    "data_root_total_bytes": 5952693100544,
+    "data_root_used_bytes": 5501054464000,
+    "new_disk_budget_gib": 25
+  },
+  "git": {
+    "branch": "exp/parscale-20261021",
+    "head_commit": "c6a28df97623a4ad9f40ea5403178301eb085c47",
+    "status_porcelain": ""
+  },
+  "gpu": {
+    "authorized_gpu_nvidia_smi": "GPU-REDACTED, NVIDIA GeForce RTX 3090, 570.211.01, 24576 MiB",
+    "compute_capability": "8.6",
+    "cuda_visible_devices_env": "GPU-REDACTED",
+    "cudnn_version": 8902,
+    "device_count_visible": 1,
+    "device_name": "NVIDIA GeForce RTX 3090",
+    "device_uuid_torch": null,
+    "expected_gpu_uuid": "GPU-REDACTED",
+    "nvidia_smi_all": [
+      "GPU-REDACTED, NVIDIA GeForce RTX 3090, 570.211.01, 24576 MiB",
+      "GPU-REDACTED, NVIDIA GeForce RTX 3090, 570.211.01, 24576 MiB",
+      "GPU-REDACTED, NVIDIA GeForce RTX 3090, 570.211.01, 24576 MiB",
+      "GPU-REDACTED, NVIDIA GeForce RTX 3090, 570.211.01, 24576 MiB"
+    ],
+    "torch_cuda_available": true,
+    "torch_cuda_version": "12.1",
+    "torch_version": "2.2.2+cu121",
+    "total_memory_gib": 23.56854248046875,
+    "uuid_matches_lock": true
+  },
+  "memory_cap": {
+    "cap_gib": 16.0,
+    "fraction_of_total": 0.6788709999041815,
+    "total_gib": 23.56854248046875
+  },
+  "models": {
+    "P1": {
+      "model_safetensors_bytes": 2687840768,
+      "path": "/path/to/parscale-runtime/models/P1"
+    },
+    "P2": {
+      "model_safetensors_bytes": 2697379032,
+      "path": "/path/to/parscale-runtime/models/P2"
+    },
+    "P4": {
+      "model_safetensors_bytes": 2706905312,
+      "path": "/path/to/parscale-runtime/models/P4"
+    }
+  },
+  "nvidia_smi_all": [
+    "GPU-REDACTED, 0, NVIDIA GeForce RTX 3090, 24576 MiB, 5338 MiB, 18798 MiB, 8 %, 570.211.01",
+    "GPU-REDACTED, 1, NVIDIA GeForce RTX 3090, 24576 MiB, 7146 MiB, 16990 MiB, 0 %, 570.211.01",
+    "GPU-REDACTED, 2, NVIDIA GeForce RTX 3090, 24576 MiB, 14866 MiB, 9270 MiB, 71 %, 570.211.01",
+    "GPU-REDACTED, 3, NVIDIA GeForce RTX 3090, 24576 MiB, 4144 MiB, 19991 MiB, 3 %, 570.211.01"
+  ],
+  "packages": {
+    "datasets": "3.5.0",
+    "einops": "0.8.1",
+    "huggingface-hub": "0.30.2",
+    "numpy": "1.26.4",
+    "pandas": "2.3.3",
+    "pyarrow": "25.0.1",
+    "regex": "2026.7.19",
+    "safetensors": "0.8.0",
+    "scipy": "1.14.1",
+    "tokenizers": "0.21.4",
+    "torch": "2.2.2+cu121",
+    "transformers": "4.51.3"
+  },
+  "run_id": "parscale-20261021-cache-diagnostic-v4",
+  "schema_version": 1,
+  "systemd_unit": "parscale-cache-diagnostic-v4.service",
+  "updated_at": "2026-10-21T10:47:55.787294+00:00",
+  "worker_started_at": "2026-10-21T10:43:43.943111+00:00",
+  "wrapper_pid": 1963258
+}

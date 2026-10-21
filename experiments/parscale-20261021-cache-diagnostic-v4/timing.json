@@ -1,0 +1,205 @@
+{
+  "created_at": "2026-10-21T10:47:16.266949+00:00",
+  "created_at_finished": "2026-10-21T10:48:14.900639+00:00",
+  "label": "validation-only functional timing; not a performance claim",
+  "models": {
+    "P1": {
+      "all_repeat_seconds": [
+        2.1097111590206623,
+        1.197578715160489,
+        1.2034381236881018,
+        1.2073334474116564,
+        1.1763067469000816,
+        1.1866107992827892,
+        1.2177018001675606,
+        1.1914798393845558,
+        1.2031895089894533,
+        1.2163067795336246,
+        1.228600861504674,
+        1.2643308378756046,
+        1.1864929590374231
+      ],
+      "eos_stopping_disabled": true,
+      "expected_output_length": 160,
+      "greedy": true,
+      "label": "validation-only functional timing check; NOT a performance or efficiency benchmark",
+      "load_seconds": 1.3742692470550537,
+      "measured_repeats": 10,
+      "median_seconds": 1.2052614782005548,
+      "model": "P1",
+      "new_tokens": 32,
+      "output_length_ok": true,
+      "output_lengths": [
+        160,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160
+      ],
+      "p90_seconds": 1.232173859141767,
+      "peak_before_timing": {
+        "allocated": 1.2710862159729004,
+        "reserved": 1.34375
+      },
+      "peak_memory_gib": {
+        "allocated": 1.3106956481933594,
+        "reserved": 1.384765625
+      },
+      "prompt_tokens": 128,
+      "raw_seconds": [
+        1.2073334474116564,
+        1.1763067469000816,
+        1.1866107992827892,
+        1.2177018001675606,
+        1.1914798393845558,
+        1.2031895089894533,
+        1.2163067795336246,
+        1.228600861504674,
+        1.2643308378756046,
+        1.1864929590374231
+      ],
+      "warmup_repeats": 3
+    },
+    "P2": {
+      "all_repeat_seconds": [
+        1.2257299404591322,
+        1.2431728057563305,
+        1.2383009232580662,
+        1.2466799709945917,
+        1.2362725473940372,
+        1.249174878001213,
+        1.2361527048051357,
+        1.2245584558695555,
+        1.2261363714933395,
+        1.2147274315357208,
+        1.228554092347622,
+        1.2550488524138927,
+        1.4121419955044985
+      ],
+      "eos_stopping_disabled": true,
+      "expected_output_length": 160,
+      "greedy": true,
+      "label": "validation-only functional timing check; NOT a performance or efficiency benchmark",
+      "load_seconds": 0.9537675380706787,
+      "measured_repeats": 10,
+      "median_seconds": 1.2362126260995865,
+      "model": "P2",
+      "new_tokens": 32,
+      "output_length_ok": true,
+      "output_lengths": [
+        160,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160
+      ],
+      "p90_seconds": 1.2707581667229533,
+      "peak_before_timing": {
+        "allocated": 1.275829792022705,
+        "reserved": 1.34375
+      },
+      "peak_memory_gib": {
+        "allocated": 1.3188037872314453,
+        "reserved": 1.392578125
+      },
+      "prompt_tokens": 128,
+      "raw_seconds": [
+        1.2466799709945917,
+        1.2362725473940372,
+        1.249174878001213,
+        1.2361527048051357,
+        1.2245584558695555,
+        1.2261363714933395,
+        1.2147274315357208,
+        1.228554092347622,
+        1.2550488524138927,
+        1.4121419955044985
+      ],
+      "warmup_repeats": 3
+    },
+    "P4": {
+      "all_repeat_seconds": [
+        1.2327326200902462,
+        1.2403753474354744,
+        1.2355761379003525,
+        1.2310027461498976,
+        1.2147457376122475,
+        1.223959719762206,
+        1.2131479643285275,
+        1.2518011219799519,
+        1.274702537804842,
+        1.260025404393673,
+        1.2127417773008347,
+        1.2236758507788181,
+        1.2214168384671211
+      ],
+      "eos_stopping_disabled": true,
+      "expected_output_length": 160,
+      "greedy": true,
+      "label": "validation-only functional timing check; NOT a performance or efficiency benchmark",
+      "load_seconds": 0.8471324443817139,
+      "measured_repeats": 10,
+      "median_seconds": 1.223817785270512,
+      "model": "P4",
+      "new_tokens": 32,
+      "output_length_ok": true,
+      "output_lengths": [
+        160,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160
+      ],
+      "p90_seconds": 1.26149311773479,
+      "peak_before_timing": {
+        "allocated": 1.2799606323242188,
+        "reserved": 1.345703125
+      },
+      "peak_memory_gib": {
+        "allocated": 1.3282217979431152,
+        "reserved": 1.421875
+      },
+      "prompt_tokens": 128,
+      "raw_seconds": [
+        1.2310027461498976,
+        1.2147457376122475,
+        1.223959719762206,
+        1.2131479643285275,
+        1.2518011219799519,
+        1.274702537804842,
+        1.260025404393673,
+        1.2127417773008347,
+        1.2236758507788181,
+        1.2214168384671211
+      ],
+      "warmup_repeats": 3
+    }
+  },
+  "run_id": "parscale-20261021-cache-diagnostic-v4",
+  "schema_version": 1,
+  "status": "complete"
+}

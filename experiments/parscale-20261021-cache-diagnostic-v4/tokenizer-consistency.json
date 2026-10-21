@@ -1,0 +1,151 @@
+{
+  "created_at": "2026-10-21T10:44:48.107723+00:00",
+  "dataset_fingerprint": "51d84d52d095f90d",
+  "dataset_id": "Salesforce/wikitext",
+  "dataset_revision": "b08601e04326c79dfdd32d625aee71d232d685c3",
+  "encoding_mismatches": {},
+  "full_encoding_equal_across_checkpoints": true,
+  "identity_per_checkpoint": {
+    "P1": {
+      "bos_token_id": null,
+      "class": "Qwen2TokenizerFast",
+      "eos_token_id": 151645,
+      "files": {
+        "tokenizer.json": {
+          "bytes": 7031645,
+          "sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539"
+        },
+        "tokenizer_config.json": {
+          "bytes": 7226,
+          "sha256": "7d0fc4691628c9f6b0c77f8138a80517896a307e074dd5ac87e279ea85515774"
+        }
+      },
+      "len": 151665,
+      "name_or_path": "/path/to/parscale-runtime/models/P1",
+      "pad_token_id": 151643,
+      "special_tokens": {
+        "additional_special_tokens": [
+          "<|im_start|>",
+          "<|im_end|>",
+          "<|object_ref_start|>",
+          "<|object_ref_end|>",
+          "<|box_start|>",
+          "<|box_end|>",
+          "<|quad_start|>",
+          "<|quad_end|>",
+          "<|vision_start|>",
+          "<|vision_end|>",
+          "<|vision_pad|>",
+          "<|image_pad|>",
+          "<|video_pad|>"
+        ],
+        "eos_token": "<|im_end|>",
+        "pad_token": "<|endoftext|>"
+      },
+      "validation_token_count": 262337,
+      "validation_token_ids_sha256": "5589175bd3ba8ced31b19b38ddd60715ea7779fdd8b3653f73eb973ee44dc76a",
+      "vocab_map_entries": 151665,
+      "vocab_map_sha256": "698c955b0b438a535083d1771ef8b41069afba4b3d51a482558bdb68ea55e800",
+      "vocab_size": 151643
+    },
+    "P2": {
+      "bos_token_id": null,
+      "class": "Qwen2TokenizerFast",
+      "eos_token_id": 151645,
+      "files": {
+        "tokenizer.json": {
+          "bytes": 7031645,
+          "sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539"
+        },
+        "tokenizer_config.json": {
+          "bytes": 7226,
+          "sha256": "7d0fc4691628c9f6b0c77f8138a80517896a307e074dd5ac87e279ea85515774"
+        }
+      },
+      "len": 151665,
+      "name_or_path": "/path/to/parscale-runtime/models/P2",
+      "pad_token_id": 151643,
+      "special_tokens": {
+        "additional_special_tokens": [
+          "<|im_start|>",
+          "<|im_end|>",
+          "<|object_ref_start|>",
+          "<|object_ref_end|>",
+          "<|box_start|>",
+          "<|box_end|>",
+          "<|quad_start|>",
+          "<|quad_end|>",
+          "<|vision_start|>",
+          "<|vision_end|>",
+          "<|vision_pad|>",
+          "<|image_pad|>",
+          "<|video_pad|>"
+        ],
+        "eos_token": "<|im_end|>",
+        "pad_token": "<|endoftext|>"
+      },
+      "validation_token_count": 262337,
+      "validation_token_ids_sha256": "5589175bd3ba8ced31b19b38ddd60715ea7779fdd8b3653f73eb973ee44dc76a",
+      "vocab_map_entries": 151665,
+      "vocab_map_sha256": "698c955b0b438a535083d1771ef8b41069afba4b3d51a482558bdb68ea55e800",
+      "vocab_size": 151643
+    },
+    "P4": {
+      "bos_token_id": null,
+      "class": "Qwen2TokenizerFast",
+      "eos_token_id": 151645,
+      "files": {
+        "tokenizer.json": {
+          "bytes": 7031645,
+          "sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539"
+        },
+        "tokenizer_config.json": {
+          "bytes": 7226,
+          "sha256": "7d0fc4691628c9f6b0c77f8138a80517896a307e074dd5ac87e279ea85515774"
+        }
+      },
+      "len": 151665,
+      "name_or_path": "/path/to/parscale-runtime/models/P4",
+      "pad_token_id": 151643,
+      "special_tokens": {
+        "additional_special_tokens": [
+          "<|im_start|>",
+          "<|im_end|>",
+          "<|object_ref_start|>",
+          "<|object_ref_end|>",
+          "<|box_start|>",
+          "<|box_end|>",
+          "<|quad_start|>",
+          "<|quad_end|>",
+          "<|vision_start|>",
+          "<|vision_end|>",
+          "<|vision_pad|>",
+          "<|image_pad|>",
+          "<|video_pad|>"
+        ],
+        "eos_token": "<|im_end|>",
+        "pad_token": "<|endoftext|>"
+      },
+      "validation_token_count": 262337,
+      "validation_token_ids_sha256": "5589175bd3ba8ced31b19b38ddd60715ea7779fdd8b3653f73eb973ee44dc76a",
+      "vocab_map_entries": 151665,
+      "vocab_map_sha256": "698c955b0b438a535083d1771ef8b41069afba4b3d51a482558bdb68ea55e800",
+      "vocab_size": 151643
+    }
+  },
+  "join_separator": "\\n\\n",
+  "num_empty_rows": 1299,
+  "num_rows": 3760,
+  "passed": true,
+  "requirement": "tokenizer files, vocabulary maps and full validation-corpus encodings identical across P1/P2/P4",
+  "run_id": "parscale-20261021-cache-diagnostic-v4",
+  "schema_version": 1,
+  "special_tokens_equal": true,
+  "split": "validation",
+  "subset": "wikitext-2-raw-v1",
+  "text_chars": 1149668,
+  "text_matches_parent_manifest": true,
+  "text_sha256": "b44fb967f92b525731216a507d1fbc44b97446b7ef0a2b4d1a893f81f1bbc29e",
+  "tokenizer_files_equal": true,
+  "vocab_maps_equal": true
+}
