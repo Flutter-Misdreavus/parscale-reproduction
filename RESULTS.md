@@ -1,30 +1,20 @@
 # Parallel Scaling 最小复现状态
 
-2026-10-21 18:24后更新：主控明确批准一次修复后v3 GPU验证。
-`parscale-20261021-cache-diagnostic-v3` 已固定为单次执行，沿用18GiB/10%单次准入、
-16GiB cap及BF16 .03门槛；已真实启动：systemd MainPID1959608、RuntimeMaxSec1800、KillMode=control-group，
-启动提交1f1aeed。当前会话直接监督并拉取证据，无并发resume。尚未形成通过结论。旧v2取消仅结束旧任务。
+2026-10-21 v3审查完成：**下载已完成；单次修复后GPU诊断在资源准入处停止；full尚未运行，不能宣称最小全量复现完成。**
 
-最新执行更新：用户已授权继续 validation 诊断与修复。已设计
-`parscale-20261021-cache-diagnostic-v2`，资源准入明确修订为每模型
-free>=18GiB（18432MiB）、util<=10%，16GiB cap 不变；科学门槛 .03 不变。
-v2 于2026-10-21 17:32:49北京时间真实启动，17:42:08由监督者取消：
-执行者在资源检查失败后自行更改采样并重跑，不符合失败即停要求。
-服务已停止（MainPID=0、ControlGroup空），完成事件已由本轮直接接收和审查，
-没有并发resume或活动后续listener。原始读数中空闲18798MiB，利用率曾达22%/12%；
-不据此声称GPU永久不可用，也不继续反复试探准入。
+`parscale-20261021-cache-diagnostic-v3` 在P2/BF16前仅一次读数为free18720MiB/util12%，利用率超过固定10%上限，立即停止，无重试。GPU run SHA为`1f1aeedb5d453a112e94db46fbb6de331f5a7933`；本次已使用唯一授权尝试，未改BF16 .03门槛，未继续full。
 
-DSH完成部分tokenizer/统计实现，但没有完整P1/P2/P4诊断矩阵。监督者已提交
-`7798c9c` 修复单次资源判定、GPU模型释放、评分提前返回和配对统计缺口，
-随后在GPU不可见的远程CPU环境通过6项针对性回归检查。没有修复后GPU验证，
-因此没有新科学结论、科学协议修订或full评估。
-[v2审查](experiments/parscale-20261021-cache-diagnostic-v2/review.md)和
-[检查记录](experiments/parscale-20261021-cache-diagnostic-v2/supervisor-checks.json)
-记录具体失败、修复与后续条件。下一步仍需在新run中完成已修复代码的受控GPU诊断；
-本次遵守资源失败后的停止，不自动再次运行。
+监督者在CUDA不可见环境独立读取P1原始数组：2046个validation target的FP32 NLL为2.663731906636；BF16保存target logprobs复算为2.663069842718，差-0.000662063918 nats/token。FP32 cache最大误差2.2888e-5，BF16为0.203125，仍未通过.03。P2只有FP32原始输出、P4缺失，实际配对bootstrap及计时未完成。平均NLL接近不能替代完整数值验证。
 
-四次wrapper墙钟合计4912.960秒；把它们全部保守计为GPU占用，上界约1.364711GPUh，
-仍低于4GPUh。这不是实测GPU活动积分，设计/监督耗时另计6小时预算。
+[本次审查](experiments/parscale-20261021-cache-diagnostic-v3/review.md)记录证据范围与局限；[CPU独立结果](experiments/parscale-20261021-cache-diagnostic-v3/supervisor-independent.json)运行代码SHA为`4a5011c`。修复SHA`7798c9c`已在v2后通过6项CPU回归，本次P1运行部分验证了修复；不能把部分完成写成完整诊断通过。
+
+远程worker结果SHA为`0d7fd01`，其中包含原始诊断日志，因此保留在远程且没有合并/推送该历史；脱敏结果relay提交为`4a07224`。最终审查HEAD和private验证/push状态记录于本地`runs/parscale-20261021-cache-diagnostic-v3-received/delivery-receipt.json`。包含本文的审查提交可用`git log -1 --format=%H -- RESULTS.md`定位。
+
+诊断墙钟130.764s，wrapper258.125s；五次已登记wrapper合计5171.085s，保守GPU占用上界约1.436413h，报告活动GPUh仅估计。主动墙钟没有完整积分，不能用wrapper时间代替6h总预算。仍受4GPUh/6h及今日21:30外层停止时间限制。
+
+最新服务核查MainPID=0、ControlGroup空，无本项目worker或listener；本轮直接接收已结束，无并发resume。当前决定为证据不足而停止，不自动新增GPU任务。v2失败、早期两次准备和r3失败全部保留；不得把资源停止解释为论文科学失败。
+
+## r3及此前结果（历史记录，以下提交与资源数不代表最新HEAD）
 
 截至 r3 审查：**下载完成，冒烟门槛未通过，完整测试尚未运行。** 这不是论文被证伪；不能宣称完整复现完成。
 
