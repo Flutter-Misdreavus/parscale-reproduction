@@ -158,6 +158,53 @@ def peak_mem_gib():
     }
 
 
+def gpu_admission(expected_uuid, free_mib_min=18432, util_max=10.0,
+                  required_consecutive=2, max_samples=10, interval=1.0):
+    """Bounded admission check for a single locked GPU.
+
+    Requires `required_consecutive` consecutive 1 s samples with
+    memory.free >= free_mib_min MiB and utilization.gpu <= util_max percent.
+    At most max_samples readings (<= ~6 s); this is a bounded gate, not polling.
+    """
+    samples = []
+    streak = 0
+    for i in range(max_samples):
+        raw = subprocess.check_output(
+            ["nvidia-smi", "--query-gpu=uuid,memory.free,utilization.gpu",
+             "--format=csv,noheader,nounits"], text=True, timeout=20)
+        rec = None
+        for line in raw.splitlines():
+            parts = [x.strip() for x in line.split(",")]
+            if parts and parts[0] == expected_uuid:
+                rec = {"uuid": parts[0], "free_mib": int(parts[1]),
+                       "utilization_percent": float(parts[2]),
+                       "sampled_at": utcnow()}
+                break
+        if rec is None:
+            raise RuntimeError(f"locked GPU {expected_uuid} not found in nvidia-smi: {raw}")
+        samples.append(rec)
+        if rec["free_mib"] >= free_mib_min and rec["utilization_percent"] <= util_max:
+            streak += 1
+        else:
+            streak = 0
+        if streak >= required_consecutive:
+            break
+        if i < max_samples - 1:
+            time.sleep(interval)
+    passed = streak >= required_consecutive
+    return {
+        "passed": passed,
+        "requirement": {"free_mib_min": free_mib_min,
+                        "utilization_percent_max": util_max,
+                        "required_consecutive_samples": required_consecutive,
+                        "max_samples": max_samples,
+                        "sample_interval_seconds": interval},
+        "samples": samples,
+        "consecutive_pass_samples": streak,
+        "decision": "admit" if passed else "stop: admission not met",
+    }
+
+
 # --------------------------------------------------------------------------- #
 # data and tokenizer
 # --------------------------------------------------------------------------- #
@@ -330,7 +377,12 @@ def scored_block(model, block, device):
         "manual_minus_label": nll - label_loss,
         "finite": bool(torch.isfinite(nll_sum).item() and math.isfinite(label_loss)),
         "seconds": time.time() - t0,
-    }, ids
+    }
+    if not rec["finite"]:
+        raise RuntimeError(f"non-finite NLL/loss at block: {rec}")
+    if int(ids.shape[1] - 1) != int(targets.numel()):
+        raise RuntimeError("target/token count mismatch in scored_block")
+    return rec, ids
 
 
 def causal_check(model, block, device):
@@ -491,9 +543,23 @@ def main():
     model_paths = resolve_model_paths(locks)
     results = {}
     checks = {}
+    admissions = []
     for m in locks["models"]:
         p = m["p"]
         path = model_paths[p]
+        adm = gpu_admission(locks["resource"]["gpu_uuid"], free_mib_min=18432,
+                            util_max=10.0, required_consecutive=2)
+        adm["model"] = f"P{p}"
+        admissions.append(adm)
+        atomic_json(run_dir / "preflight.json", {
+            "run_id": run_id, "schema_version": 1, "created_at": utcnow(),
+            "requirement": {"free_mib_min": 18432, "utilization_percent_max": 10.0,
+                            "sampling": "2 consecutive 1 s samples within <=10 readings"},
+            "checks": admissions,
+        })
+        print(f"[eval] P{p} admission passed={adm['passed']}", flush=True)
+        if not adm["passed"]:
+            raise RuntimeError(f"admission failed before P{p}: {adm}")
         print(f"[eval] P{p} load {path}", flush=True)
         torch.cuda.reset_peak_memory_stats()
         t0 = time.time()
@@ -565,6 +631,13 @@ def main():
             "file_manifest": model_file_manifest(path),
         }
         checks[f"P{p}"] = c
+        atomic_json(run_dir / "smoke.partial.json", {
+            "run_id": run_id, "schema_version": 1, "stage": args.stage,
+            "status": "partial", "updated_at": utcnow(),
+            "models": results, "checks": checks, "admissions": admissions,
+        })
+        if not c["causal"]["passed"]:
+            raise RuntimeError(f"causal invariant failed for P{p}: {c['causal']}")
         del model
         torch.cuda.empty_cache()
 
