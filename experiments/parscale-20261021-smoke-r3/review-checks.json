@@ -1,0 +1,94 @@
+{
+  "run_id": "parscale-20261021-smoke-r3",
+  "event_id": "81cb5f2613797757a7df3799c66f696891fd3f95efc0d3c6709f3322f8f7f6a3",
+  "report_sha256": "45f837dccbec7674856d1339e225309e8b43ca57923437e5111d6c4308066bb8",
+  "audit_run_commit": "d0fb70c19e0bb6d1b3112c905156d4788e3d510f",
+  "task_and_event_identity_verified": true,
+  "verified_artifacts": [
+    "report.json",
+    "environment.json",
+    "smoke.json",
+    "fit-results.json",
+    "data-manifest.json",
+    "requirements-freeze.txt",
+    "model-manifest.json",
+    "cache-diagnostic-fp32-l64.json",
+    "cache-diagnostic-bf16-l16.json",
+    "cache-diagnostic.json",
+    "raw/logs/evaluate.log",
+    "raw/logs/fit.log",
+    "raw/logs/verify-models.log",
+    "raw/logs/cache-diagnostic-fp32.log",
+    "raw/logs/cache-diagnostic-bf16-l16.log",
+    "raw/logs/download-resume-P1.log",
+    "raw/logs/download-resume-P1b.log",
+    "raw/logs/download-resume-P2.log",
+    "raw/logs/download-resume-P4.log",
+    "started.json",
+    "dsh-events.jsonl",
+    "dsh-stderr.log"
+  ],
+  "nll_recomputed_from_blocks": {
+    "P1": {
+      "nll_sum": 5448.640380859375,
+      "tokens": 2046,
+      "nll": 2.6630695898628423,
+      "ppl": 14.340240264286988
+    },
+    "P2": {
+      "nll_sum": 5303.748291015625,
+      "tokens": 2046,
+      "nll": 2.5922523416498655,
+      "ppl": 13.359828639611623
+    },
+    "P4": {
+      "nll_sum": 5262.22216796875,
+      "tokens": 2046,
+      "nll": 2.5719560938263686,
+      "ppl": 13.091407432668626
+    }
+  },
+  "nll_deltas": {
+    "P2-P1": -0.07081724821297675,
+    "P4-P1": -0.09111349603647367,
+    "P4-P2": -0.020296247823496927
+  },
+  "fit_recomputed_from_published_tables_and_reported_parameters": {
+    "pile": {
+      "r2": 0.9986755850944447,
+      "objective": 1.813937190656137e-05,
+      "source_table_matches": true,
+      "best_optimizer_success_reported": true,
+      "optimizer_rerun": false
+    },
+    "stack-v2-python": {
+      "r2": 0.9978327010258554,
+      "objective": 3.6767414791539775e-05,
+      "source_table_matches": true,
+      "best_optimizer_success_reported": true,
+      "optimizer_rerun": false
+    }
+  },
+  "tokenizer_file_hashes_identical": true,
+  "weight_manifest_matches_pinned_expected_hashes": true,
+  "cache_summary_cross_checks": {
+    "P1": {
+      "bf16_max": 0.1875,
+      "fp32_max": 2.193450927734375e-05
+    },
+    "P2": {
+      "bf16_max": 0.140625,
+      "fp32_max": 2.09808349609375e-05
+    },
+    "P4": {
+      "bf16_max": 0.125,
+      "fp32_max": 2.47955322265625e-05
+    }
+  },
+  "limitations": [
+    "No inference rerun; per-token logits and targets unavailable in received artifacts.",
+    "Full-corpus tokenizer equivalence was not enforced by worker.",
+    "Resource usage estimate is not a measured GPU activity integral.",
+    "FP32 sequence hash labels the parent 1024-token block, not the actual 64-token input."
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "run_id": "parscale-20261021-cache-diagnostic",
+  "parent_run_id": "parscale-20261021-smoke-r3",
+  "ready": true,
+  "execution_status": "NOT_STARTED_REVIEW_DELIVERABLE_ONLY",
+  "hypothesis": "Validation-only diagnosis: BF16 full/incremental discrepancies reflect finite-precision effects; assess their effect on target log probabilities against FP32 without redefining or passing the failed original BF16 gate.",
+  "baseline": "Same locked P1/P2/P4 checkpoint in FP32, full teacher-forced forward, SDPA.",
+  "intervention": "Same checkpoint, token sequence and SDPA backend: compare BF16 full and cached incremental paths with FP32 full and cached paths. No weight updates.",
+  "dataset": "Salesforce/wikitext wikitext-2-raw-v1 at b08601e04326c79dfdd32d625aee71d232d685c3; same locked P1/P2/P4 models and HF LFS hashes in locks.json and configs/model-sources.json.",
+  "split": "Validation only. Two existing first 1024-token blocks for loss; first 64 tokens of each block with prefill lengths 1 and 32 for cache diagnosis. Do not read or score test split in this task.",
+  "primary_metric": "For every model/path/sequence: max/mean/p99 absolute logit error and target log-probability difference versus the corresponding FP32 reference; per-block token-weighted BF16-minus-FP32 NLL.",
+  "decision_rule": "SUCCEEDED means complete finite diagnostic evidence and implemented safety/analysis checks, not acceptance of the r3 smoke gate or the scientific hypothesis. Preserve and report BF16 <=0.03 pass/fail unchanged. Report FP32 residuals and every position, no new acceptance threshold selected from observed BF16 maxima. GPT reviews the new evidence before any explicit protocol revision or full-test task.",
+  "controls": [
+    "This task is designed but not launched by the r3 review session. Before later execution verify absence of this run's service/processes and record cumulative project budget. This is a validation/code repair task, not a fourth preparation/download attempt.",
+    "Reuse the already complete locked remote checkpoints. No downloads or environment reinstall needed. No local weights. If a file fails hash verification, stop and report corruption rather than adding a preparation retry.",
+    "Before creating each GPU model (including tiny and diagnostics), enforce free >=20GiB and utilization <=10% on GPU-REDACTED. Keep the 16GiB allocator cap and measure actual process memory; do not reinterpret free-memory requirement as a guideline or affect other processes.",
+    "Use a systemd user service with RuntimeMaxSec=1800 and KillMode=control-group; wrapper <=1740s. No new long task without a real listener using --fetch-artifacts --execute --session-id SESSION-REDACTED, never --last.",
+    "Freeze and commit implementation before execution; preserve code/run/result SHAs separately. Keep raw arrays and logs outside Git. Publish only small sanitized metrics/manifests. Verify repository privacy before each relay push.",
+    "Preserve PROTOCOL.md, locks.json and r3 evidence. A different precision criterion requires a new explicit protocol version and full-task design; do not silently accept r3 or adjust .03.",
+    "No model training, no test-set selection, no paid resources. Existing SSH/Git authorization remains valid; do not ask again for routine authorized operations."
+  ],
+  "seeds": [42, 20261021],
+  "code_revision": "Start from reviewed r3 result dec4aaa2d95ae2e0f7f23339d370cc71f9d09e3d plus committed supervisor task; resolve actual launch HEAD. Implement and commit diagnostics/fixes before each command, record exact SHA and source hashes. Upstream remains cd6acb48ba6d3b1f9715785ff0d212751210177d.",
+  "environment": "Existing remote /path/to/parscale-reproduction checkout and /path/to/parscale-runtime; torch2.2.2+cu121, Transformers4.51.3, SDPA. Reuse runtime/pkgs and previously authorized read-only MemLoop torch path. All GPU accesses restricted to locked UUID. Existing complete model paths runtime/models/P1,P2,P4.",
+  "experiment_commands": [
+    "Inspect task/service identity and project budget; write preflight manifest. Stop before GPU initialization if resource gate fails. Record versions, TF32/backend settings and exact weight hashes without changing attention backend.",
+    "Repair evaluator to fail immediately on NaN, token mismatch, resource failure and unexpected gate failure, preserving partial evidence. Save metrics after each model; ensure independent FP32 diagnosis is a separate explicit mode and does not overwrite failed smoke.json.",
+    "Require tokenizer file manifests, vocabulary maps and full validation-corpus encodings to match across P1/P2/P4. Hash actual diagnostic token bytes separately from parent block hash; record dtype/shape/endian and input/target hashes.",
+    "Implement explicit --out diagnostics for FP32 and BF16 full/prefill/incremental paths on both fixed sequences and prefill lengths. Save raw reference/path arrays remotely with manifests for independent reviewer computation; record target log-probabilities, loss differences and worst-error coordinate with both logits, local BF16 spacing and FP32 reference. Do not infer all errors from unrelated global maximum logit magnitude.",
+    "Implement full-stage paired contiguous-block bootstrap (2000 paired resamples, seed20261021, sum NLL/sum tokens in each resample) and separate generation timing per PROTOCOL.md, but do not run full/test. CPU checks must include unequal block lengths to detect mean-of-means errors and a paired-effect fixture. Validation-only generation check uses 128 prompt tokens, 32 greedy new tokens, EOS stopping consistently disabled, synchronized timing and raw repeats; do not label this test performance.",
+    "Commit changes before meaningful small validation/CPU checks, run the bounded diagnostic matrix and preserve errors. Expected BF16 .03 failures are recorded diagnostic outcomes; NaN/OOM/token/resource mismatch stop the affected task immediately without repeated retries.",
+    "Write report.json, actual command-to-SHA mapping, resource ledger and small evidence; stop for review. Do not automatically start full evaluation."
+  ],
+  "budget": {
+    "gpu_count": 1,
+    "gpu_hours": 0.25,
+    "wall_seconds": 1740,
+    "max_attempts": 1,
+    "model_cost_limit": "One existing-provider DSH session <=1740s, no purchase/top-up. This budget is a ceiling within remaining project <=6 active hours and <=4GPUh, not an addition. Reconcile earlier runs and stop at earlier remaining limit."
+  },
+  "stop_conditions": [
+    "Runtime1740s wrapper/1800s systemd, task GPU .25h, project active6h/GPU4h, process16GiB or project new disk25GiB reached; delivery remains 2026-10-22T12:00:00+08:00.",
+    "Insufficient shared GPU free memory/utilization, new interference, OOM, NaN, weight mismatch or tokenizer/data mismatch: preserve evidence and stop; do not affect unrelated processes.",
+    "Any need to change model/dataset/split/attention backend or scientific acceptance criteria: report for review rather than silently changing it."
+  ],
+  "required_outputs": [
+    "report.json",
+    "preflight.json with timestamped per-model GPU checks",
+    "diagnostics.json with actual sequence/target hashes and raw-array manifest",
+    "tokenizer-consistency.json",
+    "analysis-checks.json and validation-only timing raw repeats",
+    "resource-ledger.json with wall and GPU measurements or explicit uncertainty",
+    "Committed implementation and sanitized evidence, exact run_commits and result HEAD"
+  ],
+  "version_control": {
+    "repository": "Flutter-Misdreavus/parscale-reproduction",
+    "visibility": "private",
+    "branch": "exp/parscale-20261021",
+    "push_mode": "relay",
+    "checkpoint_minutes": 15
+  }
+}
