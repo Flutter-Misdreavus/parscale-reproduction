@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "run_id": "parscale-20261021-smoke-r2",
+  "parent_run_id": "parscale-20261021-smoke",
+  "ready": true,
+  "hypothesis": "Implementation smoke gate: fixed official P1/P2/P4 checkpoints yield finite correctly aligned causal NLL; recomputed published scaling fits achieve R2 >= .99. Full hypothesis is in PROTOCOL.md; do not evaluate test yet.",
+  "baseline": "Official ParScale-0.7B-P1-Pile at locked revision.",
+  "intervention": "Official P2 and P4 variants at locked revisions; unmodified upstream classes.",
+  "dataset": "Salesforce/wikitext wikitext-2-raw-v1 revision b08601e04326c79dfdd32d625aee71d232d685c3; published arrays in pinned parametric_fit.py.",
+  "split": "Only first two 1024-token validation blocks in this stage. Test split reserved for later GPT-approved task.",
+  "primary_metric": "Finite token-weighted NLL nats/token and manual-vs-label/cached-vs-full consistency; scientific primary metric fixed in PROTOCOL.md.",
+  "decision_rule": "Report SUCCEEDED only if all three checkpoint smokes and causal/cache checks pass, plus numerical fits; report exact failures without changing protocol. Stop after report for GPT review.",
+  "controls": [
+    "Read PROTOCOL.md and locks.json before implementation; never change scientific criteria.",
+    "Use exact revisions/local model code; record tokenizer identity and config.",
+    "Use one specified GPU with 16 GiB cap; no unrelated process changes.",
+    "Commit code before each smoke run, after fixes and after outputs; relay pushes pending until GPT sync.",
+    "This invocation explicitly enables GPU-capable unconfined DSH mode through a task-local overlay; do not modify global settings. No sudo, child tmux, screen, setsid, sandbox escape, or unrelated directories. All commands stay under wrapper process group and foreground/polled DSH tools.",
+    "Existing runtime root outside workspace is explicitly authorized for this task only. Do not scan other projects/caches. Only read the specifically provided MemLoop torch site-packages path.",
+    "Precreate all torch CUDA contexts only after setting CUDA_VISIBLE_DEVICES to the specified UUID. Use timeout on network operations."
+  ],
+  "seeds": [
+    42,
+    20261021
+  ],
+  "code_revision": "Initial committed repository snapshot containing this task; resolve git rev-parse HEAD at start, preserve parent SHA, and record each later implementation/run commit explicitly. Upstream cd6acb48ba6d3b1f9715785ff0d212751210177d.",
+  "environment": "Remote Ubuntu, Python3.10, 4xRTX3090; only GPU-REDACTED authorized. Reuse read-only torch2.2.2+cu121 from /path/to/data/MemLoop/runtime/venv via new isolated venv with explicit site path if compatible; never pip into MemLoop. All new env/cache under /path/to/parscale-runtime. DSH0.2.1-rc.2 via existing adapter.; task-local runtime/dsh-gpu-adapter explicitly supplies DSH danger-full-access mode for GPU and own runtime writes; no global policy change.",
+  "experiment_commands": [
+    "Inspect git status/HEAD, GPU and disk; read protocol; create isolated environment and install requirements without changing other projects.",
+    "Implement scripts/evaluate.py supporting --stage smoke|full --run-dir PATH and scripts/fit_scaling.py --out PATH, per PROTOCOL.md. Pin every model/data download. If packages missing, install only own venv.",
+    "Create focused smoke checks for label alignment, future-token causality, cached decode equivalence and a tiny random-model backward check including nonzero finite prefix/aggregation gradients for P2. Commit implementation before running.",
+    "Run CPU published-data fit; run evaluate.py --stage smoke on validation first 2 blocks for P1/P2/P4 only. Record commands and run SHAs.",
+    "Commit sanitized smoke evidence and report summary to experiments/parscale-20261021-smoke-r2; write report.json with relay push pending. Stop; do not run full stage."
+  ],
+  "budget": {
+    "gpu_count": 1,
+    "gpu_hours": 0.5,
+    "wall_seconds": 2700,
+    "max_attempts": 2,
+    "model_cost_limit": "One DSH session, <=2700 wall seconds; existing authorized provider account, no purchase/top-up, stop on quota error."
+  },
+  "stop_conditions": [
+    "Wall limit 2700s or GPU active time 0.5h or disk growth25GiB; timeout all downloads with bounded retries.",
+    "GPU not free enough or new interference risks/OOM/NaN/data leakage; stop affected task and preserve evidence.",
+    "Cannot fetch pinned source or dependencies: BLOCKED, no alternate data/model.",
+    "At most two localized implementation fixes, each committed before rerun. No scope changes."
+  ],
+  "required_outputs": [
+    "report.json",
+    "environment.json",
+    "smoke.json",
+    "fit-results.json",
+    "data-manifest.json",
+    "requirements-freeze.txt",
+    "Source files and small evidence committed; actual run_commits and final HEAD in report."
+  ],
+  "version_control": {
+    "repository": "Flutter-Misdreavus/parscale-reproduction",
+    "visibility": "private",
+    "branch": "exp/parscale-20261021",
+    "push_mode": "relay",
+    "checkpoint_minutes": 15
+  }
+}
