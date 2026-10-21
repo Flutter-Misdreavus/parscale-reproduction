@@ -2,8 +2,8 @@
   "schema_version": 1,
   "run_id": "parscale-20261021-full",
   "parent_run_id": "parscale-20261021-cache-diagnostic-v4",
-  "ready": false,
-  "execution_status": "DRAFT_WAITING_FOR_INDEPENDENT_V4_REVIEW",
+  "ready": true,
+  "execution_status": "AUTHORIZED_AFTER_INDEPENDENT_V4_REVIEW",
   "hypothesis": "At fixed official ~0.7B weights, increasing parallel streams from1 to2/4 reduces teacher-forced prediction NLL on the locked complete WikiText2 test split.",
   "baseline": "Official ParScale0.7B P1; BF16 primary and independently scored FP32 sensitivity.",
   "intervention": "Official same-family P2 andP4 checkpoints; no training or checkpoint selection.",
@@ -64,5 +64,6 @@
     "checkpoint_minutes": 15
   },
   "protocol_amendment": "experiments/parscale-20261021-full/protocol-v2.md",
-  "full_test_authorized_by_supervisor": false
+  "full_test_authorized_by_supervisor": true,
+  "supervisor_review_event_id": "6a5d82a2ec6e1e095fe74522d717371fc6c5df21acfd52536c30984c24b83feb"
 }
