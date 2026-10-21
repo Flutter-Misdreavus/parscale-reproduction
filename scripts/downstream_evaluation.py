@@ -855,7 +855,7 @@ def smoke(run_dir):
                    "continuation_sha256": sha256_bytes(case["continuation"].encode())}
             case_rows.append(row)
             validation["manual_cases"].append(row)
-        b = benchmark(model, tok, repeats=2)
+        b = benchmark(model, tok, repeats=1)
         peak = {"allocated_gib": torch.cuda.max_memory_allocated() / 1024**3,
                 "reserved_gib": torch.cuda.max_memory_reserved() / 1024**3}
         models[f"P{p}"] = {"load_seconds": load_s, "peak_memory_gib": peak,
@@ -863,6 +863,7 @@ def smoke(run_dir):
                            "max_abs_diff": max(r["abs_diff"] for r in case_rows)}
         del lm
         release(model)
+        del model
         print(f"[smoke] P{p} load={load_s:.1f}s peak={peak['allocated_gib']:.2f}GiB "
               f"max_manual_diff={models[f'P{p}']['max_abs_diff']:.2e}", flush=True)
 
@@ -1090,6 +1091,7 @@ def evaluate(run_dir):
                 atomic_json(run_dir / "full-results.json", results)
             del lm
             release(model)
+            del model
         results["status"] = "SUCCEEDED"
         results["finished_at"] = utcnow()
         results["resource_usage"] = {"wall_seconds": time.time() - started,
