@@ -1,0 +1,1 @@
+Use skills/research-orchestrator/SKILL.md. Follow PROTOCOL.md and the fixed task. This private experiment repository uses relay pushes; do not upload credentials, raw datasets, weights or DSH logs. Commit explicit paths before running code and after each implementation/fix/phase; messages include run_id and purpose. Preserve actual run SHA separately from later result SHA.

@@ -1,0 +1,43 @@
+{
+  "upstream_commit": "cd6acb48ba6d3b1f9715785ff0d212751210177d",
+  "models": [
+    {
+      "p": 1,
+      "id": "ParScale/ParScale-0.7B-P1-Pile",
+      "revision": "881efa413e390400d5121468f259c6180073c721"
+    },
+    {
+      "p": 2,
+      "id": "ParScale/ParScale-0.7B-P2-Pile",
+      "revision": "4cd35ea21ca4a721b69bc9854cbd397605e3c146"
+    },
+    {
+      "p": 4,
+      "id": "ParScale/ParScale-0.7B-P4-Pile",
+      "revision": "da736174c40a0d6f2eca0b6daf0ee7916dffa362"
+    }
+  ],
+  "dataset": {
+    "id": "Salesforce/wikitext",
+    "revision": "b08601e04326c79dfdd32d625aee71d232d685c3",
+    "subset": "wikitext-2-raw-v1",
+    "smoke_split": "validation",
+    "evaluation_split": "test"
+  },
+  "evaluation": {
+    "seed": 42,
+    "context_length": 1024,
+    "batch_size": 1,
+    "dtype": "bfloat16",
+    "attention": "sdpa",
+    "bootstrap_replicates": 2000,
+    "bootstrap_seed": 20261021
+  },
+  "resource": {
+    "gpu_uuid": "GPU-REDACTED",
+    "gpu_count": 1,
+    "max_allocated_gib": 16,
+    "max_disk_gib": 25,
+    "final_deadline": "2026-10-22T12:00:00+08:00"
+  }
+}
