@@ -1,0 +1,441 @@
+{
+  "checks": {
+    "all_scored_nll_finite": true,
+    "cached_vs_full_within_0.03": false,
+    "causal_invariant": true,
+    "manual_vs_label_within_1e-3": true,
+    "tiny_backward_grads": true,
+    "tokenizer_identical_probe": true
+  },
+  "finished_at": "2026-10-21T08:57:52.969790+00:00",
+  "git": {
+    "branch": "exp/parscale-20261021",
+    "head_commit": "27293651bcf6bfd156a177467ff8e099ecc3754a",
+    "status_porcelain": ""
+  },
+  "gpu": {
+    "authorized_gpu_nvidia_smi": "GPU-REDACTED, NVIDIA GeForce RTX 3090, 570.211.01, 24576 MiB",
+    "compute_capability": "8.6",
+    "cuda_visible_devices_env": "GPU-REDACTED",
+    "cudnn_version": 8902,
+    "device_count_visible": 1,
+    "device_name": "NVIDIA GeForce RTX 3090",
+    "device_uuid_torch": null,
+    "expected_gpu_uuid": "GPU-REDACTED",
+    "nvidia_smi_all": [
+      "GPU-REDACTED, NVIDIA GeForce RTX 3090, 570.211.01, 24576 MiB",
+      "GPU-REDACTED, NVIDIA GeForce RTX 3090, 570.211.01, 24576 MiB",
+      "GPU-REDACTED, NVIDIA GeForce RTX 3090, 570.211.01, 24576 MiB",
+      "GPU-REDACTED, NVIDIA GeForce RTX 3090, 570.211.01, 24576 MiB"
+    ],
+    "torch_cuda_available": true,
+    "torch_cuda_version": "12.1",
+    "torch_version": "2.2.2+cu121",
+    "total_memory_gib": 23.56854248046875,
+    "uuid_matches_lock": true
+  },
+  "memory_cap": {
+    "cap_gib": 16.0,
+    "fraction_of_total": 0.6788709999041815,
+    "total_gib": 23.56854248046875
+  },
+  "models": {
+    "P1": {
+      "aggregate": {
+        "nll_nats_per_token": 2.6630695898628423,
+        "nll_sum_nats": 5448.640380859375,
+        "num_blocks": 2,
+        "ppl": 14.340240264286988,
+        "token_count_scored": 2046,
+        "token_weighted": true
+      },
+      "attention": "sdpa",
+      "blocks": [
+        {
+          "block_id": 0,
+          "finite": true,
+          "label_loss_mean": 2.524352550506592,
+          "manual_minus_label": -6.012902575847079e-08,
+          "nll_nats_per_token": 2.524352490377566,
+          "nll_sum_nats": 2582.41259765625,
+          "ppl": 12.482809906686507,
+          "seconds": 0.49220824241638184,
+          "token_count_scored": 1023
+        },
+        {
+          "block_id": 1,
+          "finite": true,
+          "label_loss_mean": 2.8017866611480713,
+          "manual_minus_label": 2.8200047186288657e-08,
+          "nll_nats_per_token": 2.8017866893481185,
+          "nll_sum_nats": 2866.227783203125,
+          "ppl": 16.47405450974014,
+          "seconds": 0.0613710880279541,
+          "token_count_scored": 1023
+        }
+      ],
+      "checks": {
+        "cache_equivalence": {
+          "incremental_tokens": 32,
+          "max_abs_logit_diff": 0.1875,
+          "mean_abs_logit_diff": 0.01629718393087387,
+          "passed": false,
+          "prefill_tokens": 32,
+          "tolerance_abs": 0.03
+        },
+        "causal": {
+          "changed_positions": [
+            48,
+            64
+          ],
+          "checked_tokens_compared": 32,
+          "max_abs_logit_diff": 0.0,
+          "passed": true,
+          "tolerance_abs": 1e-06
+        }
+      },
+      "config": {
+        "_attn_implementation": "sdpa",
+        "head_dim": null,
+        "hidden_size": 896,
+        "intermediate_size": 4864,
+        "max_position_embeddings": 2048,
+        "max_window_layers": 36,
+        "model_type": "qwen2_parscale",
+        "num_attention_heads": 16,
+        "num_hidden_layers": 36,
+        "num_key_value_heads": 2,
+        "parscale_attn_smooth": 0.1,
+        "parscale_n": 1,
+        "parscale_n_tokens": 48,
+        "rms_norm_eps": 1e-06,
+        "rope_theta": 10000.0,
+        "sliding_window": null,
+        "tie_word_embeddings": true,
+        "use_sliding_window": false,
+        "vocab_size": 151936
+      },
+      "dtype": "bfloat16",
+      "file_manifest": {
+        "config.json": {
+          "bytes": 943,
+          "sha256": "307b33f0a28c88feed5bbd09c09aa17b2709af12e16fd92da364f4605563517a"
+        },
+        "generation_config.json": {
+          "bytes": 117,
+          "sha256": "dd5fc7bcb9d08b94f281fdc05a5fcbcafa1acce7c26270c2350129444462e17c"
+        },
+        "model.safetensors": {
+          "bytes": 2687840768,
+          "sha256": "skipped_large"
+        },
+        "tokenizer.json": {
+          "bytes": 7031645,
+          "sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539"
+        },
+        "tokenizer_config.json": {
+          "bytes": 7226,
+          "sha256": "7d0fc4691628c9f6b0c77f8138a80517896a307e074dd5ac87e279ea85515774"
+        }
+      },
+      "model_id": "ParScale/ParScale-0.7B-P1-Pile",
+      "parameter_count": 671948032,
+      "peak_memory_gib": {
+        "allocated": 2.74627685546875,
+        "reserved": 2.85546875
+      },
+      "revision": "881efa413e390400d5121468f259c6180073c721",
+      "timing": {
+        "load_seconds": 25.269691705703735,
+        "score_seconds": 0.554131269454956
+      }
+    },
+    "P2": {
+      "aggregate": {
+        "nll_nats_per_token": 2.5922523416498655,
+        "nll_sum_nats": 5303.748291015625,
+        "num_blocks": 2,
+        "ppl": 13.359828639611623,
+        "token_count_scored": 2046,
+        "token_weighted": true
+      },
+      "attention": "sdpa",
+      "blocks": [
+        {
+          "block_id": 0,
+          "finite": true,
+          "label_loss_mean": 2.47104549407959,
+          "manual_minus_label": 9.601999462205413e-08,
+          "nll_nats_per_token": 2.4710455900995845,
+          "nll_sum_nats": 2527.879638671875,
+          "ppl": 11.834814749776449,
+          "seconds": 0.10575747489929199,
+          "token_count_scored": 1023
+        },
+        {
+          "block_id": 1,
+          "finite": true,
+          "label_loss_mean": 2.713459014892578,
+          "manual_minus_label": 7.830756842963638e-08,
+          "nll_nats_per_token": 2.7134590932001466,
+          "nll_sum_nats": 2775.86865234375,
+          "ppl": 15.081353198465436,
+          "seconds": 0.08430910110473633,
+          "token_count_scored": 1023
+        }
+      ],
+      "checks": {
+        "cache_equivalence": {
+          "incremental_tokens": 32,
+          "max_abs_logit_diff": 0.140625,
+          "mean_abs_logit_diff": 0.01382034458220005,
+          "passed": false,
+          "prefill_tokens": 32,
+          "tolerance_abs": 0.03
+        },
+        "causal": {
+          "changed_positions": [
+            48,
+            64
+          ],
+          "checked_tokens_compared": 32,
+          "max_abs_logit_diff": 0.0,
+          "passed": true,
+          "tolerance_abs": 1e-06
+        }
+      },
+      "config": {
+        "_attn_implementation": "sdpa",
+        "head_dim": null,
+        "hidden_size": 896,
+        "intermediate_size": 4864,
+        "max_position_embeddings": 2048,
+        "max_window_layers": 36,
+        "model_type": "qwen2_parscale",
+        "num_attention_heads": 16,
+        "num_hidden_layers": 36,
+        "num_key_value_heads": 2,
+        "parscale_attn_smooth": 0.1,
+        "parscale_n": 2,
+        "parscale_n_tokens": 48,
+        "rms_norm_eps": 1e-06,
+        "rope_theta": 10000.0,
+        "sliding_window": null,
+        "tie_word_embeddings": true,
+        "use_sliding_window": false,
+        "vocab_size": 151936
+      },
+      "dtype": "bfloat16",
+      "file_manifest": {
+        "config.json": {
+          "bytes": 943,
+          "sha256": "6eccc7e9cc09d42e7e72981bc5e661ea46262745e5f137f5f73d4b477265e1f1"
+        },
+        "generation_config.json": {
+          "bytes": 138,
+          "sha256": "8c970692323e3ea0e9b8b0a4dca79388d31226e41f83c9fd6014804280ebf6e8"
+        },
+        "model.safetensors": {
+          "bytes": 2697379032,
+          "sha256": "skipped_large"
+        },
+        "model.safetensors.aria2__temp.stale-r2": {
+          "bytes": 680,
+          "sha256": "6b56ba458e8c9610757b242ec573454f51c18860249be5397fc37d87a2290500"
+        },
+        "tokenizer.json": {
+          "bytes": 7031645,
+          "sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539"
+        },
+        "tokenizer_config.json": {
+          "bytes": 7226,
+          "sha256": "7d0fc4691628c9f6b0c77f8138a80517896a307e074dd5ac87e279ea85515774"
+        }
+      },
+      "model_id": "ParScale/ParScale-0.7B-P2-Pile",
+      "parameter_count": 674330498,
+      "peak_memory_gib": {
+        "allocated": 2.767843246459961,
+        "reserved": 2.912109375
+      },
+      "revision": "4cd35ea21ca4a721b69bc9854cbd397605e3c146",
+      "timing": {
+        "load_seconds": 0.7967596054077148,
+        "score_seconds": 0.19050264358520508
+      }
+    },
+    "P4": {
+      "aggregate": {
+        "nll_nats_per_token": 2.5719560938263686,
+        "nll_sum_nats": 5262.22216796875,
+        "num_blocks": 2,
+        "ppl": 13.091407432668626,
+        "token_count_scored": 2046,
+        "token_weighted": true
+      },
+      "attention": "sdpa",
+      "blocks": [
+        {
+          "block_id": 0,
+          "finite": true,
+          "label_loss_mean": 2.4382333755493164,
+          "manual_minus_label": 9.322329574956711e-10,
+          "nll_nats_per_token": 2.4382333764815494,
+          "nll_sum_nats": 2494.312744140625,
+          "ppl": 11.452790092095151,
+          "seconds": 0.16863203048706055,
+          "token_count_scored": 1023
+        },
+        {
+          "block_id": 1,
+          "finite": true,
+          "label_loss_mean": 2.705678701400757,
+          "manual_minus_label": 1.0977043096715988e-07,
+          "nll_nats_per_token": 2.705678811171188,
+          "nll_sum_nats": 2767.909423828125,
+          "ppl": 14.964471293892238,
+          "seconds": 0.13820123672485352,
+          "token_count_scored": 1023
+        }
+      ],
+      "checks": {
+        "cache_equivalence": {
+          "incremental_tokens": 32,
+          "max_abs_logit_diff": 0.125,
+          "mean_abs_logit_diff": 0.011626129038631916,
+          "passed": false,
+          "prefill_tokens": 32,
+          "tolerance_abs": 0.03
+        },
+        "causal": {
+          "changed_positions": [
+            48,
+            64
+          ],
+          "checked_tokens_compared": 32,
+          "max_abs_logit_diff": 0.0,
+          "passed": true,
+          "tolerance_abs": 1e-06
+        }
+      },
+      "config": {
+        "_attn_implementation": "sdpa",
+        "head_dim": null,
+        "hidden_size": 896,
+        "intermediate_size": 4864,
+        "max_position_embeddings": 2048,
+        "max_window_layers": 36,
+        "model_type": "qwen2_parscale",
+        "num_attention_heads": 16,
+        "num_hidden_layers": 36,
+        "num_key_value_heads": 2,
+        "parscale_attn_smooth": 0.1,
+        "parscale_n": 4,
+        "parscale_n_tokens": 48,
+        "rms_norm_eps": 1e-06,
+        "rope_theta": 10000.0,
+        "sliding_window": null,
+        "tie_word_embeddings": true,
+        "use_sliding_window": false,
+        "vocab_size": 151936
+      },
+      "dtype": "bfloat16",
+      "file_manifest": {
+        "config.json": {
+          "bytes": 943,
+          "sha256": "a680a497bbe0fc03ba0a9a7b30750a2efed2ec30dfff499977ebae659d6fc6e6"
+        },
+        "generation_config.json": {
+          "bytes": 138,
+          "sha256": "8c970692323e3ea0e9b8b0a4dca79388d31226e41f83c9fd6014804280ebf6e8"
+        },
+        "model.safetensors": {
+          "bytes": 2706905312,
+          "sha256": "skipped_large"
+        },
+        "tokenizer.json": {
+          "bytes": 7031645,
+          "sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539"
+        },
+        "tokenizer_config.json": {
+          "bytes": 7226,
+          "sha256": "7d0fc4691628c9f6b0c77f8138a80517896a307e074dd5ac87e279ea85515774"
+        }
+      },
+      "model_id": "ParScale/ParScale-0.7B-P4-Pile",
+      "parameter_count": 676712068,
+      "peak_memory_gib": {
+        "allocated": 2.804177761077881,
+        "reserved": 3.068359375
+      },
+      "revision": "da736174c40a0d6f2eca0b6daf0ee7916dffa362",
+      "timing": {
+        "load_seconds": 0.8045196533203125,
+        "score_seconds": 0.30736541748046875
+      }
+    }
+  },
+  "nll_deltas": {
+    "P2-P1": {
+      "delta_nll": -0.07081724821297675,
+      "relative_decrease": 0.026592338586474598
+    },
+    "P4-P1": {
+      "delta_nll": -0.09111349603647367,
+      "relative_decrease": 0.03421371201988242
+    }
+  },
+  "notes": [
+    "Smoke stage scores only the first two 1024-token validation blocks; test split untouched.",
+    "NLL is token-weighted sum over blocks, not a mean of block means.",
+    "Peak memory is per-model process peak since the last reset."
+  ],
+  "run_id": "parscale-20261021-smoke-r3",
+  "stage": "smoke",
+  "started_at": "2026-10-21T08:56:58.797045+00:00",
+  "status": "failed",
+  "tiny_backward_check": {
+    "config": {
+      "hidden_size": 64,
+      "intermediate_size": 128,
+      "num_attention_heads": 4,
+      "num_hidden_layers": 2,
+      "num_key_value_heads": 2,
+      "parscale_attn_smooth": 0.01,
+      "parscale_n": 2,
+      "parscale_n_tokens": 8,
+      "vocab_size": 128
+    },
+    "grads": {
+      "aggregate_linear0_weight": {
+        "finite": true,
+        "nonzero": true,
+        "norm": 0.0009551012772135437,
+        "present": true
+      },
+      "aggregate_linear1_weight": {
+        "finite": true,
+        "nonzero": true,
+        "norm": 0.0007952321320772171,
+        "present": true
+      },
+      "prefix_k": {
+        "finite": true,
+        "nonzero": true,
+        "norm": 0.00022461153275799006,
+        "present": true
+      },
+      "prefix_v": {
+        "finite": true,
+        "nonzero": true,
+        "norm": 0.0444406233727932,
+        "present": true
+      }
+    },
+    "loss": 4.901430606842041,
+    "loss_finite": true,
+    "passed": true,
+    "seed": 42
+  },
+  "wall_seconds": 54.17274785041809
+}

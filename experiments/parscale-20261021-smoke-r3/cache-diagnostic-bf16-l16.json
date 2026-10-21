@@ -1,0 +1,127 @@
+{
+  "all_within_0.03": false,
+  "created_at": "2026-10-21T09:00:07.861932+00:00",
+  "data": {
+    "block_id": 0,
+    "prefill_tokens": 8,
+    "sequence_tokens": 16,
+    "token_ids_sha256": "8702e3b09722fd49990032bb0734141cfd2f17731cca20be81fe9b742810b7bb"
+  },
+  "git": {
+    "branch": "exp/parscale-20261021",
+    "head_commit": "a43288dcb8e5d1c03818d9a1dbb91798f19d3e67",
+    "status_porcelain": ""
+  },
+  "gpu": {
+    "authorized_gpu_nvidia_smi": "GPU-REDACTED, NVIDIA GeForce RTX 3090, 570.211.01, 24576 MiB",
+    "compute_capability": "8.6",
+    "cuda_visible_devices_env": "GPU-REDACTED",
+    "cudnn_version": 8902,
+    "device_count_visible": 1,
+    "device_name": "NVIDIA GeForce RTX 3090",
+    "device_uuid_torch": null,
+    "expected_gpu_uuid": "GPU-REDACTED",
+    "torch_cuda_available": true,
+    "torch_cuda_version": "12.1",
+    "torch_version": "2.2.2+cu121",
+    "total_memory_gib": 23.56854248046875,
+    "uuid_matches_lock": true
+  },
+  "memory_cap": {
+    "cap_gib": 16.0,
+    "fraction_of_total": 0.6788709999041815,
+    "total_gib": 23.56854248046875
+  },
+  "purpose": "FP32 same-sequence diagnostic for failed BF16 cache gate; protocol gate unchanged",
+  "results": {
+    "P1": {
+      "actual_weight_dtype": "torch.bfloat16",
+      "full_vs_incremental_max_abs_logit_diff": 0.15625,
+      "full_vs_incremental_mean_abs_logit_diff": 0.01859360933303833,
+      "full_vs_prefill_max_abs_logit_diff": 0.0,
+      "incremental_tokens": 8,
+      "load_seconds": 2.448086738586426,
+      "model_id": "ParScale/ParScale-0.7B-P1-Pile",
+      "passed_tolerance": false,
+      "peak_memory_gib": {
+        "allocated": 1.3008599281311035,
+        "reserved": 1.369140625
+      },
+      "per_incremental_position_max_abs_diff": [
+        0.140625,
+        0.125,
+        0.09375,
+        0.125,
+        0.125,
+        0.15625,
+        0.125,
+        0.15625
+      ],
+      "prefill_tokens": 8,
+      "requested_dtype": "bfloat16",
+      "revision": "881efa413e390400d5121468f259c6180073c721",
+      "sequence_tokens": 16,
+      "tolerance_abs": 0.03
+    },
+    "P2": {
+      "actual_weight_dtype": "torch.bfloat16",
+      "full_vs_incremental_max_abs_logit_diff": 0.1796875,
+      "full_vs_incremental_mean_abs_logit_diff": 0.019063230603933334,
+      "full_vs_prefill_max_abs_logit_diff": 0.1875,
+      "incremental_tokens": 8,
+      "load_seconds": 0.914703369140625,
+      "model_id": "ParScale/ParScale-0.7B-P2-Pile",
+      "passed_tolerance": false,
+      "peak_memory_gib": {
+        "allocated": 1.3074688911437988,
+        "reserved": 1.373046875
+      },
+      "per_incremental_position_max_abs_diff": [
+        0.15625,
+        0.140625,
+        0.125,
+        0.125,
+        0.125,
+        0.125,
+        0.1796875,
+        0.125
+      ],
+      "prefill_tokens": 8,
+      "requested_dtype": "bfloat16",
+      "revision": "4cd35ea21ca4a721b69bc9854cbd397605e3c146",
+      "sequence_tokens": 16,
+      "tolerance_abs": 0.03
+    },
+    "P4": {
+      "actual_weight_dtype": "torch.bfloat16",
+      "full_vs_incremental_max_abs_logit_diff": 0.15625,
+      "full_vs_incremental_mean_abs_logit_diff": 0.017468053847551346,
+      "full_vs_prefill_max_abs_logit_diff": 0.125,
+      "incremental_tokens": 8,
+      "load_seconds": 0.781632661819458,
+      "model_id": "ParScale/ParScale-0.7B-P4-Pile",
+      "passed_tolerance": false,
+      "peak_memory_gib": {
+        "allocated": 1.3144264221191406,
+        "reserved": 1.39453125
+      },
+      "per_incremental_position_max_abs_diff": [
+        0.09375,
+        0.109375,
+        0.0625,
+        0.125,
+        0.15625,
+        0.125,
+        0.15625,
+        0.140625
+      ],
+      "prefill_tokens": 8,
+      "requested_dtype": "bfloat16",
+      "revision": "da736174c40a0d6f2eca0b6daf0ee7916dffa362",
+      "sequence_tokens": 16,
+      "tolerance_abs": 0.03
+    }
+  },
+  "run_id": "parscale-20261021-smoke-r3",
+  "schema_version": 1
+}

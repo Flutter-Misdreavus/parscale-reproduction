@@ -1,0 +1,67 @@
+{
+  "created_at": "2026-10-21T08:57:52.982172+00:00",
+  "env": {
+    "CUDA_VISIBLE_DEVICES": "GPU-REDACTED",
+    "HF_ENDPOINT": "https://hf-mirror.com",
+    "paths_redacted": true
+  },
+  "evaluation": {
+    "attention": "sdpa",
+    "batch_size": 1,
+    "bootstrap_replicates": 2000,
+    "bootstrap_seed": 20261021,
+    "context_length": 1024,
+    "dtype": "bfloat16",
+    "seed": 42
+  },
+  "git": {
+    "branch": "exp/parscale-20261021",
+    "head_commit": "27293651bcf6bfd156a177467ff8e099ecc3754a",
+    "status_porcelain": ""
+  },
+  "gpu": {
+    "authorized_gpu_nvidia_smi": "GPU-REDACTED, NVIDIA GeForce RTX 3090, 570.211.01, 24576 MiB",
+    "compute_capability": "8.6",
+    "cuda_visible_devices_env": "GPU-REDACTED",
+    "cudnn_version": 8902,
+    "device_count_visible": 1,
+    "device_name": "NVIDIA GeForce RTX 3090",
+    "device_uuid_torch": null,
+    "expected_gpu_uuid": "GPU-REDACTED",
+    "torch_cuda_available": true,
+    "torch_cuda_version": "12.1",
+    "torch_version": "2.2.2+cu121",
+    "total_memory_gib": 23.56854248046875,
+    "uuid_matches_lock": true
+  },
+  "memory_cap": {
+    "cap_gib": 16.0,
+    "fraction_of_total": 0.6788709999041815,
+    "total_gib": 23.56854248046875
+  },
+  "packages": {
+    "datasets": "3.5.0",
+    "einops": "0.8.1",
+    "huggingface-hub": "0.30.2",
+    "numpy": "1.26.4",
+    "pandas": "2.3.3",
+    "pyarrow": "25.0.1",
+    "regex": "2026.7.19",
+    "safetensors": "0.8.0",
+    "scipy": "1.14.1",
+    "tokenizers": "0.21.4",
+    "torch": "2.2.2+cu121",
+    "transformers": "4.51.3"
+  },
+  "platform": "Linux-6.8.0-111-generic-x86_64-with-glibc2.35",
+  "python_version": "3.10.12 (main, Aug 31 2026, 10:18:17) [GCC 11.4.0]",
+  "resource": {
+    "final_deadline": "2026-10-22T12:00:00+08:00",
+    "gpu_count": 1,
+    "gpu_uuid": "GPU-REDACTED",
+    "max_allocated_gib": 16,
+    "max_disk_gib": 25
+  },
+  "run_id": "parscale-20261021-smoke-r3",
+  "stage": "smoke"
+}

@@ -1,0 +1,18 @@
+{
+  "authorized_gpu_uuid": "GPU-REDACTED",
+  "decision": "Proceeded because the 16 GiB per-process cap bounds this task and the observed peak was 3.07 GiB; exact reading and deviation reported for GPT review.",
+  "memory_free_gib": 19.04,
+  "memory_total_mib": 24576,
+  "memory_used_mib": 5078,
+  "note": "Other GPU 0 compute processes held 5078 MiB before and during this task; no unrelated process was touched.",
+  "observed_at_utc": "2026-10-21T09:01:28Z",
+  "peak_task_memory_gib": 3.068359375,
+  "protocol_preflight_met": false,
+  "protocol_preflight_requirement": {
+    "free_gib_min": 20,
+    "utilization_percent_max": 10
+  },
+  "run_id": "parscale-20261021-smoke-r3",
+  "schema_version": 1,
+  "utilization_gpu_percent": 4
+}
