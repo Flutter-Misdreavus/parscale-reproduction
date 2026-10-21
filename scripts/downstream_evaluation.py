@@ -764,6 +764,14 @@ def benchmark(model, tok, repeats=2):
     return rows
 
 
+def scorer_instance(case):
+    """Use the harness request API for fixed synthetic/manual smoke cases."""
+    from lm_eval.api.instance import Instance
+    return Instance(request_type="loglikelihood", doc={},
+                    arguments=(case["context"], case["continuation"]), idx=0,
+                    metadata=("scorer_smoke", 0, 1))
+
+
 def smoke(run_dir):
     from transformers import AutoTokenizer
     started = time.time()
@@ -835,7 +843,7 @@ def smoke(run_dir):
                        add_bos_token=False)
         case_rows = []
         for case in cases:
-            adapter = lm.loglikelihood([(case["context"], case["continuation"])])
+            adapter = lm.loglikelihood([scorer_instance(case)])
             manual, lens = manual_loglikelihood(model, tok, case["context"], case["continuation"])
             if p == available[0]:
                 manual_by_case[case["name"]] = manual
@@ -865,7 +873,7 @@ def smoke(run_dir):
                      truncation=False, device="cuda", dtype=torch.float32, add_bos_token=False)
     fp32_rows = []
     for case in cases[:2]:
-        adapter32 = lm32.loglikelihood([(case["context"], case["continuation"])])
+        adapter32 = lm32.loglikelihood([scorer_instance(case)])
         manual32, lens32 = manual_loglikelihood(model32, tok, case["context"], case["continuation"])
         fp32_rows.append({"case": case["name"], "manual_fp32": float(manual32),
                           "adapter_fp32": float(adapter32[0][0]),
