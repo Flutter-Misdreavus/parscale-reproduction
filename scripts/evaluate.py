@@ -403,7 +403,13 @@ def tiny_backward_check(device, seed=42):
         parscale_attn_smooth=0.01, tie_word_embeddings=True,
     )
     cfg._attn_implementation = "sdpa"
-    model = Qwen2ParScaleForCausalLM(cfg).to(device)
+    model = Qwen2ParScaleForCausalLM(cfg)
+    # Upstream creates prefix Parameters with torch.empty; initialize only this
+    # synthetic check. Real pretrained checkpoint parameters remain untouched.
+    for name, param in model.named_parameters():
+        if name.endswith(("prefix_k", "prefix_v")):
+            torch.nn.init.normal_(param, mean=0.0, std=cfg.initializer_range)
+    model = model.to(device)
     model.train()
     g = torch.Generator(device=device)
     g.manual_seed(seed)

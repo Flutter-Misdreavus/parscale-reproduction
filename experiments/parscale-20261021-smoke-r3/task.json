@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "run_id": "parscale-20261021-smoke-r3",
+  "parent_run_id": "parscale-20261021-smoke-r2",
+  "ready": true,
+  "hypothesis": "Implementation smoke gate: fixed official P1/P2/P4 checkpoints yield finite correctly aligned causal NLL; recomputed published scaling fits achieve R2 >= .99. Full hypothesis is in PROTOCOL.md; do not evaluate test yet.",
+  "baseline": "Official ParScale-0.7B-P1-Pile at locked revision.",
+  "intervention": "Official P2 and P4 variants at locked revisions; unmodified upstream classes.",
+  "dataset": "Salesforce/wikitext wikitext-2-raw-v1 revision b08601e04326c79dfdd32d625aee71d232d685c3; published arrays in pinned parametric_fit.py.",
+  "split": "Only first two 1024-token validation blocks in this stage. Test split reserved for later GPT-approved task.",
+  "primary_metric": "Finite token-weighted NLL nats/token and manual-vs-label/cached-vs-full consistency; scientific primary metric fixed in PROTOCOL.md.",
+  "decision_rule": "Report SUCCEEDED only if all three checkpoint smokes and causal/cache checks pass, plus numerical fits; report exact failures without changing protocol. Stop after report for GPT review.",
+  "controls": [
+    "Read PROTOCOL.md and locks.json before implementation; never change scientific criteria.",
+    "Use exact revisions/local model code; record tokenizer identity and config.",
+    "Use one specified GPU with 16 GiB cap; no unrelated process changes.",
+    "Commit code before each smoke run, after fixes and after outputs; relay pushes pending until GPT sync.",
+    "Existing runtime root outside workspace is explicitly authorized for this task only. Do not scan other projects/caches. Only read the specifically provided MemLoop torch site-packages path.",
+    "Precreate all torch CUDA contexts only after setting CUDA_VISIBLE_DEVICES to the specified UUID. Use timeout on network operations.",
+    "LATEST USER AUTHORIZATION: all SSH and Git operations in this task are approved. User says successful downloading matters and not to overconstrain worker. Prefer HF mirror; ModelScope or other accessible source is allowed if exact expected HF LFS SHA256 matches locked checkpoint. Reuse existing partial files; no need to discard or redownload merely because source changed.",
+    "This attempt runs inside systemd user service parscale-smoke-r3 with RuntimeMaxSec=10800 and KillMode=control-group. Existing downloaded models are under runtime/models/P1,P2,P4 with aria2 resume files. Inspect and resume; no duplicate jobs.",
+    "Routine implementation/environment repairs are allowed within budget and must be committed before execution; do not change model, dataset split or scientific outcome criteria."
+  ],
+  "seeds": [
+    42,
+    20261021
+  ],
+  "code_revision": "Initial committed repository snapshot containing this task; resolve git rev-parse HEAD at start, preserve parent SHA, and record each later implementation/run commit explicitly. Upstream cd6acb48ba6d3b1f9715785ff0d212751210177d.",
+  "environment": "Remote Ubuntu, Python3.10, 4xRTX3090; only GPU-REDACTED authorized. Reuse read-only torch2.2.2+cu121 from /path/to/data/MemLoop/runtime/venv via new isolated venv with explicit site path if compatible; never pip into MemLoop. All new env/cache under /path/to/parscale-runtime. DSH0.2.1-rc.2 via existing adapter.; task-local runtime/dsh-gpu-adapter explicitly supplies DSH danger-full-access mode for GPU and own runtime writes; no global policy change. Existing pkgs already installed under runtime/pkgs; PYTHONPATH=runtime/pkgs:/path/to/python/site-packages. Source prior scripts/run_stage.sh exports. Latest source commit ea1ffde before this task; latest user relaxed download-source restriction. Systemd user service provides complete process cleanup.",
+  "experiment_commands": [
+    "Read task and protocol, inspect prior r2 download logs and partial model files. All old r2 worker/download processes have been stopped by GPT; confirm before resuming. Do not redo environment installation unnecessarily.",
+    "Resume existing downloads using aria2c -c with matching source URLs from prior r2 logs, or any accessible source with matching pinned HF LFS SHA256. Mirror preferred but not mandatory. Expected model files are ~2.5GiB each (stored FP32, load BF16). Preserve successful partial files.",
+    "Implement/repair focused evaluator checks if necessary, commit code/config BEFORE running. Run CPU fitting from current scripts (prior r2 fit results already available for comparison); run scripts/evaluate.py --stage smoke --run-dir runs/parscale-20261021-smoke-r3 with exact paths saved in raw/downloads/model_paths.json. Use only first 2 validation blocks per P; no test evaluation.",
+    "Record actual source URLs/revisions/hashes, parameters, environment, manual loss, causality, cache diagnostics and tiny backward. If BF16 cache threshold .03 fails, provide same-sequence FP32 diagnostic without relaxing gate. Report failed gate clearly so GPT can decide.",
+    "Commit small metrics and summary under experiments/parscale-20261021-smoke-r3. Write run/report.json and stop for GPT review. Full test is next task, do not launch it."
+  ],
+  "budget": {
+    "gpu_count": 1,
+    "gpu_hours": 0.5,
+    "wall_seconds": 10740,
+    "max_attempts": 3,
+    "model_cost_limit": "One DSH continuation session <=10740s; no purchase/top-up; existing account only."
+  },
+  "stop_conditions": [
+    "10740s wrapper limit, systemd service10800s hard process-tree bound; GPU active <=.5h, one GPU <=16GiB process allocation, new disk <=25GiB.",
+    "Stop GPU stage on OOM/NaN/data mismatch or failure of required smoke gates; preserve diagnostics. No unrelated user process changes.",
+    "Do not change model/dataset/split or hide failures; bounded routine repairs allowed within task budget."
+  ],
+  "required_outputs": [
+    "report.json",
+    "environment.json",
+    "smoke.json",
+    "fit-results.json",
+    "data-manifest.json",
+    "requirements-freeze.txt",
+    "Source files and small evidence committed; actual run_commits and final HEAD in report."
+  ],
+  "version_control": {
+    "repository": "Flutter-Misdreavus/parscale-reproduction",
+    "visibility": "private",
+    "branch": "exp/parscale-20261021",
+    "push_mode": "relay",
+    "checkpoint_minutes": 15
+  }
+}

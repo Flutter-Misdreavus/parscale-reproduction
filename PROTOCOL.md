@@ -23,3 +23,6 @@ Extract params, p, stack_loss and pile_loss literals directly from pinned upstre
 
 ## Evidence/version control
 Follow AGENTS.md and copied research-orchestrator skill. Implementation, smoke, fixes and result commits contain run_id, stage, purpose. Record actual command->commit mappings, separate final HEAD from run commits. Remote uses relay; no personal GitHub token copied. Outputs: code, exact requirements freeze, environment/GPU/config/data manifest, smoke metrics and failures, fit data/parameters, full eval raw per-block metrics, comparison JSON, human-readable report. Only small sanitized metrics and configs under experiments/<run_id>/ committed; raw logs/data/weights/cache remain ignored outside Git. Report unfinished stages honestly.
+
+## Preparation revision 2026-10-21 16:17 CST
+Actual checkpoints total ~7.5GiB; r3 preparation may use up to3h within total6h. HF mirror preferred; latest user explicitly permits any successful source with identical pinned weights. Resume existing partial files. GPU limits and scientific protocol unchanged. The runtime is a systemd user service with a3h hard cgroup lifetime.
