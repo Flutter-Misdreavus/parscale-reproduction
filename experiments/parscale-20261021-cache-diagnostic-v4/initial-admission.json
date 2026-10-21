@@ -1,0 +1,18 @@
+{
+  "decision": "admit",
+  "passed": true,
+  "requirement": {
+    "free_mib_min": 18432,
+    "max_samples": 1,
+    "utilization_percent_max": null,
+    "utilization_record_only": true
+  },
+  "samples": [
+    {
+      "free_mib": 19055,
+      "sampled_at": "2026-10-21T10:44:48.258385+00:00",
+      "utilization_percent": 8.0,
+      "uuid": "GPU-REDACTED"
+    }
+  ]
+}

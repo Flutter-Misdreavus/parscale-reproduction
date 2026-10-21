@@ -1,0 +1,390 @@
+{
+  "attention_backend": "sdpa",
+  "block_nll": {
+    "P1": [
+      {
+        "bf16_minus_fp32_nll_nats": -1.00244140625,
+        "bf16_nll_nats": 2582.41259765625,
+        "block_id": 0,
+        "fp32_nll_nats": 2583.4150390625,
+        "token_count_scored": 1023
+      },
+      {
+        "bf16_minus_fp32_nll_nats": -0.350830078125,
+        "bf16_nll_nats": 2866.22802734375,
+        "block_id": 1,
+        "fp32_nll_nats": 2866.578857421875,
+        "token_count_scored": 1023
+      }
+    ],
+    "P2": [
+      {
+        "bf16_minus_fp32_nll_nats": 0.130859375,
+        "bf16_nll_nats": 2527.87939453125,
+        "block_id": 0,
+        "fp32_nll_nats": 2527.74853515625,
+        "token_count_scored": 1023
+      },
+      {
+        "bf16_minus_fp32_nll_nats": -0.06640625,
+        "bf16_nll_nats": 2775.86865234375,
+        "block_id": 1,
+        "fp32_nll_nats": 2775.93505859375,
+        "token_count_scored": 1023
+      }
+    ],
+    "P4": [
+      {
+        "bf16_minus_fp32_nll_nats": 0.8359375,
+        "bf16_nll_nats": 2494.31298828125,
+        "block_id": 0,
+        "fp32_nll_nats": 2493.47705078125,
+        "token_count_scored": 1023
+      },
+      {
+        "bf16_minus_fp32_nll_nats": 0.070068359375,
+        "bf16_nll_nats": 2767.909423828125,
+        "block_id": 1,
+        "fp32_nll_nats": 2767.83935546875,
+        "token_count_scored": 1023
+      }
+    ]
+  },
+  "bootstrap": {
+    "bfloat16": {
+      "P2-P1": {
+        "bootstrap_mean": -0.0710451213877688,
+        "ci95_high": -0.05330713892961869,
+        "ci95_low": -0.08832783479960904,
+        "method": "shared paired contiguous-block draws; sum NLL/sum tokens per draw",
+        "observed_delta_nll": -0.07081748686461387,
+        "replicates": 2000,
+        "seed": 20261021
+      },
+      "P4-P1": {
+        "bootstrap_mean": -0.09117842610677078,
+        "ci95_high": -0.08611887524437911,
+        "ci95_low": -0.09610811682856779,
+        "method": "shared paired contiguous-block draws; sum NLL/sum tokens per draw",
+        "observed_delta_nll": -0.09111349603647367,
+        "replicates": 2000,
+        "seed": 20261021
+      },
+      "P4-P2": {
+        "bootstrap_mean": -0.020133304719001984,
+        "ci95_high": -0.0077802820289587515,
+        "ci95_low": -0.03281173631476042,
+        "method": "shared paired contiguous-block draws; sum NLL/sum tokens per draw",
+        "observed_delta_nll": -0.020296009171859808,
+        "replicates": 2000,
+        "seed": 20261021
+      }
+    },
+    "fp32": {
+      "P2-P1": {
+        "bootstrap_mean": -0.07173265277045913,
+        "ci95_high": -0.05441495983015665,
+        "ci95_low": -0.08860586395711145,
+        "method": "shared paired contiguous-block draws; sum NLL/sum tokens per draw",
+        "observed_delta_nll": -0.07151041189363383,
+        "replicates": 2000,
+        "seed": 20261021
+      },
+      "P4-P1": {
+        "bootstrap_mean": -0.09227366075860681,
+        "ci95_high": -0.08791592207355814,
+        "ci95_low": -0.09651955225134401,
+        "method": "shared paired contiguous-block draws; sum NLL/sum tokens per draw",
+        "observed_delta_nll": -0.0922177371624513,
+        "replicates": 2000,
+        "seed": 20261021
+      },
+      "P4-P2": {
+        "bootstrap_mean": -0.020541007988147647,
+        "ci95_high": -0.007913688294232557,
+        "ci95_low": -0.03350096224340149,
+        "method": "shared paired contiguous-block draws; sum NLL/sum tokens per draw",
+        "observed_delta_nll": -0.020707325268817467,
+        "replicates": 2000,
+        "seed": 20261021
+      }
+    }
+  },
+  "created_at": "2026-10-21T10:55:29.052040+00:00",
+  "dtype_paths": [
+    "float32",
+    "bfloat16"
+  ],
+  "fp32_cache_residual_by_model": {
+    "P1": {
+      "by_seq": {
+        "0": 2.288818359375e-05,
+        "1": 2.193450927734375e-05
+      },
+      "max_abs_logit": 2.288818359375e-05
+    },
+    "P2": {
+      "by_seq": {
+        "0": 2.384185791015625e-05,
+        "1": 2.384185791015625e-05
+      },
+      "max_abs_logit": 2.384185791015625e-05
+    },
+    "P4": {
+      "by_seq": {
+        "0": 2.47955322265625e-05,
+        "1": 2.86102294921875e-05
+      },
+      "max_abs_logit": 2.86102294921875e-05
+    }
+  },
+  "gate": {
+    "all_models_exceed_0.03": true,
+    "bf16_full_vs_cached_tolerance_abs": 0.03,
+    "bf16_gate_result": "FAILED (unchanged from r3)",
+    "max_bf16_cache_error_by_model": {
+      "P1": 0.203125,
+      "P2": 0.21875,
+      "P4": 0.1875
+    },
+    "note": "No new acceptance threshold is selected from these observations."
+  },
+  "precision_effects_by_model": {
+    "P1": {
+      "bf16_minus_fp32_nll_nats_per_token": -0.0006614230128909604,
+      "bf16_nll_nats_per_token": 2.663069709188661,
+      "fp32_nll_nats_per_token": 2.6637311322015518,
+      "max_bf16_cache_error_abs_logit": 0.203125,
+      "max_bf16_full_vs_fp32_abs_logit": 0.1659247875213623,
+      "max_bf16_vs_fp32_target_logprob_abs_diff": 0.1103367805480957,
+      "ratio_cache_to_full_fp32": 1.2241992473478278
+    },
+    "P2": {
+      "bf16_minus_fp32_nll_nats_per_token": 3.150201612900361e-05,
+      "bf16_nll_nats_per_token": 2.592252222324047,
+      "fp32_nll_nats_per_token": 2.592220720307918,
+      "max_bf16_cache_error_abs_logit": 0.21875,
+      "max_bf16_full_vs_fp32_abs_logit": 0.14470863342285156,
+      "max_bf16_vs_fp32_target_logprob_abs_diff": 0.06759262084960938,
+      "ratio_cache_to_full_fp32": 1.5116582530414266
+    },
+    "P4": {
+      "bf16_minus_fp32_nll_nats_per_token": 0.00044281811308666263,
+      "bf16_nll_nats_per_token": 2.571956213152187,
+      "fp32_nll_nats_per_token": 2.5715133950391005,
+      "max_bf16_cache_error_abs_logit": 0.1875,
+      "max_bf16_full_vs_fp32_abs_logit": 0.16000521183013916,
+      "max_bf16_vs_fp32_target_logprob_abs_diff": 0.08537626266479492,
+      "ratio_cache_to_full_fp32": 1.171836828659364
+    }
+  },
+  "raw_consistency": {
+    "arrays_checked": 48,
+    "files_checked": 18,
+    "max_per_position_recompute_difference": 2.002716064453125e-05,
+    "passed": true
+  },
+  "resource": {
+    "gpu_hours_observed_estimate": 0.03905503145832982,
+    "note": "GPU-hour value is a wall-clock activity estimate for this run, not an independently metered integral; prior project totals must be reconciled by GPT.",
+    "peak_allocated_gib": 3.689405918121338,
+    "raw_diagnostics_bytes": 5134237248,
+    "wall_seconds_observed": 224.48159337043762
+  },
+  "run_id": "parscale-20261021-cache-diagnostic-v4",
+  "run_sha": "c6a28df97623a4ad9f40ea5403178301eb085c47",
+  "schema_version": 1,
+  "sequence_nll_effects_63_tokens": {
+    "P1": {
+      "0": {
+        "bf16_cached_p1_minus_fp32_nll": 0.07337454140909472,
+        "bf16_cached_p1_minus_full_nll": -0.031005346790664134,
+        "bf16_cached_p32_minus_fp32_nll": -0.11952320327804955,
+        "bf16_cached_p32_minus_full_nll": -0.2239030914778084,
+        "bf16_full_minus_fp32_nll": 0.10437988819975885,
+        "fp32_full_nll": 186.80558690713428,
+        "tokens_scored": 63
+      },
+      "1": {
+        "bf16_cached_p1_minus_fp32_nll": -0.11787949634100414,
+        "bf16_cached_p1_minus_full_nll": -0.005976966668924888,
+        "bf16_cached_p32_minus_fp32_nll": -0.016032969497359773,
+        "bf16_cached_p32_minus_full_nll": 0.09586956017471948,
+        "bf16_full_minus_fp32_nll": -0.11190252967207925,
+        "fp32_full_nll": 269.9884965003247,
+        "tokens_scored": 63
+      }
+    },
+    "P2": {
+      "0": {
+        "bf16_cached_p1_minus_fp32_nll": 0.1952203945914448,
+        "bf16_cached_p1_minus_full_nll": 0.017506113992368455,
+        "bf16_cached_p32_minus_fp32_nll": 0.18907163724131237,
+        "bf16_cached_p32_minus_full_nll": 0.011357356642236027,
+        "bf16_full_minus_fp32_nll": 0.17771428059907635,
+        "fp32_full_nll": 185.98184954948047,
+        "tokens_scored": 63
+      },
+      "1": {
+        "bf16_cached_p1_minus_fp32_nll": 0.059494316628274646,
+        "bf16_cached_p1_minus_full_nll": 0.032463236248304383,
+        "bf16_cached_p32_minus_fp32_nll": -0.035473108609494375,
+        "bf16_cached_p32_minus_full_nll": -0.06250418898946464,
+        "bf16_full_minus_fp32_nll": 0.027031080379970263,
+        "fp32_full_nll": 264.83396276311305,
+        "tokens_scored": 63
+      }
+    },
+    "P4": {
+      "0": {
+        "bf16_cached_p1_minus_fp32_nll": 0.040849631201325565,
+        "bf16_cached_p1_minus_full_nll": -0.09235913373319704,
+        "bf16_cached_p32_minus_fp32_nll": -0.03523554701612852,
+        "bf16_cached_p32_minus_full_nll": -0.16844431195065113,
+        "bf16_full_minus_fp32_nll": 0.1332087649345226,
+        "fp32_full_nll": 194.57812274986674,
+        "tokens_scored": 63
+      },
+      "1": {
+        "bf16_cached_p1_minus_fp32_nll": -0.13888522625865107,
+        "bf16_cached_p1_minus_full_nll": -0.06041847087192309,
+        "bf16_cached_p32_minus_fp32_nll": -0.15538358771317462,
+        "bf16_cached_p32_minus_full_nll": -0.07691683232644664,
+        "bf16_full_minus_fp32_nll": -0.07846675538672798,
+        "fp32_full_nll": 263.017872281907,
+        "tokens_scored": 63
+      }
+    }
+  },
+  "sequence_nll_note": "NLL over the 63 scored target tokens of each 64-token diagnostic sequence; descriptive finite-precision effect, not a 1024-token block NLL.",
+  "status": "SUCCEEDED",
+  "timing": {
+    "P1": {
+      "median_seconds": 1.2052614782005548,
+      "output_length_ok": true,
+      "p90_seconds": 1.232173859141767,
+      "peak_allocated_gib": 1.3106956481933594,
+      "raw_repeats": 10
+    },
+    "P2": {
+      "median_seconds": 1.2362126260995865,
+      "output_length_ok": true,
+      "p90_seconds": 1.2707581667229533,
+      "peak_allocated_gib": 1.3188037872314453,
+      "raw_repeats": 10
+    },
+    "P4": {
+      "median_seconds": 1.223817785270512,
+      "output_length_ok": true,
+      "p90_seconds": 1.26149311773479,
+      "peak_allocated_gib": 1.3282217979431152,
+      "raw_repeats": 10
+    }
+  },
+  "tokenizer": {
+    "encoding_equal": true,
+    "files_equal": true,
+    "passed": true,
+    "text_sha256": "b44fb967f92b525731216a507d1fbc44b97446b7ef0a2b4d1a893f81f1bbc29e",
+    "token_count": 262337,
+    "vocab_equal": true
+  },
+  "worst_target_logprob_position": {
+    "P1": {
+      "0/cached_p1_vs_fp32": {
+        "abs_diff": 0.06687068939208984,
+        "position": 35,
+        "positions": 63
+      },
+      "0/cached_p32_vs_fp32": {
+        "abs_diff": 0.061064720153808594,
+        "position": 2,
+        "positions": 63
+      },
+      "0/full_vs_fp32": {
+        "abs_diff": 0.1103367805480957,
+        "position": 54,
+        "positions": 63
+      },
+      "1/cached_p1_vs_fp32": {
+        "abs_diff": 0.04842948913574219,
+        "position": 42,
+        "positions": 63
+      },
+      "1/cached_p32_vs_fp32": {
+        "abs_diff": 0.06743252277374268,
+        "position": 37,
+        "positions": 63
+      },
+      "1/full_vs_fp32": {
+        "abs_diff": 0.06809425354003906,
+        "position": 37,
+        "positions": 63
+      }
+    },
+    "P2": {
+      "0/cached_p1_vs_fp32": {
+        "abs_diff": 0.06505584716796875,
+        "position": 60,
+        "positions": 63
+      },
+      "0/cached_p32_vs_fp32": {
+        "abs_diff": 0.047396183013916016,
+        "position": 14,
+        "positions": 63
+      },
+      "0/full_vs_fp32": {
+        "abs_diff": 0.04316282272338867,
+        "position": 14,
+        "positions": 63
+      },
+      "1/cached_p1_vs_fp32": {
+        "abs_diff": 0.03429412841796875,
+        "position": 12,
+        "positions": 63
+      },
+      "1/cached_p32_vs_fp32": {
+        "abs_diff": 0.04022216796875,
+        "position": 27,
+        "positions": 63
+      },
+      "1/full_vs_fp32": {
+        "abs_diff": 0.06759262084960938,
+        "position": 30,
+        "positions": 63
+      }
+    },
+    "P4": {
+      "0/cached_p1_vs_fp32": {
+        "abs_diff": 0.07061481475830078,
+        "position": 8,
+        "positions": 63
+      },
+      "0/cached_p32_vs_fp32": {
+        "abs_diff": 0.06115269660949707,
+        "position": 32,
+        "positions": 63
+      },
+      "0/full_vs_fp32": {
+        "abs_diff": 0.05916714668273926,
+        "position": 32,
+        "positions": 63
+      },
+      "1/cached_p1_vs_fp32": {
+        "abs_diff": 0.07632970809936523,
+        "position": 35,
+        "positions": 63
+      },
+      "1/cached_p32_vs_fp32": {
+        "abs_diff": 0.08537626266479492,
+        "position": 35,
+        "positions": 63
+      },
+      "1/full_vs_fp32": {
+        "abs_diff": 0.07275581359863281,
+        "position": 53,
+        "positions": 63
+      }
+    }
+  }
+}

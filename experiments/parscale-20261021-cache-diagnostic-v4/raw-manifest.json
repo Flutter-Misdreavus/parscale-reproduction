@@ -1,0 +1,569 @@
+{
+  "created_at": "2026-10-21T10:55:21.007132+00:00",
+  "diagnostics_manifest_sha256": "551d340bad240f4deb17757fd41341502f8e53889ecb3071a0aeec56161dd933",
+  "entries": [
+    {
+      "arrays": {
+        "cached_p1": {
+          "dtype": "float32",
+          "sha256": "0e45128a8d326682446d461d2917cb4670c8a863af4b63248525f8514a67874c",
+          "shape": [
+            64,
+            151936
+          ]
+        },
+        "cached_p32": {
+          "dtype": "float32",
+          "sha256": "449c71c64c6f9f00cf53c61d9e613ded0289a0327eca3aa5e8aead705b25a1f3",
+          "shape": [
+            64,
+            151936
+          ]
+        },
+        "full": {
+          "dtype": "float32",
+          "sha256": "d41e5b47816dad5e17bb5c56fdb437a2ee69b9cbecb30619ed29aa85bf07330e",
+          "shape": [
+            64,
+            151936
+          ]
+        },
+        "tokens": {
+          "dtype": "int32",
+          "sha256": "4a8776a60f33b16c844bccfdbb2c8ce54007678dc548800c311a83ef1a84e0dd",
+          "shape": [
+            64
+          ]
+        }
+      },
+      "bytes": 116688112,
+      "path": "raw/diagnostics/P1/P_bfloat16_seq0.npz",
+      "sha256": "77a362a0dc808a82a9e3a3916625adf19443e379576caad5e0fdea6ec062b2e3"
+    },
+    {
+      "arrays": {
+        "cached_p1": {
+          "dtype": "float32",
+          "sha256": "7df0cba1e6df6231eff26421ed4ed2f45ffe075478bd62cd54e9bb7c36a5f616",
+          "shape": [
+            64,
+            151936
+          ]
+        },
+        "cached_p32": {
+          "dtype": "float32",
+          "sha256": "a08d0ab097c23e8667def5c4fe45a1f1f755c8f98746462b0e93837f5a19d165",
+          "shape": [
+            64,
+            151936
+          ]
+        },
+        "full": {
+          "dtype": "float32",
+          "sha256": "78f2af46643aa63134e6cf12ae62e3d388b8a595be1f5a31782e4c7fa2977b56",
+          "shape": [
+            64,
+            151936
+          ]
+        },
+        "tokens": {
+          "dtype": "int32",
+          "sha256": "22968380f613f3bbdaee092325a58471a3e8a4749944f62503375d42248bedc1",
+          "shape": [
+            64
+          ]
+        }
+      },
+      "bytes": 116688112,
+      "path": "raw/diagnostics/P1/P_bfloat16_seq1.npz",
+      "sha256": "c84da3bfdb727eda8eab171e76311ae8d75675bdd4a21e036c8d7dacdceb5073"
+    },
+    {
+      "arrays": {
+        "full_logits": {
+          "dtype": "float32",
+          "sha256": "4948773a090be7e271ed7d9eb9f4710f3a2f7b8339465a7404772b0222b5689c",
+          "shape": [
+            1024,
+            151936
+          ]
+        }
+      },
+      "bytes": 622329984,
+      "path": "raw/diagnostics/P1/P_float32_loss_b0.npy",
+      "sha256": "936b2fe5209c136ce9f4f86d863957316d31f77709a65a2a458b44388272d4e9"
+    },
+    {
+      "arrays": {
+        "full_logits": {
+          "dtype": "float32",
+          "sha256": "208ff36c55359720c566ebdce9cfb8334513bd7d2fcd0c74eee1484c0f42d989",
+          "shape": [
+            1024,
+            151936
+          ]
+        }
+      },
+      "bytes": 622329984,
+      "path": "raw/diagnostics/P1/P_float32_loss_b1.npy",
+      "sha256": "1b2ef8142549888133abc38f6507b1c409c60449021de2a3f0696dc6eea698ef"
+    },
+    {
+      "arrays": {
+        "cached_p1": {
+          "dtype": "float32",
+          "sha256": "3fd130fcf59b43177c7245bdffb18e47536a7320f7bb676cf3bf350d72ecee44",
+          "shape": [
+            64,
+            151936
+          ]
+        },
+        "cached_p32": {
+          "dtype": "float32",
+          "sha256": "18b2c8b3307131c998d90ea300de0b98d602bc9fb7818b21bdbec0d5832bf48b",
+          "shape": [
+            64,
+            151936
+          ]
+        },
+        "full": {
+          "dtype": "float32",
+          "sha256": "8c7ccb7ab941b089b7122b09a51f7ce439c8925f24839342498f11052b63e454",
+          "shape": [
+            64,
+            151936
+          ]
+        },
+        "tokens": {
+          "dtype": "int32",
+          "sha256": "4a8776a60f33b16c844bccfdbb2c8ce54007678dc548800c311a83ef1a84e0dd",
+          "shape": [
+            64
+          ]
+        }
+      },
+      "bytes": 116688112,
+      "path": "raw/diagnostics/P1/P_float32_seq0.npz",
+      "sha256": "4b31cba1ba4492c674cb08ce3591012b7d3691b8cc7dad956bb49da58fbe066a"
+    },
+    {
+      "arrays": {
+        "cached_p1": {
+          "dtype": "float32",
+          "sha256": "607799e4c606a97b36130eaaffdfcd8c1977a42db1657e2d0f68ea31c7c9d7f6",
+          "shape": [
+            64,
+            151936
+          ]
+        },
+        "cached_p32": {
+          "dtype": "float32",
+          "sha256": "ebae6a99084b4497bbb1dfea506333788fa32a869b810b64fd88eb348d878329",
+          "shape": [
+            64,
+            151936
+          ]
+        },
+        "full": {
+          "dtype": "float32",
+          "sha256": "fcec01ab7bbd6b7a712f2c99dc8457fdfe61cf4e56e2f234f347dc1670e8a2c8",
+          "shape": [
+            64,
+            151936
+          ]
+        },
+        "tokens": {
+          "dtype": "int32",
+          "sha256": "22968380f613f3bbdaee092325a58471a3e8a4749944f62503375d42248bedc1",
+          "shape": [
+            64
+          ]
+        }
+      },
+      "bytes": 116688112,
+      "path": "raw/diagnostics/P1/P_float32_seq1.npz",
+      "sha256": "a8f7dcee5a045c785669a0ae5e3bc54cf5fcdf7dad642ad766baf90d7b6f3215"
+    },
+    {
+      "arrays": {
+        "cached_p1": {
+          "dtype": "float32",
+          "sha256": "7b4d5110c26fc8383a146cae599755286a6fc60655370dd9e46e08debeab630f",
+          "shape": [
+            64,
+            151936
+          ]
+        },
+        "cached_p32": {
+          "dtype": "float32",
+          "sha256": "1b0fe3fbb0d3859f15c9f7469f58ff2a876ef712650600d2cc63a4281534a556",
+          "shape": [
+            64,
+            151936
+          ]
+        },
+        "full": {
+          "dtype": "float32",
+          "sha256": "5967b30f4e578c9010dc8cc352c4b685a05a89843cbd8aa5128de10021946385",
+          "shape": [
+            64,
+            151936
+          ]
+        },
+        "tokens": {
+          "dtype": "int32",
+          "sha256": "4a8776a60f33b16c844bccfdbb2c8ce54007678dc548800c311a83ef1a84e0dd",
+          "shape": [
+            64
+          ]
+        }
+      },
+      "bytes": 116688112,
+      "path": "raw/diagnostics/P2/P_bfloat16_seq0.npz",
+      "sha256": "09d819e92eb9be4fdf01d7f730e641e6ff5748296001fbfafd884bba6584e5f1"
+    },
+    {
+      "arrays": {
+        "cached_p1": {
+          "dtype": "float32",
+          "sha256": "075aebf2963697332fadf13df9bbf134b2ba358397877c905a40ebeaa2698894",
+          "shape": [
+            64,
+            151936
+          ]
+        },
+        "cached_p32": {
+          "dtype": "float32",
+          "sha256": "95c8e2f0fe5d66dd40e8375746ec56fbb7702c001e0888e9fd1c9a11fe94ae66",
+          "shape": [
+            64,
+            151936
+          ]
+        },
+        "full": {
+          "dtype": "float32",
+          "sha256": "ec84330920ee8be68dc6e5ad9e0f078b3a5c8a683a02c08616c4d5440bc87b04",
+          "shape": [
+            64,
+            151936
+          ]
+        },
+        "tokens": {
+          "dtype": "int32",
+          "sha256": "22968380f613f3bbdaee092325a58471a3e8a4749944f62503375d42248bedc1",
+          "shape": [
+            64
+          ]
+        }
+      },
+      "bytes": 116688112,
+      "path": "raw/diagnostics/P2/P_bfloat16_seq1.npz",
+      "sha256": "d5020db307d61cf917da34c4a7a0b7d85293d22b9af022549dd4ae22fd32529f"
+    },
+    {
+      "arrays": {
+        "full_logits": {
+          "dtype": "float32",
+          "sha256": "747b98f3a6261a221427e40662cc8655633c56e2f312872b8bfe0aff905738cf",
+          "shape": [
+            1024,
+            151936
+          ]
+        }
+      },
+      "bytes": 622329984,
+      "path": "raw/diagnostics/P2/P_float32_loss_b0.npy",
+      "sha256": "2a1542b4dafb16f4028381f5151902315bf4214a453a1b841d89e12e0a568474"
+    },
+    {
+      "arrays": {
+        "full_logits": {
+          "dtype": "float32",
+          "sha256": "6db9d6aafc350e9f013570672fed69a3b55dde446473b4096334dffd8331e9ba",
+          "shape": [
+            1024,
+            151936
+          ]
+        }
+      },
+      "bytes": 622329984,
+      "path": "raw/diagnostics/P2/P_float32_loss_b1.npy",
+      "sha256": "4c66c6785ce1ae6e820d3b6860194cb881489c75624ff2d988a309917a2328ef"
+    },
+    {
+      "arrays": {
+        "cached_p1": {
+          "dtype": "float32",
+          "sha256": "1c81ce8e3a353e31da2e3130e4b2a8e3de747195a2acd15181edbc9f0a1115db",
+          "shape": [
+            64,
+            151936
+          ]
+        },
+        "cached_p32": {
+          "dtype": "float32",
+          "sha256": "c110d5af44b5360ba01c27b8ddeff350071732b263bdc6c30220b381556b6b0c",
+          "shape": [
+            64,
+            151936
+          ]
+        },
+        "full": {
+          "dtype": "float32",
+          "sha256": "72be58fbd2877f8782cd67186e78c241d9e1ccf565361238af163d6334cfc2df",
+          "shape": [
+            64,
+            151936
+          ]
+        },
+        "tokens": {
+          "dtype": "int32",
+          "sha256": "4a8776a60f33b16c844bccfdbb2c8ce54007678dc548800c311a83ef1a84e0dd",
+          "shape": [
+            64
+          ]
+        }
+      },
+      "bytes": 116688112,
+      "path": "raw/diagnostics/P2/P_float32_seq0.npz",
+      "sha256": "4b72ca31841851b4d6a63b989b43ef7d62b67b4c8b90049745bd56c54d794d07"
+    },
+    {
+      "arrays": {
+        "cached_p1": {
+          "dtype": "float32",
+          "sha256": "e8047eeaef547b47ec5ae7e482143c3ceacf3606889a7c7b3a4d1cf34ff42d35",
+          "shape": [
+            64,
+            151936
+          ]
+        },
+        "cached_p32": {
+          "dtype": "float32",
+          "sha256": "1146472056fb720af2c3855b8f25dc4f8b353f825d0f88cc7624ffd013505970",
+          "shape": [
+            64,
+            151936
+          ]
+        },
+        "full": {
+          "dtype": "float32",
+          "sha256": "f4f96aaccf8fb65d1de43ead81349ee8599c2763d97c3202172eb91d777cbb63",
+          "shape": [
+            64,
+            151936
+          ]
+        },
+        "tokens": {
+          "dtype": "int32",
+          "sha256": "22968380f613f3bbdaee092325a58471a3e8a4749944f62503375d42248bedc1",
+          "shape": [
+            64
+          ]
+        }
+      },
+      "bytes": 116688112,
+      "path": "raw/diagnostics/P2/P_float32_seq1.npz",
+      "sha256": "524cad1520128a753ff9d97eac2c91fcad254c46605e5070cc6e832003e55310"
+    },
+    {
+      "arrays": {
+        "cached_p1": {
+          "dtype": "float32",
+          "sha256": "d387d1c5e20f5d552d688fc05374453fcca20e8b74cb398414860b90b08b833b",
+          "shape": [
+            64,
+            151936
+          ]
+        },
+        "cached_p32": {
+          "dtype": "float32",
+          "sha256": "d24be91dd94819d9145b83e6e24aeeae45b83770945383299accd4a76e1b81d0",
+          "shape": [
+            64,
+            151936
+          ]
+        },
+        "full": {
+          "dtype": "float32",
+          "sha256": "07b1e488cc2f1d60e05ba14e642eaa12118e927a4f1b2b095ab4a38f9f8b8e3c",
+          "shape": [
+            64,
+            151936
+          ]
+        },
+        "tokens": {
+          "dtype": "int32",
+          "sha256": "4a8776a60f33b16c844bccfdbb2c8ce54007678dc548800c311a83ef1a84e0dd",
+          "shape": [
+            64
+          ]
+        }
+      },
+      "bytes": 116688112,
+      "path": "raw/diagnostics/P4/P_bfloat16_seq0.npz",
+      "sha256": "03af8dae4ad8b24e4372ff69f04bb197cb273ac55cf5a9170d2995e632942147"
+    },
+    {
+      "arrays": {
+        "cached_p1": {
+          "dtype": "float32",
+          "sha256": "8a555527a05111bfec187778a77b8bc5c0e60fb2166a2693662323ee015829ab",
+          "shape": [
+            64,
+            151936
+          ]
+        },
+        "cached_p32": {
+          "dtype": "float32",
+          "sha256": "d1d6ca2f88b4c6dccf3c521efa10916ef438b512bb4f41cfec7a3b20cb639942",
+          "shape": [
+            64,
+            151936
+          ]
+        },
+        "full": {
+          "dtype": "float32",
+          "sha256": "09a020493db66df362e23f3297f5225b59b7eba546b42c7fa5f09c6ee6fe29a3",
+          "shape": [
+            64,
+            151936
+          ]
+        },
+        "tokens": {
+          "dtype": "int32",
+          "sha256": "22968380f613f3bbdaee092325a58471a3e8a4749944f62503375d42248bedc1",
+          "shape": [
+            64
+          ]
+        }
+      },
+      "bytes": 116688112,
+      "path": "raw/diagnostics/P4/P_bfloat16_seq1.npz",
+      "sha256": "58211e321a58ecf9995c522ad571733cde67d7f636ee90bb9e44acef677e5461"
+    },
+    {
+      "arrays": {
+        "full_logits": {
+          "dtype": "float32",
+          "sha256": "4169be5707782838fc55f13e83c80fd8fae889f6d78109f963746b024bc8133e",
+          "shape": [
+            1024,
+            151936
+          ]
+        }
+      },
+      "bytes": 622329984,
+      "path": "raw/diagnostics/P4/P_float32_loss_b0.npy",
+      "sha256": "6dbad03f27ccaac5df439b1d1f1b7274b620b8901b647d47063add4ec9c235f6"
+    },
+    {
+      "arrays": {
+        "full_logits": {
+          "dtype": "float32",
+          "sha256": "e2ed1b6bfad2280e72b624c4c1a984f3fb8e889aaa2e0f6aef22576050499d18",
+          "shape": [
+            1024,
+            151936
+          ]
+        }
+      },
+      "bytes": 622329984,
+      "path": "raw/diagnostics/P4/P_float32_loss_b1.npy",
+      "sha256": "4c571fea245a507a8bdb7c62afd9090c9ad579e4267c6e621d63786fb7345f2d"
+    },
+    {
+      "arrays": {
+        "cached_p1": {
+          "dtype": "float32",
+          "sha256": "fda4815c104e55dc78724f006348011f840eb580045506dc42926c088a5f79dc",
+          "shape": [
+            64,
+            151936
+          ]
+        },
+        "cached_p32": {
+          "dtype": "float32",
+          "sha256": "25c6e3c83f661aa26a1f15a996509d11fc775fcf3981cff7c1afb07a9ee9e777",
+          "shape": [
+            64,
+            151936
+          ]
+        },
+        "full": {
+          "dtype": "float32",
+          "sha256": "7c84d3737d916f45e56ccee7defe63fe29cd0dcdd45de300a2fe43b107b587e6",
+          "shape": [
+            64,
+            151936
+          ]
+        },
+        "tokens": {
+          "dtype": "int32",
+          "sha256": "4a8776a60f33b16c844bccfdbb2c8ce54007678dc548800c311a83ef1a84e0dd",
+          "shape": [
+            64
+          ]
+        }
+      },
+      "bytes": 116688112,
+      "path": "raw/diagnostics/P4/P_float32_seq0.npz",
+      "sha256": "e569982524a13289538b2217a8f6a20ec5927e4e23209f7f3d447ed76e4f09a6"
+    },
+    {
+      "arrays": {
+        "cached_p1": {
+          "dtype": "float32",
+          "sha256": "42d0dbdee35cc646724cf10f779c27a06c10b1ba9a88a83a583319372adbe239",
+          "shape": [
+            64,
+            151936
+          ]
+        },
+        "cached_p32": {
+          "dtype": "float32",
+          "sha256": "fd94afa08ff640ee1b001b9e1c11f721c927387066403d090533a2ef266d621d",
+          "shape": [
+            64,
+            151936
+          ]
+        },
+        "full": {
+          "dtype": "float32",
+          "sha256": "891c628c689308bf2ccbfc92ec0ccb6c1d479e3535071d3f39953d6a3b7d04f9",
+          "shape": [
+            64,
+            151936
+          ]
+        },
+        "tokens": {
+          "dtype": "int32",
+          "sha256": "22968380f613f3bbdaee092325a58471a3e8a4749944f62503375d42248bedc1",
+          "shape": [
+            64
+          ]
+        }
+      },
+      "bytes": 116688112,
+      "path": "raw/diagnostics/P4/P_float32_seq1.npz",
+      "sha256": "e695973b16a64f029f2acfd050edca06ba20aefd66c393f0d8b5587f5cfdf5b5"
+    }
+  ],
+  "logs": {
+    "raw/cpu-regression.log": {
+      "bytes": 572,
+      "sha256": "0c57ff08a7d9f9b547bc3aea97c374035919af102ff4434513cc8408ef99bec1"
+    },
+    "raw/diagnostic.log": {
+      "bytes": 3058,
+      "sha256": "086cdf368ceead33c34f487404ed4247b984cd24e4071cf7b2911feac19b9811"
+    }
+  },
+  "purpose": "Complete hash manifest for raw v4 logit arrays and execution logs; raw files stay outside Git.",
+  "run_id": "parscale-20261021-cache-diagnostic-v4",
+  "schema_version": 1,
+  "totals": {
+    "array_files": 18,
+    "bytes": 5134237248
+  }
+}
