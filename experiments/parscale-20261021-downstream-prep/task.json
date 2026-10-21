@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "run_id": "parscale-20261021-downstream-prep",
+  "parent_run_id": "parscale-20261021-full",
+  "ready": true,
+  "hypothesis": "At fixed official 0.7B-Pile checkpoint family, increased P improves downstream multiple-choice accuracy; no training or size scaling claim.",
+  "baseline": "Official ParScale-0.7B-P1-Pile, existing pinned weights; paper nonembedding N=0.5B column.",
+  "intervention": "Official P2/P4/P8 same 42B-token Pile family. PREPARATION ONLY: implement, pin data, validate scorer, benchmark; no full test evaluation until supervisor gate.",
+  "dataset": {
+    "tasks": {
+      "piqa": 5,
+      "sciq": 3,
+      "winogrande": 5,
+      "openbookqa": 5,
+      "hellaswag": 10,
+      "arc_easy": 25,
+      "arc_challenge": 25
+    },
+    "framework": "EleutherAI lm-evaluation-harness; choose compatible immutable release/commit, pin all dataset revisions and task configs before any scored test. Prefer HF mirror; identical immutable upstream fallback allowed. Download data outside Git.",
+    "models": "Reuse P1/P2/P4 runtime/models. Download P8 ParScale/ParScale-0.7B-P8-Pile revision 2cf8614c5ac7b0edab5912ed1d07aecc3b800f53, verify actual files and SHA256. No Python-family or other model sizes."
+  },
+  "split": "Official lm-eval default held-out splits. Smoke on training/fewshot-source examples where available; otherwise synthetic inputs without reporting test accuracies. Freeze fewshot seed 20261021 and exact rendered requests, truncation policy and sample IDs before test. Full input length audit CPU-only permitted.",
+  "primary_metric": "Future full-stage primary: equal-weight macro of six paper task groups (PIQA,SciQ,WinoGrande,OpenBookQA,HellaSwag,ARC mean) P4 minus P1 percentage points. Prep gate is numerical correctness and resource feasibility, not accuracy.",
+  "decision_rule": "Full-stage descriptive positive >=1 percentage point macro improvement with paired stratified bootstrap 95% CI lower>0; otherwise inconclusive/negative. No requirement of monotonic single-task scores. Secondary all P vs P1 and individual tasks, no selective omission. For prep require manual answer-token logprob agreement with adapter, candidate alignment/truncation/padding verified, immutable dataset/model manifests, and runtime prediction.",
+  "controls": [
+    "Current conversation is sole supervisor. Do not launch background Codex or new experiments. Do not modify frozen task.",
+    "Use only GPU from PARSCALE_GPU_UUID (authorized device0), memory allocator cap16GiB, free admission>=18432MiB. Max180 seconds cumulative GPU smoke across models; systemd bounds overall process. No full test metrics during prep.",
+    "BF16 full teacher-forced scoring, fresh official learned-prefix cache each forward, no incremental decoding/cache reuse. Preserve internal prefix mechanism: do not blindly disable use_cache. Audit model implementation. Compare raw candidate logprob manual reconstruction; FP32 sensitivity on small fixed smoke only. Historical BF16 incremental cache max-logit gate remains failed.",
+    "Use lm-eval official task templates, fewshot counts above and normalized accuracy where available; retain acc too. Fix harness version, seeds, tokenizer config, context max and truncation in manifest; no ad-hoc prompt variants. HFLM pretrained model instance/custom adapter allowed. Ensure no unexpected answer special tokens/labels in prompt, no evaluation examples in fewshot.",
+    "Prefer batch1 no padding initially. If batching, verify padded vs unpadded candidate scoring and no contamination across requests. Include multi-token answers and common-prefix choices. Use existing Torch2.2.2+cu121/Transformers4.51.3 via read-only existing packages, install additional evaluator dependencies into separate runtime/downstream-pkgs, never replace global or shared packages.",
+    "Public sanitized Git history only. Original remote checkout is evidence archive: do not merge it. Reuse weights/runtime read-only except new P8/data/dependency directory. No credentials/infrastructure IDs/hostpaths/rawdata/rawexecutorlogs committed. Use environment vars for all local paths.",
+    "Before GPU execution commit implementation+config; record actual run SHA, clean tree. Commit small manifests and summary separately afterwards. Explicit staging paths and check_public_metadata.py before result commit. Report relay push pending; GPT publishes after review.",
+    "Budget project <=4 GPUh and6 active hours, conservative prior wrapper usage6613.323s. This prep wall<=1800s, GPU smoke<=180s. Do not redownload existing checkpoints. New disk<=8GiB initially; maintain>=100GiB free. No full test until supervisor approves predicted remaining runtime. Max2 implementation repair attempts within this run budget.",
+    "Provide machine-readable preflight.json with perP latency, peak memory, total input tokens/request counts bytask, projected full evaluation walltime and scope that fits remaining budget. Save checkpoints frequently. If blocked, report exact actionable cause promptly; do not waste timeout waiting."
+  ],
+  "seeds": [
+    42,
+    20261021
+  ],
+  "code_revision": "Base sanitized public HEAD4ba4dd23c79c58100890e0a3b31aabb3d136c59b; task commit then worker implementation commit, exact SHA recorded before GPU smoke.",
+  "environment": "New sanitized remote checkout; PARSCALE_RUNTIME_DIR, PARSCALE_GPU_UUID and PARSCALE_TORCH_SITE supplied outside Git. Existing credential-enabled DSH adapter, HF_ENDPOINT=https://hf-mirror.com.",
+  "experiment_commands": [
+    "Inspect existing scoring/model code and package environment. Implement scripts/downstream_evaluation.py plus reproducible runner and requirements/config. Prefer a small compatible lm-eval adapter over hand-written dataset prompts. Read supplied protocol and paper shot settings.",
+    "Pin immutable harness/model/data revisions and verify hashes; prepare all7 task datasets. Add pipeline modes prepare, smoke, evaluate so full stage can reuse prepared requests and resumes only identical config/SHA. Save per-item predicted/gold/candidate scores without raw dataset text in shareable results; raw requests stay outsideGit.",
+    "Commit code/config before GPU smoke. Run training/synthetic smoke <=180GPU-seconds, verify manual scoring and task mapping; measure full requested context lengths and flag truncation. Do not silently change paper settings to fit.",
+    "Write preflight.json and report.json with measured performance, input-length audit and full forecast; actual run commit vs result HEAD. Commit sanitized preparation artifacts. Stop for current GPT review; do not run full test."
+  ],
+  "budget": {
+    "gpu_count": 1,
+    "gpu_hours": 0.05,
+    "wall_seconds": 1800,
+    "max_attempts": 1,
+    "model_cost_limit": "One existing-provider DSH session <=1800s; no purchase or new paid services."
+  },
+  "stop_conditions": [
+    "OOM/NaN, wrong GPU/model/data hashes, <=100GiB disk free, >8GiB new storage, GPU180s or wall1800s reached.",
+    "Scoring mismatch or unknown task semantics blocks full evaluation; preserve failure and return concise report."
+  ],
+  "required_outputs": [
+    "report.json",
+    "preflight.json",
+    "model-manifest.json",
+    "data-manifest.json",
+    "scorer-validation.json",
+    "requirements/immutable task settings",
+    "committed adapter/runner and sanitized experiment summary"
+  ],
+  "version_control": {
+    "repository": "Flutter-Misdreavus/parscale-reproduction",
+    "visibility": "public",
+    "branch": "exp/parscale-20261021",
+    "push_mode": "relay",
+    "checkpoint_minutes": 15,
+    "public_authorized_by_owner": true
+  }
+}
