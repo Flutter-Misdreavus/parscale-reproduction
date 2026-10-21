@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "run_id": "parscale-20261021-downstream-core",
+  "parent_run_id": "parscale-20261021-downstream-smoke",
+  "ready": true,
+  "full_test_authorized_by_supervisor": true,
+  "supervisor_review_event_id": "a45290e71d230d94f1d5f963cc8f47cd59a11ad01c6ef006ad2bea075ee7331d",
+  "hypothesis": "For official0.7B-Pile checkpoints, P4 improves equal-weight core-four downstream accuracy overP1.",
+  "baseline": "Official P1; immutable models/data/source and exact request hashes in accepted preparation manifests.",
+  "intervention": "P2/P4/P8 checkpoints at the same nominal0.7B scale; no training, task/prompt selection or parameter-size scaling.",
+  "dataset": "Full PIQA validation1838, SciQ test1000, WinoGrande validation1267, OpenBookQA test500; paper5/3/5/5-shot; lm-eval0.4.8 immutable templates, seed20261021. Other prepared tasks deferred for measured cost.",
+  "split": "Official held-out splits; fewshot examples from train. All fixed request hashes verified before scoring. No truncation for selected tasks.",
+  "primary_metric": "P4-P1 equal-weight mean of four task accuracies, acc_norm ifprovided otherwiseacc; percentage points; paired stratified2000bootstrap95%CI seed20261021.",
+  "decision_rule": "Positive subset evidence iff P4-P1>=1percentagepoint andpairedCI lower>0. Otherwise report inconclusive/negative. Individual tasks/P2/P8 descriptive; no monotonic requirement. Never report this four-task mean as paper six-group General average.",
+  "controls": [
+    "Only current conversation supervises. No background Codex, no old private Git history merges. Public repo authorized byuser.",
+    "Use committed scripts/supervised_downstream_full.py, NOT the legacy evaluate mode. Reuse all prepared data/weights offline. No installs/downloads/prepare reruns or independent evaluation implementations.",
+    "Source hashes and copied evidence hashes must matchtask. Allfour officialweights rehashed once bydriver; exact selected request streams rebuilt andmatched beforeGPU. Record actual runSHA distinctfromresultcommit.",
+    "Batch1, BF16weights, float32softmax/sum, fresh official learned-prefix cache perforward, no incrementalcache or padding. GPU16GiB cap/free>=18432MiB; utilization alone notstop.",
+    "Score all4tasks forallP. New driver persists every64candidates andcompletedtaskmetrics. No automatic rerun aftertestfailure or budgetstop; preserve partials andreturndiagnosis.",
+    "Scoring phase <=4800seconds(1.333333GPUh conservative includingCPU/modelresidency), wholewrapper<=5400seconds; project remains4GPUh/6activehours. PriorconservativeGPU6613.323s plussmokecommandwall35s. Oneboundedexisting-providerDSHsession, no paidpurchase.",
+    "No need to compute bootstrap or write new analysis scripts: GPT independently audits outcomes. Executor only runs fixedcommand, assembles report andcommits small sanitizedsummary. Do not publish rawdatasettext, hostpaths, GPUUUIDs, credentials, executorlogs orweights."
+  ],
+  "seeds": [
+    42,
+    20261021
+  ],
+  "code_revision": "Current committed standalone supervised driver andaccepted scorer atopc8015b9; exactHEAD written beforeone GPUrun.",
+  "environment": "Existing isolateddownstream packages/torch site throughruntimeenv; HFoffline, same authorizedGPU.",
+  "experiment_commands": [
+    "Check cleanHEAD andfrozen task. Execute timeout --signal=TERM --kill-after=10 5150 bash scripts/run_downstream_core.sh runs/parscale-20261021-downstream-core once. It sets runtimeenv/offline mode andinvokes only supervised_downstream_full.py.",
+    "Wait for all16pairs or explicitfailure/budgetstop, inspect full-results.json/progress.json. Do not switchscope orstartadditional tasks.",
+    "Write report.json schema1 and list full-results.json,request-verification.json,progress.json,alloutcomes/*.json andcandidateJSONL files asartifacts (rawlog optional). Eachoutcome hasgold/scores/normalizationlengths/accuracies; no benchmarktext. GPT independentlyrecomputesstatistics.",
+    "Commit small sanitized full-results summary underexperiments/parscale-20261021-downstream-core; do not copy rawtaskprompts orrawlogs. Record actualrunSHA, resultHEAD andrelaypushpending. Stop."
+  ],
+  "budget": {
+    "gpu_count": 1,
+    "gpu_hours": 1.3333333333333333,
+    "wall_seconds": 5400,
+    "max_attempts": 1,
+    "model_cost_limit": "One bounded existing-provider DSH execution session<=5400s; no new service or purchase."
+  },
+  "scoring_wall_seconds": 4800,
+  "evaluation_tasks": [
+    "piqa",
+    "sciq",
+    "winogrande",
+    "openbookqa"
+  ],
+  "evaluation_models": [
+    1,
+    2,
+    4,
+    8
+  ],
+  "prepared_artifact_sha256": {
+    "scorer-validation.json": "114e06f127a619333fab56a658625a7ff1ec8ace64664265d73aca041bfac989",
+    "preflight.json": "ba8a74cbfadb9a97b656c26f4b8ab332fd42c980d8508d41da1c4545e48779df",
+    "data-manifest.json": "b97cce837c654445aaee3fa1ba3e8c0aefa128e39a85fa73693eb5f6189904e8",
+    "model-manifest.json": "8bcaa815b4694094d8afbfb02f5c882611874dc4a2d00dc1074a27028220f992"
+  },
+  "validated_source_sha256": {
+    "scripts/downstream_evaluation.py": "797694bea083df7d68bb187106597f693802e6d8812bae063f873e5d6c5bb8ed",
+    "upstream/modeling_qwen2_parscale.py": "b246ba04c4ccd20237a75d184424815602762044a54974caf0d6115fca07eb39",
+    "upstream/configuration_qwen2_parscale.py": "6973a771bf5f9fa4e1451bbff78d849d4a3b4df31050a532891fd315f557daef",
+    "configs/downstream/tasks/arc_challenge.yaml": "eeec8ede58b7441bcd791e64d5b38828b995aa38b378ccc380b3915813b71ef1",
+    "configs/downstream/tasks/arc_easy.yaml": "2195967b87241242f92a68567113ac20d19d45695178bd1bf700e3cb15bee260",
+    "configs/downstream/tasks/hellaswag.yaml": "c8f7aa3c79a7455411bac4d72ad2106618678983bcda21ab2d06c22da6dfa93b",
+    "configs/downstream/tasks/openbookqa.yaml": "17f7977e042302b9e11c0d014a10bafb3ce8879b0f35be59d67cb95c5ec1cddd",
+    "configs/downstream/tasks/piqa.yaml": "97c54f668aea8e746f35b09e780546c9e63335a4bc3b893e7b43a423a9717e70",
+    "configs/downstream/tasks/preprocess_winogrande.py": "e55327629264a98f1d383fda24645b6779afb53fa0bce2150042b9416b1ae006",
+    "configs/downstream/tasks/sciq.yaml": "40745074742cba5cdad315cc665471bd8e9c608a9061dece4ae5954d47e23b20",
+    "configs/downstream/tasks/utils.py": "07d23b60b28f2a4f658dcf8440623a63fe6644854ce9b846a114dde980dc1214",
+    "configs/downstream/tasks/winogrande.yaml": "bdeb55cdbaf08c2f0ae41f63560e9727b0c8ed1e756b1c73d641834326914808"
+  },
+  "stop_conditions": [
+    "Anyidentity/hash/scorer mismatch, OOM, nonfiniteoutput, memoryadmissionfail orresourcecap. Preserve partials.",
+    "No automatic repeat or test-driven modification."
+  ],
+  "required_outputs": [
+    "report.json",
+    "full-results.json",
+    "request-verification.json",
+    "progress.json",
+    "outcomes/P*-TASK.json",
+    "candidates/P*-TASK.jsonl outsideGit",
+    "raw/full.log outsideGit",
+    "actualrunSHA and smallsanitizedsummary"
+  ],
+  "version_control": {
+    "repository": "Flutter-Misdreavus/parscale-reproduction",
+    "visibility": "public",
+    "branch": "exp/parscale-20261021",
+    "push_mode": "relay",
+    "checkpoint_minutes": 15,
+    "public_authorized_by_owner": true
+  }
+}
