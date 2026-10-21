@@ -119,7 +119,7 @@ python scripts/review_full_results.py \
 
 实测环境为 Python 3.10.12、PyTorch 2.2.2 + CUDA 12.1、Transformers 4.51.3；完整版本见 [environment.json](experiments/parscale-20261021-full/environment.json)。
 
-GPU 入口 [run_full_evaluation.sh](scripts/run_full_evaluation.sh) 保存的是本次服务器的执行配置，其中包含固定路径、GPU UUID 和已审查的验证集参考记录。它需要现成缓存，不能在新机器上直接作为安装命令运行。
+GPU 入口 [run_full_evaluation.sh](scripts/run_full_evaluation.sh) 需要现成缓存和已审查的验证集参考记录。运行前通过 `PARSCALE_RUNTIME_DIR` 指定本机缓存/依赖目录，通过 `PARSCALE_GPU_UUID` 指定获准使用的 GPU；公开文件不保存真实服务器身份。它不能在新机器上直接作为安装命令运行。
 
 迁移到新机器时，需要按以下顺序准备：
 
@@ -164,4 +164,4 @@ python docs/plot_results.py
 
 本项目基于 Mouxiang Chen 等人的 [*Parallel Scaling Law for Language Models*](https://arxiv.org/abs/2505.10475v1) 和 [QwenLM/ParScale](https://github.com/QwenLM/ParScale)。模型来自作者发布的 ParScale checkpoint，论文方法、公开数据及上游代码归原作者所有。
 
-使用本仓库中的研究结果时，请区分原论文结论与本次 WikiText-2 checkpoint 比较。固定上游版本及来源说明见 [UPSTREAM.md](UPSTREAM.md)。实际全量运行代码为 [`5acb76e`](https://github.com/Flutter-Misdreavus/parscale-reproduction/commit/5acb76e310e15f76e4ee8c50adaedd83e7b8aa7a)，后续文档更新不改变该实验版本。
+使用本仓库中的研究结果时，请区分原论文结论与本次 WikiText-2 checkpoint 比较。固定上游版本及来源说明见 [UPSTREAM.md](UPSTREAM.md)。实际全量运行记录中的原始代码标识为 `5acb76e`；它与后续公开脱敏版本区分保存。公开文件中的身份字段可能已替换，原始证据哈希的含义见 [公开审查说明](docs/publication-audit.md)。

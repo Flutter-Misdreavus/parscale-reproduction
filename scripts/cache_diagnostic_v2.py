@@ -211,7 +211,7 @@ def phase_preflight(locks, run_dir, model_paths):
     nvidia = subprocess.check_output(
         ["nvidia-smi", "--query-gpu=uuid,index,name,memory.total,memory.used,memory.free,utilization.gpu,driver_version",
          "--format=csv,noheader"], text=True, timeout=20)
-    disk = shutil.disk_usage("/path/to/data")
+    disk = shutil.disk_usage(run_dir)
     models = {}
     for p, path in sorted(model_paths.items()):
         f = path / "model.safetensors"

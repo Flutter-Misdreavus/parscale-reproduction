@@ -1,0 +1,14 @@
+[extend]
+useDefault = true
+
+# These exact forms were reviewed: experiment fingerprints and an upstream import.
+# Do not allow arbitrary hexadecimal secrets or entire result directories.
+[[allowlists]]
+description = "Named SHA256 evidence fields (not authentication tokens)"
+regexTarget = "match"
+regexes = ['''^[A-Za-z0-9_]*sha256[A-Za-z0-9_]*["']?\s*[:=]\s*["'][0-9a-f]{64}["']''']
+
+[[allowlists]]
+description = "Literal Python import in the upstream model documentation"
+regexTarget = "match"
+regexes = ['''^AutoTokenizer, Qwen2ForCausalLM$''']

@@ -21,6 +21,7 @@ from pathlib import Path
 
 import numpy as np
 import torch
+from runtime_config import configured_gpu_uuid
 
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
@@ -108,6 +109,7 @@ def package_versions():
 
 
 def gpu_environment(expected_uuid):
+    expected_uuid = configured_gpu_uuid(expected_uuid)
     props = torch.cuda.get_device_properties(0)
     uuid = getattr(props, "uuid", None)
     if uuid is not None and not str(uuid).startswith("GPU-"):
@@ -160,6 +162,7 @@ def peak_mem_gib():
 
 def gpu_admission(expected_uuid, free_mib_min=20480, util_max=10.0):
     """One admission observation; a failed reading never triggers polling."""
+    expected_uuid = configured_gpu_uuid(expected_uuid)
     raw = subprocess.check_output(
         ["nvidia-smi", "-i", expected_uuid,
          "--query-gpu=uuid,memory.free,utilization.gpu",

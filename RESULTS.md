@@ -28,12 +28,12 @@ FP32对照：P2−P1相对下降1.1070%，NLL差−0.032824，CI[−0.036319, �
 
 实际GPU运行与独立CPU审查代码commit均为`5acb76e310e15f76e4ee8c50adaedd83e7b8aa7a`（开跑时工作树干净），不能用后续结果/报告commit替代。v4 GPU诊断运行`c6a28df97623a4ad9f40ea5403178301eb085c47`，v4结果`dff8edd24aedfb85e53b804a6b73f88655ad6d32`；更早失败和修复保留在各run的审查记录中。完整测试worker结果commit为`ceb71c1f3fbcb6f0a372378c67f2fa859f029f53`；完成事件及11份交付文件校验通过，服务已正常退出并释放本任务GPU资源。当前报告提交可用`git log -1 --format=%H -- RESULTS.md`定位；最终HEAD、服务退出状态及private验证/push回执保存在本地`runs/parscale-20261021-full-received/delivery-receipt.json`，版本摘要见本轮review.md。
 
-远程证据目录：`/path/to/parscale-reproduction/runs/parscale-20261021-full`。模型与数据缓存：`/path/to/parscale-runtime`。原始日志、数组、模型权重和数据未上传Git；本地接收目录保存完成事件与通过哈希校验的小型交付文件。
+原始证据和模型缓存保留在私有实验存储中。公开报告已移除服务器地址、账户、目录、设备与会话标识；原始日志、数组、权重和数据未上传Git。公开文件的身份字段可能与原始归档不同，原始哈希仍指向未脱敏归档；详见[公开审查说明](docs/publication-audit.md)。
 
 复算命令（远程既有环境，禁用GPU）：
 
 ```bash
-CUDA_VISIBLE_DEVICES= PYTHONPATH=/path/to/parscale-runtime/pkgs:/path/to/python/site-packages \
+CUDA_VISIBLE_DEVICES= \
 python3 scripts/review_full_results.py --run-dir runs/parscale-20261021-full --out /tmp/parscale-full-review.json
 ```
 

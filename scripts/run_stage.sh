@@ -10,11 +10,8 @@ RUN_ID="${1:?run_id}"
 RUN_DIR="${2:?run_dir}"
 STAGE="${3:-smoke}"
 REPO="$(cd "$(dirname "$0")/.." && pwd)"
-RT="/path/to/parscale-runtime"
+source "$REPO/scripts/runtime_env.sh"
 
-export PYTHONPATH="$RT/pkgs:/path/to/python/site-packages:$REPO"
-export HF_HOME="$RT/hf"
-export HF_ENDPOINT="${HF_ENDPOINT:-https://hf-mirror.com}"
 export HF_HUB_DOWNLOAD_TIMEOUT=120
 export HF_HUB_ETAG_TIMEOUT=30
 export TOKENIZERS_PARALLELISM=false
