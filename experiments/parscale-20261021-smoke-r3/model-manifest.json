@@ -1,0 +1,103 @@
+{
+  "all_verified": true,
+  "created_at": "2026-10-21T08:51:58.001186+00:00",
+  "models": {
+    "P1": {
+      "actual_bytes": 2687840768,
+      "actual_sha256": "0e6632e3e64c7125b67f0189d7c0d22d8fce73f1545c9ba37a3b683c0db7eeea",
+      "expected_bytes": 2687840768,
+      "expected_sha256": "0e6632e3e64c7125b67f0189d7c0d22d8fce73f1545c9ba37a3b683c0db7eeea",
+      "other_files": {
+        "config.json": {
+          "bytes": 943,
+          "sha256": "307b33f0a28c88feed5bbd09c09aa17b2709af12e16fd92da364f4605563517a"
+        },
+        "generation_config.json": {
+          "bytes": 117,
+          "sha256": "dd5fc7bcb9d08b94f281fdc05a5fcbcafa1acce7c26270c2350129444462e17c"
+        },
+        "tokenizer.json": {
+          "bytes": 7031645,
+          "sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539"
+        },
+        "tokenizer_config.json": {
+          "bytes": 7226,
+          "sha256": "7d0fc4691628c9f6b0c77f8138a80517896a307e074dd5ac87e279ea85515774"
+        }
+      },
+      "repo_id": "ParScale/ParScale-0.7B-P1-Pile",
+      "revision": "881efa413e390400d5121468f259c6180073c721",
+      "sha256_ok": true,
+      "size_ok": true,
+      "url": "https://hf-mirror.com/ParScale/ParScale-0.7B-P1-Pile/resolve/881efa413e390400d5121468f259c6180073c721/model.safetensors",
+      "verified": true
+    },
+    "P2": {
+      "actual_bytes": 2697379032,
+      "actual_sha256": "c25a184a1240c3361311d58f2512a4856cb810b7c01d3960b4bd95c97be9c01e",
+      "expected_bytes": 2697379032,
+      "expected_sha256": "c25a184a1240c3361311d58f2512a4856cb810b7c01d3960b4bd95c97be9c01e",
+      "other_files": {
+        "config.json": {
+          "bytes": 943,
+          "sha256": "6eccc7e9cc09d42e7e72981bc5e661ea46262745e5f137f5f73d4b477265e1f1"
+        },
+        "generation_config.json": {
+          "bytes": 138,
+          "sha256": "8c970692323e3ea0e9b8b0a4dca79388d31226e41f83c9fd6014804280ebf6e8"
+        },
+        "model.safetensors.aria2__temp.stale-r2": {
+          "bytes": 680,
+          "sha256": "6b56ba458e8c9610757b242ec573454f51c18860249be5397fc37d87a2290500"
+        },
+        "tokenizer.json": {
+          "bytes": 7031645,
+          "sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539"
+        },
+        "tokenizer_config.json": {
+          "bytes": 7226,
+          "sha256": "7d0fc4691628c9f6b0c77f8138a80517896a307e074dd5ac87e279ea85515774"
+        }
+      },
+      "repo_id": "ParScale/ParScale-0.7B-P2-Pile",
+      "revision": "4cd35ea21ca4a721b69bc9854cbd397605e3c146",
+      "sha256_ok": true,
+      "size_ok": true,
+      "url": "https://hf-mirror.com/ParScale/ParScale-0.7B-P2-Pile/resolve/4cd35ea21ca4a721b69bc9854cbd397605e3c146/model.safetensors",
+      "verified": true
+    },
+    "P4": {
+      "actual_bytes": 2706905312,
+      "actual_sha256": "8efe0426c53bdb8af3fe2d44847bc5533e05374fd32ef2bedaa14b274924c49d",
+      "expected_bytes": 2706905312,
+      "expected_sha256": "8efe0426c53bdb8af3fe2d44847bc5533e05374fd32ef2bedaa14b274924c49d",
+      "other_files": {
+        "config.json": {
+          "bytes": 943,
+          "sha256": "a680a497bbe0fc03ba0a9a7b30750a2efed2ec30dfff499977ebae659d6fc6e6"
+        },
+        "generation_config.json": {
+          "bytes": 138,
+          "sha256": "8c970692323e3ea0e9b8b0a4dca79388d31226e41f83c9fd6014804280ebf6e8"
+        },
+        "tokenizer.json": {
+          "bytes": 7031645,
+          "sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539"
+        },
+        "tokenizer_config.json": {
+          "bytes": 7226,
+          "sha256": "7d0fc4691628c9f6b0c77f8138a80517896a307e074dd5ac87e279ea85515774"
+        }
+      },
+      "repo_id": "ParScale/ParScale-0.7B-P4-Pile",
+      "revision": "da736174c40a0d6f2eca0b6daf0ee7916dffa362",
+      "sha256_ok": true,
+      "size_ok": true,
+      "url": "https://hf-mirror.com/ParScale/ParScale-0.7B-P4-Pile/resolve/da736174c40a0d6f2eca0b6daf0ee7916dffa362/model.safetensors",
+      "verified": true
+    }
+  },
+  "run_id": "parscale-20261021-smoke-r3",
+  "schema_version": 1,
+  "source": "https://hf-mirror.com"
+}

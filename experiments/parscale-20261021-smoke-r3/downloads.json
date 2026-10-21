@@ -1,0 +1,58 @@
+{
+  "all_verified": true,
+  "logs": [
+    "runs/parscale-20261021-smoke-r3/raw/logs/download-resume-P1-probe.log",
+    "runs/parscale-20261021-smoke-r3/raw/logs/download-resume-P1.log",
+    "runs/parscale-20261021-smoke-r3/raw/logs/download-resume-P2.log",
+    "runs/parscale-20261021-smoke-r3/raw/logs/download-resume-P4.log",
+    "runs/parscale-20261021-smoke-r3/raw/logs/download-resume-P1b.log",
+    "runs/parscale-20261021-smoke-r3/raw/logs/verify-models.log"
+  ],
+  "models": {
+    "P1": {
+      "actual_bytes": 2687840768,
+      "actual_sha256": "0e6632e3e64c7125b67f0189d7c0d22d8fce73f1545c9ba37a3b683c0db7eeea",
+      "expected_bytes": 2687840768,
+      "expected_sha256": "0e6632e3e64c7125b67f0189d7c0d22d8fce73f1545c9ba37a3b683c0db7eeea",
+      "repo_id": "ParScale/ParScale-0.7B-P1-Pile",
+      "revision": "881efa413e390400d5121468f259c6180073c721",
+      "sha256_ok": true,
+      "size_ok": true,
+      "url": "https://hf-mirror.com/ParScale/ParScale-0.7B-P1-Pile/resolve/881efa413e390400d5121468f259c6180073c721/model.safetensors",
+      "verified": true
+    },
+    "P2": {
+      "actual_bytes": 2697379032,
+      "actual_sha256": "c25a184a1240c3361311d58f2512a4856cb810b7c01d3960b4bd95c97be9c01e",
+      "expected_bytes": 2697379032,
+      "expected_sha256": "c25a184a1240c3361311d58f2512a4856cb810b7c01d3960b4bd95c97be9c01e",
+      "repo_id": "ParScale/ParScale-0.7B-P2-Pile",
+      "revision": "4cd35ea21ca4a721b69bc9854cbd397605e3c146",
+      "sha256_ok": true,
+      "size_ok": true,
+      "url": "https://hf-mirror.com/ParScale/ParScale-0.7B-P2-Pile/resolve/4cd35ea21ca4a721b69bc9854cbd397605e3c146/model.safetensors",
+      "verified": true
+    },
+    "P4": {
+      "actual_bytes": 2706905312,
+      "actual_sha256": "8efe0426c53bdb8af3fe2d44847bc5533e05374fd32ef2bedaa14b274924c49d",
+      "expected_bytes": 2706905312,
+      "expected_sha256": "8efe0426c53bdb8af3fe2d44847bc5533e05374fd32ef2bedaa14b274924c49d",
+      "repo_id": "ParScale/ParScale-0.7B-P4-Pile",
+      "revision": "da736174c40a0d6f2eca0b6daf0ee7916dffa362",
+      "sha256_ok": true,
+      "size_ok": true,
+      "url": "https://hf-mirror.com/ParScale/ParScale-0.7B-P4-Pile/resolve/da736174c40a0d6f2eca0b6daf0ee7916dffa362/model.safetensors",
+      "verified": true
+    }
+  },
+  "notes": [
+    "Partial files from the cancelled r2 attempt were resumed with aria2c -c; no model was restarted from zero except when a prior r2 attempt had already done so.",
+    "Every model.safetensors matches the pinned Hugging Face LFS byte size and SHA256.",
+    "P2 and P4 finished in the first r3 resume; P1 was resumed once more after a 1500s wrapper timeout and then completed."
+  ],
+  "observed_at_utc": "2026-10-21T08:52:03.102711+00:00",
+  "run_id": "parscale-20261021-smoke-r3",
+  "schema_version": 1,
+  "source": "https://hf-mirror.com"
+}
