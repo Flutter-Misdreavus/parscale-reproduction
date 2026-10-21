@@ -1,0 +1,83 @@
+{
+  "run_id": "parscale-20261021-full",
+  "event_id": "b990b64e22d2139e4aafff1c1de838ae3883bde5103420dfccacc54c5bbf687a",
+  "status": "SUCCEEDED",
+  "completed_at": "2026-10-21T11:08:55.307705+00:00",
+  "frozen_task_sha256": "e58c2b0eba69bca0392f00aff3f25d84187c4991f0c19d6c829be9033335f56d",
+  "actual_run_commit": "5acb76e310e15f76e4ee8c50adaedd83e7b8aa7a",
+  "independent_review_code_commit": "5acb76e310e15f76e4ee8c50adaedd83e7b8aa7a",
+  "worker_result_commit": "ceb71c1f3fbcb6f0a372378c67f2fa859f029f53",
+  "full_results_sha256": "95780208b0b47e33a000767985434bd4a0a8507e1cd1128f1a9d5950983e9282",
+  "supervisor_independent_sha256": "1bb95082b412216d5b1e3edd1a5d220e273d2049e530bf9e5c2cd69f45fd1910",
+  "artifacts_verified_count": 11,
+  "verified_at": "2026-10-21T11:09:11.674093+00:00",
+  "artifacts": [
+    {
+      "bytes": 956892,
+      "path": "full-results.json",
+      "sha256": "95780208b0b47e33a000767985434bd4a0a8507e1cd1128f1a9d5950983e9282"
+    },
+    {
+      "bytes": 19029,
+      "path": "pretest-validation.json",
+      "sha256": "99531656baf98bf319dcb0c15a488c25505189e79efeb388573936747cc04e8e"
+    },
+    {
+      "bytes": 6129,
+      "path": "validation-data-manifest.json",
+      "sha256": "0d0770bd87fd27db806d019dab70d14f36dab5295e9157aae2168a258d014a6f"
+    },
+    {
+      "bytes": 68401,
+      "path": "test-data-manifest.json",
+      "sha256": "4556592648fd9158827e698f8e12f1d7be04f93f62678a306c31ea9224cf484c"
+    },
+    {
+      "bytes": 4461,
+      "path": "model-manifest.json",
+      "sha256": "b4a7d04888e44bc0f1859e1544c14a1f814bb9c323cbac9c85ab4ced2a486b29"
+    },
+    {
+      "bytes": 7464,
+      "path": "raw/full.log",
+      "sha256": "7e7beaca604ec1d82f2da1a20667b409e0fb819f990e8dca6c5db20cf42a149e"
+    },
+    {
+      "bytes": 41,
+      "path": "full-once.lock/run.sha",
+      "sha256": "a877c2d947dc8922efb2f01c595a3599d50a49e39ac15c8b6762f64de85df023"
+    },
+    {
+      "bytes": 292,
+      "path": "started.json",
+      "sha256": "8c5715a1187ebee166793b7485fd199602d3d386e61635c61994fb5ea30ed753"
+    },
+    {
+      "bytes": 187922,
+      "path": "dsh-events.jsonl",
+      "sha256": "dae367ede0a47a93ff4f3d33137db42b5443691ab02f381792dabb89af38b8b3"
+    },
+    {
+      "bytes": 832,
+      "path": "dsh-stderr.log",
+      "sha256": "4c495ce75cd88600cfd6e114ab9d6cf3a52660fa61c64230932068b14f68cc48"
+    },
+    {
+      "bytes": 7665,
+      "path": "report.json",
+      "sha256": "f90183ce77533374c8917b5bdd5bd25dd0e660a07ca9375e519903ada2b91ea0"
+    }
+  ],
+  "resources": {
+    "wrapper_wall_seconds": 587.77,
+    "recorded_seven_wrappers_total_seconds": 6613.323,
+    "scope": "Recorded wrapper wall sum is a conservative occupancy bound for their contained GPU work, not a complete project active-time audit."
+  },
+  "remote_final_service": {
+    "active_state": "inactive",
+    "main_pid": 0,
+    "result": "success",
+    "exec_main_status": 0,
+    "control_group": ""
+  }
+}
