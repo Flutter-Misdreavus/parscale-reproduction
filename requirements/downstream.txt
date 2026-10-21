@@ -1,0 +1,37 @@
+# Downstream preparation/evaluation environment (Python 3.10, CUDA 12.1 runtime).
+# Installed into PARSCALE_RUNTIME_DIR/downstream-pkgs, never into the shared venv.
+lm-eval==0.4.8
+accelerate==1.6.0
+evaluate==0.4.3
+datasets==3.5.0
+transformers==4.51.3
+huggingface-hub==0.30.2
+torch==2.2.2+cu121
+tokenizers==0.21.4
+safetensors==0.8.0
+numpy==1.26.4
+scipy==1.14.1
+scikit-learn==1.6.1
+sacrebleu==2.5.1
+rouge-score==0.1.2
+sqlitedict==2.1.0
+pytablewriter==1.2.1
+word2number==1.1
+jsonlines==4.0.0
+numexpr==2.10.2
+peft==0.15.2
+zstandard==0.23.0
+tqdm-multiprocess==0.0.11
+more-itertools==10.6.0
+portalocker==4.3.0
+tabulate==0.10.0
+lxml==6.1.2
+joblib==1.5.3
+threadpoolctl==3.6.0
+# lm-eval 0.4.8 wheel sha256 (PyPI/mirror):
+# c30b36d6117f644f3685e6b87005ecd7051d01e9cdcf617e8e671102c1546de2
+# Pure-Python packages whose sdists do not build under the host's setuptools;
+# installed by extracting the published archive into downstream-pkgs:
+# sqlitedict 2.1.0 sha256 03d9cfb96d602996f1d4c2db2856f1224b96a9c431bdd16e78032a72940f9e8c
+# word2number 1.1 sha256 70e27a5d387f67b04c71fbb7621c05930b19bfd26efd6851e6e0f9969dcde7d0
+# rouge-score 0.1.2 sha256 c7d4da2683e68c9abf0135ef915d63a46643666f848e558a1b9f7ead17ff0f04

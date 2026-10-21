@@ -1,0 +1,27 @@
+# Frozen copy of lm-evaluation-harness 0.4.8 hellaswag.yaml.
+task: hellaswag
+dataset_path: Rowan/hellaswag
+dataset_name: null
+output_type: multiple_choice
+training_split: train
+validation_split: validation
+test_split: null
+process_docs: !function utils.process_docs
+doc_to_text: "{{query}}"
+doc_to_target: "{{label}}"
+doc_to_choice: "choices"
+should_decontaminate: false
+num_fewshot: 10
+metric_list:
+  - metric: acc
+    aggregation: mean
+    higher_is_better: true
+  - metric: acc_norm
+    aggregation: mean
+    higher_is_better: true
+metadata:
+  version: 1.0
+  upstream_task_yaml: lm_eval/tasks/hellaswag/hellaswag.yaml
+dataset_kwargs:
+  revision: 218ec52e09a7e7462a5400043bb9a69a41d06b76
+  trust_remote_code: false
