@@ -1,0 +1,13 @@
+{
+  "service": "parscale-cache-diagnostic-v2.service",
+  "MainPID": 1948499,
+  "worker_pid": 1948500,
+  "started_at_utc": "2026-10-21T09:32:49.475019+00:00",
+  "launch_commit": "57f710e",
+  "RuntimeMaxSec": 1800,
+  "KillMode": "control-group",
+  "task_sha256": "1ae7b2defa2c873898745f47280ebd706b23fe8c2a67896ef1c2de3977fe93e4",
+  "run_id": "parscale-20261021-cache-diagnostic-v2",
+  "gpu_uuid": "GPU-REDACTED",
+  "receiver_mode": "direct monitor, parent workflow fetch-artifacts without concurrent resume"
+}

@@ -3,8 +3,12 @@
 最新执行更新：用户已授权继续 validation 诊断与修复。已设计
 `parscale-20261021-cache-diagnostic-v2`，资源准入明确修订为每模型
 free>=18GiB（18432MiB）、util<=10%，16GiB cap 不变；科学门槛 .03 不变。
-启动前已确认无活动项目 worker，远程工作树干净。当前正在提交与同步，
-尚不能把任务设计视为已运行；实际启动身份和结果将继续更新。
+启动前已确认无活动项目 worker，远程工作树干净。任务已于
+2026-10-21 17:32:49 北京时间真实启动：systemd 服务
+`parscale-cache-diagnostic-v2.service`，MainPID1948499、worker1948500，
+RuntimeMaxSec1800、KillMode=control-group；启动代码提交 `57f710e`。
+GPT 本轮直接监测，父仓库 workflow 正在拉取完成事件；没有并发 resume 本会话。
+诊断仍在运行，尚无新结论。
 
 截至 r3 审查：**下载完成，冒烟门槛未通过，完整测试尚未运行。** 这不是论文被证伪；不能宣称完整复现完成。
 
