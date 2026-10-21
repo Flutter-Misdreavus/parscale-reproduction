@@ -54,6 +54,22 @@ MODELS = OrderedDict([
 CONTEXT_MAX = 2048
 FEWSHOT_SEED = 20261021
 TASK_YAML_DIR = ROOT / "configs" / "downstream" / "tasks"
+# Tasks whose pinned Hub revision only publishes parquet files are materialised
+# outside Git and rendered into a local `parquet` loader config at runtime.
+LOCAL_PARQUET = {
+    "openbookqa": {"train": "openbookqa/train.parquet",
+                    "validation": "openbookqa/validation.parquet",
+                    "test": "openbookqa/test.parquet"},
+    "hellaswag": {"train": "hellaswag/train.parquet",
+                   "validation": "hellaswag/validation.parquet",
+                   "test": "hellaswag/test.parquet"},
+    "arc_easy": {"train": "arc_easy/train.parquet",
+                  "validation": "arc_easy/validation.parquet",
+                  "test": "arc_easy/test.parquet"},
+    "arc_challenge": {"train": "arc_challenge/train.parquet",
+                       "validation": "arc_challenge/validation.parquet",
+                       "test": "arc_challenge/test.parquet"},
+}
 GPU_SECONDS_LIMIT = 180.0
 FREE_MIB_MIN = 18432
 UTIL_MAX = 10.0
@@ -182,21 +198,35 @@ def model_manifest(run_dir, verify_hashes=True):
 # --------------------------------------------------------------------------- #
 # tasks / data
 # --------------------------------------------------------------------------- #
-def make_tasks(run_dir, mode):
-    """mode=audit uses frozen YAML; mode=smoke uses 0-shot train-only copies."""
-    from lm_eval.tasks import TaskManager
-    include = TASK_YAML_DIR
-    if mode == "smoke":
-        include = run_dir / "raw" / "smoke-tasks"
-        include.mkdir(parents=True, exist_ok=True)
-        for name in TASKS:
-            text = (TASK_YAML_DIR / f"{name}.yaml").read_text()
+def _runtime_task_dir(run_dir, mode):
+    """Render the frozen YAMLs, substituting local pinned parquet where needed."""
+    include = run_dir / "raw" / (f"{mode}-tasks")
+    include.mkdir(parents=True, exist_ok=True)
+    rt = Path(os.environ["PARSCALE_RUNTIME_DIR"])
+    for name in TASKS:
+        text = (TASK_YAML_DIR / f"{name}.yaml").read_text()
+        if mode == "smoke":
             text = re.sub(r"^num_fewshot:\s*\d+\s*$", "num_fewshot: 0", text, flags=re.M)
             text = re.sub(r"^test_split:\s*.*$", "test_split: train", text, flags=re.M)
             text = re.sub(r"^validation_split:\s*.*$", "validation_split: null", text, flags=re.M)
-            (include / f"{name}.yaml").write_text(text)
-        for helper in ["preprocess_winogrande.py", "utils.py"]:
-            shutil.copy2(TASK_YAML_DIR / helper, include / helper)
+        if name in LOCAL_PARQUET:
+            files = {split: str(rt / "downstream-data" / rel)
+                     for split, rel in LOCAL_PARQUET[name].items()}
+            text = re.sub(r"^dataset_path:.*$", "dataset_path: parquet", text, flags=re.M)
+            text = re.sub(r"^dataset_name:.*$", "dataset_name: null", text, flags=re.M)
+            text = re.sub(r"^dataset_kwargs:\n(?:  .*\n?)*",
+                          "dataset_kwargs: " + json.dumps({"data_files": files}) + "\n",
+                          text, flags=re.M)
+        (include / f"{name}.yaml").write_text(text)
+    for helper in ["preprocess_winogrande.py", "utils.py"]:
+        shutil.copy2(TASK_YAML_DIR / helper, include / helper)
+    return include
+
+
+def make_tasks(run_dir, mode):
+    """mode=audit uses frozen YAML; mode=smoke uses 0-shot train-only copies."""
+    from lm_eval.tasks import TaskManager
+    include = _runtime_task_dir(run_dir, mode)
     tm = TaskManager(include_path=str(include))
     tasks = tm.load_task_or_group(list(TASKS))
     for name, task in tasks.items():
@@ -265,8 +295,14 @@ def prepare(run_dir):
     for name, spec in TASKS.items():
         task = tasks[name]
         t0 = time.time()
-        ds = load_dataset(spec["repo"], spec["config"], revision=spec["revision"],
-                          cache_dir=str(Path(os.environ["HF_HOME"]) / "datasets"))
+        if name in LOCAL_PARQUET:
+            local_files = {split: str(Path(os.environ["PARSCALE_RUNTIME_DIR"]) /
+                                      "downstream-data" / rel)
+                           for split, rel in LOCAL_PARQUET[name].items()}
+            ds = load_dataset("parquet", data_files=local_files)
+        else:
+            ds = load_dataset(spec["repo"], spec["config"], revision=spec["revision"],
+                              cache_dir=str(Path(os.environ["HF_HOME"]) / "datasets"))
         splits = {}
         for split_name in sorted(ds.keys()):
             d = ds[split_name]
@@ -275,8 +311,13 @@ def prepare(run_dir):
                 h.update(json.dumps(row, sort_keys=True, ensure_ascii=False).encode())
             splits[split_name] = {"rows": len(d), "content_sha256": h.hexdigest(),
                                   "fingerprint": d._fingerprint}
+        local = {}
+        for split, rel in LOCAL_PARQUET.get(name, {}).items():
+            f = Path(os.environ["PARSCALE_RUNTIME_DIR"]) / "downstream-data" / rel
+            local[split] = {"bytes": f.stat().st_size, "sha256": sha256_file(f)}
         dataset_manifest["datasets"][name] = {"repo_id": spec["repo"], "config": spec["config"],
-                                              "revision": spec["revision"], "splits": splits}
+                                              "revision": spec["revision"], "splits": splits,
+                                              "local_parquet": local}
         task.build_all_requests(limit=None)
         records = []
         with gzip.open(raw / "requests" / f"{name}.jsonl.gz", "wt", encoding="utf-8") as fh:
