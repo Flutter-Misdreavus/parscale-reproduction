@@ -58,6 +58,15 @@ CONTEXT_MAX = 2048
 FEWSHOT_SEED = 20261021
 TASK_YAML_DIR = ROOT / "configs" / "downstream" / "tasks"
 LOCAL_PARQUET = {
+    "piqa": {"train": "piqa/train.parquet",
+              "validation": "piqa/validation.parquet",
+              "test": "piqa/test.parquet"},
+    "sciq": {"train": "sciq/train.parquet",
+              "validation": "sciq/validation.parquet",
+              "test": "sciq/test.parquet"},
+    "winogrande": {"train": "winogrande/train.parquet",
+                    "validation": "winogrande/validation.parquet",
+                    "test": "winogrande/test.parquet"},
     "openbookqa": {"train": "openbookqa/train.parquet",
                     "validation": "openbookqa/validation.parquet",
                     "test": "openbookqa/test.parquet"},
@@ -274,6 +283,9 @@ def _runtime_task_dir(run_dir, mode):
         if mode == "smoke":
             text = re.sub(r"^num_fewshot:\s*\d+\s*$", "num_fewshot: 0", text, flags=re.M)
             text = re.sub(r"^test_split:\s*.*$", "test_split: train", text, flags=re.M)
+            if not re.search(r"^test_split:", text, flags=re.M):
+                text = re.sub(r"^num_fewshot:", "test_split: train\nnum_fewshot:",
+                              text, flags=re.M)
             text = re.sub(r"^validation_split:\s*.*$", "validation_split: null", text, flags=re.M)
         if name in LOCAL_PARQUET:
             files = {split: str(rt / "downstream-data" / rel)
@@ -292,7 +304,9 @@ def _runtime_task_dir(run_dir, mode):
 def make_task_manager(run_dir, mode):
     from lm_eval.tasks import TaskManager
     include = _runtime_task_dir(run_dir, mode)
-    return TaskManager(include_path=str(include))
+    # 0.4.8 merges include_path before defaults, so defaults would silently
+    # win for these seven names.  Load only the frozen local YAMLs.
+    return TaskManager(include_path=str(include), include_defaults=False)
 
 
 def make_tasks(run_dir, mode):
