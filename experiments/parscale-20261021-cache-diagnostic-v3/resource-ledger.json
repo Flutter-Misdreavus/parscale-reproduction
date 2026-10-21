@@ -1,0 +1,98 @@
+{
+  "admission_checks": [
+    {
+      "created_at": "2026-10-21T10:28:41.475841+00:00",
+      "decision": "admit",
+      "label": "P1/float32",
+      "passed": true,
+      "requirement": {
+        "free_mib_min": 18432,
+        "max_samples": 1,
+        "utilization_percent_max": 10.0
+      },
+      "samples": [
+        {
+          "free_mib": 18798,
+          "sampled_at": "2026-10-21T10:28:41.475809+00:00",
+          "utilization_percent": 10.0,
+          "uuid": "GPU-REDACTED"
+        }
+      ]
+    },
+    {
+      "created_at": "2026-10-21T10:29:01.576038+00:00",
+      "decision": "admit",
+      "label": "P1/bfloat16",
+      "passed": true,
+      "requirement": {
+        "free_mib_min": 18432,
+        "max_samples": 1,
+        "utilization_percent_max": 10.0
+      },
+      "samples": [
+        {
+          "free_mib": 18726,
+          "sampled_at": "2026-10-21T10:29:01.575993+00:00",
+          "utilization_percent": 2.0,
+          "uuid": "GPU-REDACTED"
+        }
+      ]
+    },
+    {
+      "created_at": "2026-10-21T10:29:39.803264+00:00",
+      "decision": "admit",
+      "label": "P2/float32",
+      "passed": true,
+      "requirement": {
+        "free_mib_min": 18432,
+        "max_samples": 1,
+        "utilization_percent_max": 10.0
+      },
+      "samples": [
+        {
+          "free_mib": 18720,
+          "sampled_at": "2026-10-21T10:29:39.803208+00:00",
+          "utilization_percent": 4.0,
+          "uuid": "GPU-REDACTED"
+        }
+      ]
+    },
+    {
+      "created_at": "2026-10-21T10:29:55.619660+00:00",
+      "decision": "stop: admission not met",
+      "label": "P2/bfloat16",
+      "passed": false,
+      "requirement": {
+        "free_mib_min": 18432,
+        "max_samples": 1,
+        "utilization_percent_max": 10.0
+      },
+      "samples": [
+        {
+          "free_mib": 18720,
+          "sampled_at": "2026-10-21T10:29:55.619614+00:00",
+          "utilization_percent": 12.0,
+          "uuid": "GPU-REDACTED"
+        }
+      ]
+    }
+  ],
+  "assembled_post_hoc": true,
+  "disk": {
+    "raw_diagnostics_bytes": 3189448608
+  },
+  "gpu_active_seconds_observed_estimate": 45.4204607963562,
+  "gpu_hours_ceiling": 0.25,
+  "gpu_hours_observed_estimate": 0.012616794665654501,
+  "gpu_hours_wall_upper_bound": 0.03632320768303341,
+  "method": "P1 load+compute measured in diagnostics.json; P2 FP32 activity bounded by the 15.816 s gap between P2/FP32 admission and P2/BF16 admission minus the fixed 1.2 s cooldown. Excludes CPU tokenizer time.",
+  "peak_memory_gib": {
+    "allocated": 3.6709256172180176,
+    "reserved": 4.017578125
+  },
+  "run_id": "parscale-20261021-cache-diagnostic-v3",
+  "schema_version": 1,
+  "uncertainty": "Not an independently metered integral; P2 FP32 compute was not recorded before the stop.",
+  "wall_seconds_ceiling": 1740,
+  "wall_seconds_observed_approx": 130.7635476589203
+}

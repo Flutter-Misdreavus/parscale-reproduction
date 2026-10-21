@@ -1,0 +1,624 @@
+{
+  "actual_run_commit": "1f1aeedb5d453a112e94db46fbb6de331f5a7933",
+  "admission": {
+    "failure": {
+      "free_mib": 18720,
+      "label": "P2/bfloat16",
+      "requirement_free_mib_min": 18432,
+      "requirement_utilization_percent_max": 10.0,
+      "sampled_at": "2026-10-21T10:29:55.619614+00:00",
+      "utilization_percent": 12.0
+    },
+    "initial": {
+      "decision": "admit",
+      "passed": true,
+      "requirement": {
+        "free_mib_min": 18432,
+        "max_samples": 1,
+        "utilization_percent_max": 10.0
+      },
+      "samples": [
+        {
+          "free_mib": 19055,
+          "sampled_at": "2026-10-21T10:28:40.936425+00:00",
+          "utilization_percent": 10.0,
+          "uuid": "GPU-REDACTED"
+        }
+      ]
+    },
+    "per_model_checks": [
+      {
+        "created_at": "2026-10-21T10:28:41.475841+00:00",
+        "decision": "admit",
+        "label": "P1/float32",
+        "passed": true,
+        "requirement": {
+          "free_mib_min": 18432,
+          "max_samples": 1,
+          "utilization_percent_max": 10.0
+        },
+        "samples": [
+          {
+            "free_mib": 18798,
+            "sampled_at": "2026-10-21T10:28:41.475809+00:00",
+            "utilization_percent": 10.0,
+            "uuid": "GPU-REDACTED"
+          }
+        ]
+      },
+      {
+        "created_at": "2026-10-21T10:29:01.576038+00:00",
+        "decision": "admit",
+        "label": "P1/bfloat16",
+        "passed": true,
+        "requirement": {
+          "free_mib_min": 18432,
+          "max_samples": 1,
+          "utilization_percent_max": 10.0
+        },
+        "samples": [
+          {
+            "free_mib": 18726,
+            "sampled_at": "2026-10-21T10:29:01.575993+00:00",
+            "utilization_percent": 2.0,
+            "uuid": "GPU-REDACTED"
+          }
+        ]
+      },
+      {
+        "created_at": "2026-10-21T10:29:39.803264+00:00",
+        "decision": "admit",
+        "label": "P2/float32",
+        "passed": true,
+        "requirement": {
+          "free_mib_min": 18432,
+          "max_samples": 1,
+          "utilization_percent_max": 10.0
+        },
+        "samples": [
+          {
+            "free_mib": 18720,
+            "sampled_at": "2026-10-21T10:29:39.803208+00:00",
+            "utilization_percent": 4.0,
+            "uuid": "GPU-REDACTED"
+          }
+        ]
+      },
+      {
+        "created_at": "2026-10-21T10:29:55.619660+00:00",
+        "decision": "stop: admission not met",
+        "label": "P2/bfloat16",
+        "passed": false,
+        "requirement": {
+          "free_mib_min": 18432,
+          "max_samples": 1,
+          "utilization_percent_max": 10.0
+        },
+        "samples": [
+          {
+            "free_mib": 18720,
+            "sampled_at": "2026-10-21T10:29:55.619614+00:00",
+            "utilization_percent": 12.0,
+            "uuid": "GPU-REDACTED"
+          }
+        ]
+      }
+    ]
+  },
+  "blocked_reason": "resource admission failed before P2/bfloat16; fixed rule forbids retry or altered sampling",
+  "branch": "exp/parscale-20261021",
+  "command": "bash scripts/run_diagnostic_once.sh runs/parscale-20261021-cache-diagnostic-v3",
+  "data_and_tokenizer": {
+    "analysis_fixtures_passed": true,
+    "blocks_total": 257,
+    "blocks_used": 2,
+    "blocks_used_meta": [
+      {
+        "block_id": 0,
+        "first_token_id": 271,
+        "last_token_id": 7402,
+        "token_count": 1024,
+        "token_ids_sha256": "8702e3b09722fd49990032bb0734141cfd2f17731cca20be81fe9b742810b7bb"
+      },
+      {
+        "block_id": 1,
+        "first_token_id": 504,
+        "last_token_id": 440,
+        "token_count": 1024,
+        "token_ids_sha256": "5e9cb9d9de4ede7783aaaa9916ed53e51ec04e353eabe73896c9ec5d0f16cbef"
+      }
+    ],
+    "dataset_id": "Salesforce/wikitext",
+    "dataset_revision": "b08601e04326c79dfdd32d625aee71d232d685c3",
+    "encoding_mismatches": {},
+    "full_encoding_equal_across_checkpoints": true,
+    "split": "validation",
+    "text_sha256": "b44fb967f92b525731216a507d1fbc44b97446b7ef0a2b4d1a893f81f1bbc29e",
+    "token_count_full_split": 262337,
+    "token_ids_sha256": "5589175bd3ba8ced31b19b38ddd60715ea7779fdd8b3653f73eb973ee44dc76a"
+  },
+  "finished_approx_utc": "2026-10-21T10:29:55.664791+00:00",
+  "gate": {
+    "criterion": "BF16 full-vs-cached max absolute logit error <= 0.03 (r3 gate, unchanged)",
+    "note": "Gate not redefined; P2/P4 BF16 cache evidence absent due to the admission stop.",
+    "observed_max_abs_over_P1_sequences": 0.203125,
+    "passed": false
+  },
+  "missing_outputs": [
+    "diagnostics P2/BF16 and P4",
+    "timing.json",
+    "environment.json from script",
+    "resource-ledger.json from script",
+    "requirements-freeze.txt",
+    "final report from script"
+  ],
+  "p1_metrics": {
+    "cache_sequences": {
+      "0": {
+        "bfloat16": {
+          "cached_p1_vs_fp32": {
+            "elements": 9723904,
+            "finite": true,
+            "max_abs": 0.18683719635009766,
+            "mean_abs": 0.016473520547151566,
+            "p99_abs": 0.05858564376831055,
+            "sequence": {
+              "parent_block_id": 0,
+              "sequence_id": 0,
+              "target_ids_sha256_i32le": "4b6d408fa06f98fce769da4a7668f1ee568cbd0b8d1bc806120b6cc0a215472b",
+              "token_count": 64,
+              "token_dtype": "int32",
+              "token_endianness": "little",
+              "token_ids_sha256_i32le": "4a8776a60f33b16c844bccfdbb2c8ce54007678dc548800c311a83ef1a84e0dd"
+            },
+            "target_logprob_abs_diff_max": 0.06687068939208984,
+            "target_logprob_abs_diff_mean": 0.014458504505455494,
+            "target_logprob_abs_diff_p99": 0.05805661797523502,
+            "worst_logit_coordinate": {
+              "abs_diff": 0.18683719635009766,
+              "abs_diff_in_bf16_spacing": 5.978790283203125,
+              "fp32_reference_logit": 4.530587196350098,
+              "local_bf16_spacing_at_reference": 0.03125,
+              "path_logit": 4.34375,
+              "position": 7,
+              "vocab_index": 29979
+            }
+          },
+          "cached_p32_vs_fp32": {
+            "elements": 9723904,
+            "finite": true,
+            "max_abs": 0.1475660800933838,
+            "mean_abs": 0.01603759080171585,
+            "p99_abs": 0.05771827697753906,
+            "sequence": {
+              "parent_block_id": 0,
+              "sequence_id": 0,
+              "target_ids_sha256_i32le": "4b6d408fa06f98fce769da4a7668f1ee568cbd0b8d1bc806120b6cc0a215472b",
+              "token_count": 64,
+              "token_dtype": "int32",
+              "token_endianness": "little",
+              "token_ids_sha256_i32le": "4a8776a60f33b16c844bccfdbb2c8ce54007678dc548800c311a83ef1a84e0dd"
+            },
+            "target_logprob_abs_diff_max": 0.061064720153808594,
+            "target_logprob_abs_diff_mean": 0.012661396525800228,
+            "target_logprob_abs_diff_p99": 0.055930652618408225,
+            "worst_logit_coordinate": {
+              "abs_diff": 0.1475660800933838,
+              "abs_diff_in_bf16_spacing": 18.888458251953125,
+              "fp32_reference_logit": -1.5225660800933838,
+              "local_bf16_spacing_at_reference": 0.0078125,
+              "path_logit": -1.375,
+              "position": 28,
+              "vocab_index": 62969
+            }
+          },
+          "finite": true,
+          "full_vs_cached_p1": {
+            "elements": 9723904,
+            "max_abs": 0.203125,
+            "mean_abs": 0.017109068110585213,
+            "p99_abs": 0.0625
+          },
+          "full_vs_cached_p32": {
+            "elements": 9723904,
+            "max_abs": 0.1875,
+            "mean_abs": 0.01664762757718563,
+            "p99_abs": 0.0625
+          },
+          "full_vs_fp32": {
+            "elements": 9723904,
+            "finite": true,
+            "max_abs": 0.15796852111816406,
+            "mean_abs": 0.015690715983510017,
+            "p99_abs": 0.0567645955085756,
+            "sequence": {
+              "parent_block_id": 0,
+              "sequence_id": 0,
+              "target_ids_sha256_i32le": "4b6d408fa06f98fce769da4a7668f1ee568cbd0b8d1bc806120b6cc0a215472b",
+              "token_count": 64,
+              "token_dtype": "int32",
+              "token_endianness": "little",
+              "token_ids_sha256_i32le": "4a8776a60f33b16c844bccfdbb2c8ce54007678dc548800c311a83ef1a84e0dd"
+            },
+            "target_logprob_abs_diff_max": 0.1103367805480957,
+            "target_logprob_abs_diff_mean": 0.014988034032285213,
+            "target_logprob_abs_diff_p99": 0.07526098251342789,
+            "worst_logit_coordinate": {
+              "abs_diff": 0.15796852111816406,
+              "abs_diff_in_bf16_spacing": 10.1099853515625,
+              "fp32_reference_logit": 2.657968521118164,
+              "local_bf16_spacing_at_reference": 0.015625,
+              "path_logit": 2.5,
+              "position": 57,
+              "vocab_index": 371
+            }
+          },
+          "prefill_lengths": [
+            1,
+            32
+          ],
+          "sequence": {
+            "parent_block_id": 0,
+            "sequence_id": 0,
+            "target_ids_sha256_i32le": "4b6d408fa06f98fce769da4a7668f1ee568cbd0b8d1bc806120b6cc0a215472b",
+            "token_count": 64,
+            "token_dtype": "int32",
+            "token_endianness": "little",
+            "token_ids_sha256_i32le": "4a8776a60f33b16c844bccfdbb2c8ce54007678dc548800c311a83ef1a84e0dd"
+          }
+        },
+        "float32": {
+          "finite": true,
+          "full_vs_cached_p1": {
+            "elements": 9723904,
+            "max_abs": 2.288818359375e-05,
+            "mean_abs": 1.6863201608430245e-06,
+            "p99_abs": 6.198883056640625e-06
+          },
+          "full_vs_cached_p32": {
+            "elements": 9723904,
+            "max_abs": 2.288818359375e-05,
+            "mean_abs": 1.7232468962902203e-06,
+            "p99_abs": 6.67572021484375e-06
+          },
+          "prefill_lengths": [
+            1,
+            32
+          ],
+          "sequence": {
+            "parent_block_id": 0,
+            "sequence_id": 0,
+            "target_ids_sha256_i32le": "4b6d408fa06f98fce769da4a7668f1ee568cbd0b8d1bc806120b6cc0a215472b",
+            "token_count": 64,
+            "token_dtype": "int32",
+            "token_endianness": "little",
+            "token_ids_sha256_i32le": "4a8776a60f33b16c844bccfdbb2c8ce54007678dc548800c311a83ef1a84e0dd"
+          }
+        }
+      },
+      "1": {
+        "bfloat16": {
+          "cached_p1_vs_fp32": {
+            "elements": 9723904,
+            "finite": true,
+            "max_abs": 0.1378803253173828,
+            "mean_abs": 0.014462795108556747,
+            "p99_abs": 0.050553791522979896,
+            "sequence": {
+              "parent_block_id": 1,
+              "sequence_id": 1,
+              "target_ids_sha256_i32le": "7cd6d7622662a6fbb1230360ae7d263a117984da8429683483a6887d19168282",
+              "token_count": 64,
+              "token_dtype": "int32",
+              "token_endianness": "little",
+              "token_ids_sha256_i32le": "22968380f613f3bbdaee092325a58471a3e8a4749944f62503375d42248bedc1"
+            },
+            "target_logprob_abs_diff_max": 0.04842948913574219,
+            "target_logprob_abs_diff_mean": 0.01673852652311325,
+            "target_logprob_abs_diff_p99": 0.04666511535644532,
+            "worst_logit_coordinate": {
+              "abs_diff": 0.1378803253173828,
+              "abs_diff_in_bf16_spacing": 4.41217041015625,
+              "fp32_reference_logit": -6.356630325317383,
+              "local_bf16_spacing_at_reference": 0.03125,
+              "path_logit": -6.21875,
+              "position": 0,
+              "vocab_index": 57259
+            }
+          },
+          "cached_p32_vs_fp32": {
+            "elements": 9723904,
+            "finite": true,
+            "max_abs": 0.1414009928703308,
+            "mean_abs": 0.014774441719055176,
+            "p99_abs": 0.052773475646972656,
+            "sequence": {
+              "parent_block_id": 1,
+              "sequence_id": 1,
+              "target_ids_sha256_i32le": "7cd6d7622662a6fbb1230360ae7d263a117984da8429683483a6887d19168282",
+              "token_count": 64,
+              "token_dtype": "int32",
+              "token_endianness": "little",
+              "token_ids_sha256_i32le": "22968380f613f3bbdaee092325a58471a3e8a4749944f62503375d42248bedc1"
+            },
+            "target_logprob_abs_diff_max": 0.06743252277374268,
+            "target_logprob_abs_diff_mean": 0.01602182723581791,
+            "target_logprob_abs_diff_p99": 0.057545244693756145,
+            "worst_logit_coordinate": {
+              "abs_diff": 0.1414009928703308,
+              "abs_diff_in_bf16_spacing": 36.19865417480469,
+              "fp32_reference_logit": -0.5613228678703308,
+              "local_bf16_spacing_at_reference": 0.00390625,
+              "path_logit": -0.419921875,
+              "position": 0,
+              "vocab_index": 22591
+            }
+          },
+          "finite": true,
+          "full_vs_cached_p1": {
+            "elements": 9723904,
+            "max_abs": 0.15625,
+            "mean_abs": 0.014852914027869701,
+            "p99_abs": 0.0625
+          },
+          "full_vs_cached_p32": {
+            "elements": 9723904,
+            "max_abs": 0.16015625,
+            "mean_abs": 0.014885114505887032,
+            "p99_abs": 0.0625
+          },
+          "full_vs_fp32": {
+            "elements": 9723904,
+            "finite": true,
+            "max_abs": 0.1659247875213623,
+            "mean_abs": 0.014949406497180462,
+            "p99_abs": 0.05336809158325195,
+            "sequence": {
+              "parent_block_id": 1,
+              "sequence_id": 1,
+              "target_ids_sha256_i32le": "7cd6d7622662a6fbb1230360ae7d263a117984da8429683483a6887d19168282",
+              "token_count": 64,
+              "token_dtype": "int32",
+              "token_endianness": "little",
+              "token_ids_sha256_i32le": "22968380f613f3bbdaee092325a58471a3e8a4749944f62503375d42248bedc1"
+            },
+            "target_logprob_abs_diff_max": 0.06809425354003906,
+            "target_logprob_abs_diff_mean": 0.018588252365589142,
+            "target_logprob_abs_diff_p99": 0.058324861526489295,
+            "worst_logit_coordinate": {
+              "abs_diff": 0.1659247875213623,
+              "abs_diff_in_bf16_spacing": 10.619186401367188,
+              "fp32_reference_logit": -2.0331122875213623,
+              "local_bf16_spacing_at_reference": 0.015625,
+              "path_logit": -1.8671875,
+              "position": 0,
+              "vocab_index": 8702
+            }
+          },
+          "prefill_lengths": [
+            1,
+            32
+          ],
+          "sequence": {
+            "parent_block_id": 1,
+            "sequence_id": 1,
+            "target_ids_sha256_i32le": "7cd6d7622662a6fbb1230360ae7d263a117984da8429683483a6887d19168282",
+            "token_count": 64,
+            "token_dtype": "int32",
+            "token_endianness": "little",
+            "token_ids_sha256_i32le": "22968380f613f3bbdaee092325a58471a3e8a4749944f62503375d42248bedc1"
+          }
+        },
+        "float32": {
+          "finite": true,
+          "full_vs_cached_p1": {
+            "elements": 9723904,
+            "max_abs": 2.09808349609375e-05,
+            "mean_abs": 1.6153556998688146e-06,
+            "p99_abs": 6.198883056640625e-06
+          },
+          "full_vs_cached_p32": {
+            "elements": 9723904,
+            "max_abs": 2.193450927734375e-05,
+            "mean_abs": 1.6687296238160343e-06,
+            "p99_abs": 6.67572021484375e-06
+          },
+          "prefill_lengths": [
+            1,
+            32
+          ],
+          "sequence": {
+            "parent_block_id": 1,
+            "sequence_id": 1,
+            "target_ids_sha256_i32le": "7cd6d7622662a6fbb1230360ae7d263a117984da8429683483a6887d19168282",
+            "token_count": 64,
+            "token_dtype": "int32",
+            "token_endianness": "little",
+            "token_ids_sha256_i32le": "22968380f613f3bbdaee092325a58471a3e8a4749944f62503375d42248bedc1"
+          }
+        }
+      }
+    },
+    "compute_seconds": {
+      "bfloat16": 18.123868465423584,
+      "float32": 10.650363683700562
+    },
+    "config": {
+      "_attn_implementation": "sdpa",
+      "head_dim": null,
+      "hidden_size": 896,
+      "max_position_embeddings": 2048,
+      "max_window_layers": 36,
+      "model_type": "qwen2_parscale",
+      "num_attention_heads": 16,
+      "num_hidden_layers": 36,
+      "num_key_value_heads": 2,
+      "num_layers": null,
+      "parscale_attn_smooth": 0.1,
+      "parscale_n": 1,
+      "parscale_n_tokens": 48,
+      "rms_norm_eps": 1e-06,
+      "rope_theta": 10000.0,
+      "sliding_window": null,
+      "tie_word_embeddings": true,
+      "use_sliding_window": false,
+      "vocab_size": 151936
+    },
+    "load_seconds": {
+      "bfloat16": 0.8798267841339111,
+      "float32": 1.1664018630981445
+    },
+    "loss_1024": {
+      "aggregate": {
+        "bf16_minus_fp32_nll_nats_per_token": -0.0006614230128909604,
+        "bf16_nll_nats_per_token": 2.663069709188661,
+        "fp32_nll_nats_per_token": 2.6637311322015518,
+        "token_count_scored": 2046,
+        "token_weighted": true
+      },
+      "bfloat16": [
+        {
+          "block_id": 0,
+          "finite": true,
+          "nll_nats_per_token": 2.524352490377566,
+          "nll_sum_nats": 2582.41259765625,
+          "target_token_ids_sha256": "6256b3ce6c2943b44647c050c8609b5467afd58e103c488ba433b03750682e94",
+          "token_count": 1024,
+          "token_count_scored": 1023,
+          "vs_fp32": {
+            "bf16_minus_fp32_nll_nats": -1.00244140625,
+            "elements": 155582464,
+            "max_abs": 0.20281696319580078,
+            "mean_abs": 0.01567818969488144,
+            "p99_abs": 0.05609321594238281,
+            "target_logprob_abs_diff_max": 0.10862910747528076,
+            "target_logprob_abs_diff_mean": 0.015049227513372898,
+            "target_logprob_abs_diff_p99": 0.06320226669311516,
+            "worst_logit_coordinate": {
+              "abs_diff": 0.20281696319580078,
+              "abs_diff_in_bf16_spacing": 6.490142822265625,
+              "fp32_reference_logit": 4.297183036804199,
+              "local_bf16_spacing_at_reference": 0.03125,
+              "path_logit": 4.5,
+              "position": 459,
+              "vocab_index": 343
+            }
+          }
+        },
+        {
+          "block_id": 1,
+          "finite": true,
+          "nll_nats_per_token": 2.8017869279997556,
+          "nll_sum_nats": 2866.22802734375,
+          "target_token_ids_sha256": "5281f894559a906eb797a58bae7fb15f96af16273a40559b109b570fa91d9d2d",
+          "token_count": 1024,
+          "token_count_scored": 1023,
+          "vs_fp32": {
+            "bf16_minus_fp32_nll_nats": -0.350830078125,
+            "elements": 155582464,
+            "max_abs": 0.17665481567382812,
+            "mean_abs": 0.015361273661255836,
+            "p99_abs": 0.05465078353881836,
+            "target_logprob_abs_diff_max": 0.09072113037109375,
+            "target_logprob_abs_diff_mean": 0.01433491986244917,
+            "target_logprob_abs_diff_p99": 0.05886374473571775,
+            "worst_logit_coordinate": {
+              "abs_diff": 0.17665481567382812,
+              "abs_diff_in_bf16_spacing": 2.82647705078125,
+              "fp32_reference_logit": 8.073345184326172,
+              "local_bf16_spacing_at_reference": 0.0625,
+              "path_logit": 8.25,
+              "position": 380,
+              "vocab_index": 332
+            }
+          }
+        }
+      ],
+      "fp32": [
+        {
+          "block_id": 0,
+          "finite": true,
+          "nll_nats_per_token": 2.525332394000489,
+          "nll_sum_nats": 2583.4150390625,
+          "target_token_ids_sha256": "6256b3ce6c2943b44647c050c8609b5467afd58e103c488ba433b03750682e94",
+          "token_count": 1024,
+          "token_count_scored": 1023
+        },
+        {
+          "block_id": 1,
+          "finite": true,
+          "nll_nats_per_token": 2.8021298704026147,
+          "nll_sum_nats": 2866.578857421875,
+          "target_token_ids_sha256": "5281f894559a906eb797a58bae7fb15f96af16273a40559b109b570fa91d9d2d",
+          "token_count": 1024,
+          "token_count_scored": 1023
+        }
+      ],
+      "paired": [
+        {
+          "bf16_minus_fp32_nll_nats": -1.00244140625,
+          "bf16_nll_nats": 2582.41259765625,
+          "block_id": 0,
+          "fp32_nll_nats": 2583.4150390625,
+          "token_count_scored": 1023
+        },
+        {
+          "bf16_minus_fp32_nll_nats": -0.350830078125,
+          "bf16_nll_nats": 2866.22802734375,
+          "block_id": 1,
+          "fp32_nll_nats": 2866.578857421875,
+          "token_count_scored": 1023
+        }
+      ]
+    },
+    "model_id": "ParScale/ParScale-0.7B-P1-Pile",
+    "parameter_count": 671948032,
+    "peak_memory_gib": {
+      "allocated": 3.6709256172180176,
+      "reserved": 4.017578125
+    },
+    "revision": "881efa413e390400d5121468f259c6180073c721"
+  },
+  "p2_float32_raw_completed": {
+    "bytes": {
+      "raw/diagnostics/P2/P_float32_loss_b0.npy": 622329984,
+      "raw/diagnostics/P2/P_float32_loss_b1.npy": 622329984,
+      "raw/diagnostics/P2/P_float32_seq0.npz": 116688112,
+      "raw/diagnostics/P2/P_float32_seq1.npz": 116688112
+    },
+    "files": [
+      "raw/diagnostics/P2/P_float32_loss_b0.npy",
+      "raw/diagnostics/P2/P_float32_loss_b1.npy",
+      "raw/diagnostics/P2/P_float32_seq0.npz",
+      "raw/diagnostics/P2/P_float32_seq1.npz"
+    ],
+    "note": "FP32 load/compute completed; model record and NLL aggregate were not written because the process raised at the next admission."
+  },
+  "parent_run_id": "parscale-20261021-cache-diagnostic-v2",
+  "resource": {
+    "note": "P2 FP32 interval 15.816 s includes <=14.6 s GPU activity; conservative wall-clock GPU bound = 0.0363 h.",
+    "p1_gpu_active_seconds_measured": 30.8204607963562,
+    "p1_peak_memory_gib": {
+      "allocated": 3.6709256172180176,
+      "reserved": 4.017578125
+    },
+    "wall_seconds_approx": 130.7635476589203
+  },
+  "run_id": "parscale-20261021-cache-diagnostic-v3",
+  "schema_version": 1,
+  "source_diagnostics_sha256": "5c0aea0fd65c7315e1483c18e2a0677f54dbc53e4d636c537e2f7ed8c611405f",
+  "stage_status": {
+    "analysis_fixtures": "passed",
+    "data_manifest": "complete",
+    "diagnostics_P1_bfloat16": "complete",
+    "diagnostics_P1_float32": "complete",
+    "diagnostics_P2_bfloat16": "blocked_admission",
+    "diagnostics_P2_float32": "complete_raw_only",
+    "diagnostics_P4": "not_started",
+    "preflight": "complete",
+    "timing": "not_started",
+    "tokenizer_consistency": "passed"
+  },
+  "started_at": "2026-10-21T10:27:44.901243+00:00",
+  "status": "BLOCKED"
+}

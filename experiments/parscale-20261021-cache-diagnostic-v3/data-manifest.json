@@ -1,0 +1,182 @@
+{
+  "block_definition": "contiguous non-overlapping token blocks of context_length; final remainder >=2 tokens included; smoke stage uses first two validation blocks",
+  "blocks_total": 257,
+  "blocks_used": 2,
+  "blocks_used_meta": [
+    {
+      "block_id": 0,
+      "first_token_id": 271,
+      "last_token_id": 7402,
+      "token_count": 1024,
+      "token_ids_sha256": "8702e3b09722fd49990032bb0734141cfd2f17731cca20be81fe9b742810b7bb"
+    },
+    {
+      "block_id": 1,
+      "first_token_id": 504,
+      "last_token_id": 440,
+      "token_count": 1024,
+      "token_ids_sha256": "5e9cb9d9de4ede7783aaaa9916ed53e51ec04e353eabe73896c9ec5d0f16cbef"
+    }
+  ],
+  "context_length": 1024,
+  "dataset_fingerprint": "51d84d52d095f90d",
+  "dataset_id": "Salesforce/wikitext",
+  "dataset_revision": "b08601e04326c79dfdd32d625aee71d232d685c3",
+  "join_separator": "\\n\\n",
+  "num_empty_rows": 1299,
+  "num_rows": 3760,
+  "split": "validation",
+  "subset": "wikitext-2-raw-v1",
+  "text_chars": 1149668,
+  "text_sha256": "b44fb967f92b525731216a507d1fbc44b97446b7ef0a2b4d1a893f81f1bbc29e",
+  "timing": {
+    "load_dataset_seconds": 0.21573305130004883,
+    "tokenize_seconds": 1.1114275455474854
+  },
+  "token_count_full_split": 262337,
+  "token_ids_sha256": "5589175bd3ba8ced31b19b38ddd60715ea7779fdd8b3653f73eb973ee44dc76a",
+  "tokenizer": {
+    "add_special_tokens": false,
+    "bos_token_id": null,
+    "eos_token_id": 151645,
+    "identity_per_checkpoint": {
+      "P1": {
+        "class": "Qwen2TokenizerFast",
+        "files": {
+          "tokenizer.json": {
+            "bytes": 7031645,
+            "sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539"
+          },
+          "tokenizer_config.json": {
+            "bytes": 7226,
+            "sha256": "7d0fc4691628c9f6b0c77f8138a80517896a307e074dd5ac87e279ea85515774"
+          }
+        },
+        "full_corpus_ids_match_P1": true,
+        "full_corpus_ids_sha256": "5589175bd3ba8ced31b19b38ddd60715ea7779fdd8b3653f73eb973ee44dc76a",
+        "len": 151665,
+        "name_or_path": "/path/to/parscale-runtime/models/P1",
+        "probe_ids_match_P1": true,
+        "probe_ids_sha256": "8792c82b14f50e603b9365e40b85ac200f36a94ffb44a013f8e34d246477e487",
+        "special_tokens": {
+          "additional_special_tokens": [
+            "<|im_start|>",
+            "<|im_end|>",
+            "<|object_ref_start|>",
+            "<|object_ref_end|>",
+            "<|box_start|>",
+            "<|box_end|>",
+            "<|quad_start|>",
+            "<|quad_end|>",
+            "<|vision_start|>",
+            "<|vision_end|>",
+            "<|vision_pad|>",
+            "<|image_pad|>",
+            "<|video_pad|>"
+          ],
+          "eos_token": "<|im_end|>",
+          "pad_token": "<|endoftext|>"
+        },
+        "vocab_size": 151643
+      },
+      "P2": {
+        "class": "Qwen2TokenizerFast",
+        "files": {
+          "tokenizer.json": {
+            "bytes": 7031645,
+            "sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539"
+          },
+          "tokenizer_config.json": {
+            "bytes": 7226,
+            "sha256": "7d0fc4691628c9f6b0c77f8138a80517896a307e074dd5ac87e279ea85515774"
+          }
+        },
+        "full_corpus_ids_match_P1": true,
+        "full_corpus_ids_sha256": "5589175bd3ba8ced31b19b38ddd60715ea7779fdd8b3653f73eb973ee44dc76a",
+        "len": 151665,
+        "name_or_path": "/path/to/parscale-runtime/models/P2",
+        "probe_ids_match_P1": true,
+        "probe_ids_sha256": "8792c82b14f50e603b9365e40b85ac200f36a94ffb44a013f8e34d246477e487",
+        "special_tokens": {
+          "additional_special_tokens": [
+            "<|im_start|>",
+            "<|im_end|>",
+            "<|object_ref_start|>",
+            "<|object_ref_end|>",
+            "<|box_start|>",
+            "<|box_end|>",
+            "<|quad_start|>",
+            "<|quad_end|>",
+            "<|vision_start|>",
+            "<|vision_end|>",
+            "<|vision_pad|>",
+            "<|image_pad|>",
+            "<|video_pad|>"
+          ],
+          "eos_token": "<|im_end|>",
+          "pad_token": "<|endoftext|>"
+        },
+        "vocab_size": 151643
+      },
+      "P4": {
+        "class": "Qwen2TokenizerFast",
+        "files": {
+          "tokenizer.json": {
+            "bytes": 7031645,
+            "sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539"
+          },
+          "tokenizer_config.json": {
+            "bytes": 7226,
+            "sha256": "7d0fc4691628c9f6b0c77f8138a80517896a307e074dd5ac87e279ea85515774"
+          }
+        },
+        "full_corpus_ids_match_P1": true,
+        "full_corpus_ids_sha256": "5589175bd3ba8ced31b19b38ddd60715ea7779fdd8b3653f73eb973ee44dc76a",
+        "len": 151665,
+        "name_or_path": "/path/to/parscale-runtime/models/P4",
+        "probe_ids_match_P1": true,
+        "probe_ids_sha256": "8792c82b14f50e603b9365e40b85ac200f36a94ffb44a013f8e34d246477e487",
+        "special_tokens": {
+          "additional_special_tokens": [
+            "<|im_start|>",
+            "<|im_end|>",
+            "<|object_ref_start|>",
+            "<|object_ref_end|>",
+            "<|box_start|>",
+            "<|box_end|>",
+            "<|quad_start|>",
+            "<|quad_end|>",
+            "<|vision_start|>",
+            "<|vision_end|>",
+            "<|vision_pad|>",
+            "<|image_pad|>",
+            "<|video_pad|>"
+          ],
+          "eos_token": "<|im_end|>",
+          "pad_token": "<|endoftext|>"
+        },
+        "vocab_size": 151643
+      }
+    },
+    "pad_token_id": 151643,
+    "probe_ids": [
+      4272,
+      6947,
+      38556,
+      25,
+      58457,
+      19826,
+      1779,
+      13,
+      220,
+      108386,
+      3837,
+      99489,
+      6313,
+      198
+    ],
+    "probe_ids_sha256": "8792c82b14f50e603b9365e40b85ac200f36a94ffb44a013f8e34d246477e487",
+    "probe_text": "ParScale reproduction: causal scoring check. 你好，世界！\n",
+    "source": "ParScale/ParScale-0.7B-P1-Pile@881efa413e390400d5121468f259c6180073c721"
+  }
+}

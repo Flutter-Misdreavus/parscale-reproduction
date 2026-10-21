@@ -1,0 +1,53 @@
+{
+  "assembled_post_hoc": true,
+  "attention_backend": "sdpa",
+  "dtype": "bfloat16 target; explicit float32 reference",
+  "git": {
+    "branch": "exp/parscale-20261021",
+    "head_commit": "1f1aeedb5d453a112e94db46fbb6de331f5a7933",
+    "status_porcelain": ""
+  },
+  "gpu": {
+    "authorized_gpu_nvidia_smi": "GPU-REDACTED, NVIDIA GeForce RTX 3090, 570.211.01, 24576 MiB",
+    "compute_capability": "8.6",
+    "cuda_visible_devices_env": "GPU-REDACTED",
+    "cudnn_version": 8902,
+    "device_count_visible": 1,
+    "device_name": "NVIDIA GeForce RTX 3090",
+    "device_uuid_torch": null,
+    "expected_gpu_uuid": "GPU-REDACTED",
+    "nvidia_smi_all": [
+      "GPU-REDACTED, NVIDIA GeForce RTX 3090, 570.211.01, 24576 MiB",
+      "GPU-REDACTED, NVIDIA GeForce RTX 3090, 570.211.01, 24576 MiB",
+      "GPU-REDACTED, NVIDIA GeForce RTX 3090, 570.211.01, 24576 MiB",
+      "GPU-REDACTED, NVIDIA GeForce RTX 3090, 570.211.01, 24576 MiB"
+    ],
+    "torch_cuda_available": true,
+    "torch_cuda_version": "12.1",
+    "torch_version": "2.2.2+cu121",
+    "total_memory_gib": 23.56854248046875,
+    "uuid_matches_lock": true
+  },
+  "memory_cap": {
+    "cap_gib": 16.0,
+    "fraction_of_total": 0.6788709999041815,
+    "total_gib": 23.56854248046875
+  },
+  "note": "The diagnostic script raised before its environment phase; this file is assembled from preflight.json only.",
+  "platform_packages": {
+    "datasets": "3.5.0",
+    "einops": "0.8.1",
+    "huggingface-hub": "0.30.2",
+    "numpy": "1.26.4",
+    "pandas": "2.3.3",
+    "pyarrow": "25.0.1",
+    "regex": "2026.7.19",
+    "safetensors": "0.8.0",
+    "scipy": "1.14.1",
+    "tokenizers": "0.21.4",
+    "torch": "2.2.2+cu121",
+    "transformers": "4.51.3"
+  },
+  "run_id": "parscale-20261021-cache-diagnostic-v3",
+  "schema_version": 1
+}
