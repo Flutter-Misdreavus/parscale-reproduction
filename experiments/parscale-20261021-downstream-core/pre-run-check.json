@@ -1,0 +1,48 @@
+{
+  "branch": "exp/parscale-20261021",
+  "checked_at": "2026-10-21T12:57:15Z",
+  "disk_free_gib": 130.0,
+  "eligible": true,
+  "gpu": {
+    "admission_would_pass": true,
+    "authorized_uuid_matches_visible": true,
+    "free_mib": 19053,
+    "free_mib_min": 18432,
+    "name": "NVIDIA GeForce RTX 3090",
+    "total_mib": 24576
+  },
+  "head_commit": "f7757a691166423cecd9333706e2f1f32869ab20",
+  "packages": {
+    "accelerate": "1.6.0",
+    "datasets": "3.5.0",
+    "lm-eval": "0.4.8",
+    "numpy": "1.26.3",
+    "torch": "2.2.2+cu121",
+    "transformers": "4.51.3"
+  },
+  "prepared_artifact_sha256_match": {
+    "data-manifest.json": true,
+    "model-manifest.json": true,
+    "preflight.json": true,
+    "scorer-validation.json": true
+  },
+  "python": "3.10.12",
+  "run_id": "parscale-20261021-downstream-core",
+  "schema_version": 1,
+  "scorer_validation_status": "SUCCEEDED",
+  "task_sha256": "accbc3b0005084ed5a32c74e1ada9c109edaac307f8c1b05796221338d381ed5",
+  "validated_source_sha256_match": {
+    "configs/downstream/tasks/arc_challenge.yaml": true,
+    "configs/downstream/tasks/arc_easy.yaml": true,
+    "configs/downstream/tasks/hellaswag.yaml": true,
+    "configs/downstream/tasks/openbookqa.yaml": true,
+    "configs/downstream/tasks/piqa.yaml": true,
+    "configs/downstream/tasks/preprocess_winogrande.py": true,
+    "configs/downstream/tasks/sciq.yaml": true,
+    "configs/downstream/tasks/utils.py": true,
+    "configs/downstream/tasks/winogrande.yaml": true,
+    "scripts/downstream_evaluation.py": true,
+    "upstream/configuration_qwen2_parscale.py": true,
+    "upstream/modeling_qwen2_parscale.py": true
+  }
+}
