@@ -42,12 +42,15 @@ def main():
     ap=argparse.ArgumentParser()
     ap.add_argument("--run-dir",type=Path,required=True)
     ap.add_argument("--out",type=Path,required=True)
+    ap.add_argument("--allow-partial",action="store_true")
     args=ap.parse_args()
     root=Path(__file__).resolve().parents[1]
     run=args.run_dir.resolve()
     locks=json.loads((root/"locks.json").read_text())
     d=json.loads((run/"diagnostics.json").read_text())
-    assert d["status"]=="complete" and set(d["models"])=={"P1","P2","P4"}
+    if not args.allow_partial:
+        assert d["status"]=="complete" and set(d["models"])=={"P1","P2","P4"}
+    assert d["models"], "no completed model evidence to reconstruct"
     verified=[]
     for item in d["raw_manifest"]:
         p=(run/item["path"]).resolve()
@@ -71,7 +74,9 @@ def main():
     result={"run_id":run.name,"all_raw_hashes_verified":True,"raw_files_verified":verified,
             "validation_text_and_token_hashes_reconstructed":True,"models":{},
             "review_code_commit":subprocess.check_output(["git","rev-parse","HEAD"],cwd=root,text=True).strip(),
-            "model_inference_rerun":False,"cuda_visible_devices":os.environ.get("CUDA_VISIBLE_DEVICES")}
+            "model_inference_rerun":False,"cuda_visible_devices":os.environ.get("CUDA_VISIBLE_DEVICES"),
+            "diagnostic_status":d["status"],
+            "missing_models":sorted({"P1","P2","P4"}-set(d["models"]))}
     for key, model in sorted(d["models"].items()):
         folder=run/"raw/diagnostics"/key
         totals={"float32":0.0,"bfloat16":0.0}
@@ -114,8 +119,9 @@ def main():
             "bf16_nll_recomputed_from_saved_target_logprobs":totals["bfloat16"]/2046,
             "max_fp32_cache_error":max32,"max_bf16_cache_error":max16,
             "sequences":sequences}
-    timing=json.loads((run/"timing.json").read_text())
     result["timing_recomputed"]={}
+    timing=json.loads((run/"timing.json").read_text()) if (run/"timing.json").exists() else {"models":{}}
+    result["timing_available"]=bool(timing["models"])
     for key,r in timing["models"].items():
         assert len(r["raw_seconds"])==10 and r["output_lengths"]==[160]*13
         median=float(np.median(r["raw_seconds"]));p90=float(np.percentile(r["raw_seconds"],90))
