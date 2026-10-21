@@ -158,51 +158,23 @@ def peak_mem_gib():
     }
 
 
-def gpu_admission(expected_uuid, free_mib_min=18432, util_max=10.0,
-                  required_consecutive=2, max_samples=10, interval=1.0):
-    """Bounded admission check for a single locked GPU.
-
-    Requires `required_consecutive` consecutive 1 s samples with
-    memory.free >= free_mib_min MiB and utilization.gpu <= util_max percent.
-    At most max_samples readings (<= ~6 s); this is a bounded gate, not polling.
-    """
-    samples = []
-    streak = 0
-    for i in range(max_samples):
-        raw = subprocess.check_output(
-            ["nvidia-smi", "--query-gpu=uuid,memory.free,utilization.gpu",
-             "--format=csv,noheader,nounits"], text=True, timeout=20)
-        rec = None
-        for line in raw.splitlines():
-            parts = [x.strip() for x in line.split(",")]
-            if parts and parts[0] == expected_uuid:
-                rec = {"uuid": parts[0], "free_mib": int(parts[1]),
-                       "utilization_percent": float(parts[2]),
-                       "sampled_at": utcnow()}
-                break
-        if rec is None:
-            raise RuntimeError(f"locked GPU {expected_uuid} not found in nvidia-smi: {raw}")
-        samples.append(rec)
-        if rec["free_mib"] >= free_mib_min and rec["utilization_percent"] <= util_max:
-            streak += 1
-        else:
-            streak = 0
-        if streak >= required_consecutive:
-            break
-        if i < max_samples - 1:
-            time.sleep(interval)
-    passed = streak >= required_consecutive
-    return {
-        "passed": passed,
-        "requirement": {"free_mib_min": free_mib_min,
-                        "utilization_percent_max": util_max,
-                        "required_consecutive_samples": required_consecutive,
-                        "max_samples": max_samples,
-                        "sample_interval_seconds": interval},
-        "samples": samples,
-        "consecutive_pass_samples": streak,
-        "decision": "admit" if passed else "stop: admission not met",
-    }
+def gpu_admission(expected_uuid, free_mib_min=20480, util_max=10.0):
+    """One admission observation; a failed reading never triggers polling."""
+    raw = subprocess.check_output(
+        ["nvidia-smi", "-i", expected_uuid,
+         "--query-gpu=uuid,memory.free,utilization.gpu",
+         "--format=csv,noheader,nounits"], text=True, timeout=20)
+    parts = raw.strip().split(",")
+    if len(parts) != 3 or parts[0].strip() != expected_uuid:
+        raise RuntimeError("invalid locked GPU observation")
+    rec = {"uuid": parts[0].strip(), "free_mib": int(parts[1]),
+           "utilization_percent": float(parts[2]), "sampled_at": utcnow()}
+    passed = (rec["free_mib"] >= free_mib_min
+              and rec["utilization_percent"] <= util_max)
+    return {"passed": passed, "samples": [rec],
+            "requirement": {"free_mib_min": free_mib_min,
+                            "utilization_percent_max": util_max, "max_samples": 1},
+            "decision": "admit" if passed else "stop: admission not met"}
 
 
 # --------------------------------------------------------------------------- #
@@ -259,6 +231,12 @@ def prepare_data(locks, run_dir, stage):
         tk = AutoTokenizer.from_pretrained(str(path), local_files_only=True,
                                            trust_remote_code=False)
         probe_ids = tk(probe, add_special_tokens=False)["input_ids"]
+        encoded = np.asarray(tk(text, add_special_tokens=False,
+                                return_attention_mask=False)["input_ids"], dtype="<i4")
+        if (not np.array_equal(encoded, ids)
+                or tk.get_vocab() != tok.get_vocab()
+                or tokenizer_files(path) != tokenizer_files(p1_path)):
+            raise RuntimeError(f"tokenizer files/vocabulary/full corpus mismatch: P{p}")
         tokenizer_identity[f"P{p}"] = {
             "class": type(tk).__name__,
             "name_or_path": tk.name_or_path,
@@ -268,6 +246,8 @@ def prepare_data(locks, run_dir, stage):
             "probe_ids_sha256": sha256_bytes(
                 np.asarray(probe_ids, dtype=np.int32).tobytes()),
             "probe_ids_match_P1": probe_ids == tok_probe_ids,
+            "full_corpus_ids_match_P1": True,
+            "full_corpus_ids_sha256": sha256_bytes(encoded.tobytes()),
             "files": tokenizer_files(path),
         }
 
@@ -365,10 +345,11 @@ def scored_block(model, block, device):
         nll_sum = F.cross_entropy(logits, targets, reduction="sum")
         label_loss = float(out.loss.detach().float().cpu())
         del out, logits
-    torch.cuda.synchronize()
+    if ids.is_cuda:
+        torch.cuda.synchronize()
     n_tokens = int(ids.shape[1] - 1)
     nll = float(nll_sum.detach().float().cpu()) / n_tokens
-    return {
+    rec = {
         "token_count_scored": n_tokens,
         "nll_sum_nats": float(nll_sum.detach().float().cpu()),
         "nll_nats_per_token": nll,
@@ -511,7 +492,10 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--stage", choices=["smoke", "full"], required=True)
     ap.add_argument("--run-dir", required=True)
+    ap.add_argument("--min-free-mib", type=int, default=20480)
     args = ap.parse_args()
+    if args.stage == "full":
+        raise RuntimeError("Full evaluation requires a reviewed versioned entrypoint; this is smoke only")
 
     run_dir = Path(args.run_dir).resolve()
     run_dir.mkdir(parents=True, exist_ok=True)
@@ -523,6 +507,10 @@ def main():
         locks = json.load(fh)
     run_id = locks.get("run_id") or run_dir.name
 
+    initial = gpu_admission(locks["resource"]["gpu_uuid"], args.min_free_mib)
+    atomic_json(run_dir / "initial-admission.json", initial)
+    if not initial["passed"]:
+        raise RuntimeError("initial GPU admission failed; no retry")
     if not torch.cuda.is_available():
         raise RuntimeError("CUDA is not available")
     gpu = gpu_environment(locks["resource"]["gpu_uuid"])
@@ -547,14 +535,14 @@ def main():
     for m in locks["models"]:
         p = m["p"]
         path = model_paths[p]
-        adm = gpu_admission(locks["resource"]["gpu_uuid"], free_mib_min=18432,
-                            util_max=10.0, required_consecutive=2)
+        adm = gpu_admission(locks["resource"]["gpu_uuid"], free_mib_min=args.min_free_mib,
+                            util_max=10.0)
         adm["model"] = f"P{p}"
         admissions.append(adm)
         atomic_json(run_dir / "preflight.json", {
             "run_id": run_id, "schema_version": 1, "created_at": utcnow(),
-            "requirement": {"free_mib_min": 18432, "utilization_percent_max": 10.0,
-                            "sampling": "2 consecutive 1 s samples within <=10 readings"},
+            "requirement": {"free_mib_min": args.min_free_mib, "utilization_percent_max": 10.0,
+                            "sampling": "one observation; fail immediately"},
             "checks": admissions,
         })
         print(f"[eval] P{p} admission passed={adm['passed']}", flush=True)
@@ -636,6 +624,8 @@ def main():
             "status": "partial", "updated_at": utcnow(),
             "models": results, "checks": checks, "admissions": admissions,
         })
+        if not c["cache_equivalence"]["passed"]:
+            raise RuntimeError(f"cache gate failed for P{p}: {c['cache_equivalence']}")
         if not c["causal"]["passed"]:
             raise RuntimeError(f"causal invariant failed for P{p}: {c['causal']}")
         del model

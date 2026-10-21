@@ -47,7 +47,7 @@ import evaluate  # noqa: E402
 
 FREE_MIB_MIN = 18432
 UTIL_MAX = 10.0
-ADMISSION_SAMPLES = 2
+ADMISSION_SAMPLES = 1
 
 
 def utcnow():
@@ -68,8 +68,10 @@ def sha256_np(arr: np.ndarray) -> str:
 
 
 def bf16_spacing(x: float) -> float:
-    if x == 0 or not math.isfinite(x):
-        return float("nan")
+    if not math.isfinite(x):
+        raise ValueError("nonfinite reference logit")
+    if x == 0:
+        return 2.0 ** -133
     exp = math.floor(math.log2(abs(x)))
     return 2.0 ** (exp - 7)
 
@@ -98,36 +100,40 @@ def worst_coord(diff: torch.Tensor, a: torch.Tensor, b: torch.Tensor, vocab: int
         "abs_diff": abs(av - bv),
         "local_bf16_spacing_at_reference": bf16_spacing(bv),
         "abs_diff_in_bf16_spacing": (abs(av - bv) / bf16_spacing(bv)
-                                     if bf16_spacing(bv) == bf16_spacing(bv) and bf16_spacing(bv) else None),
+                                     if bf16_spacing(bv) else None),
     }
 
 
 def full_logits(model, tokens) -> torch.Tensor:
-    ids = torch.tensor(np.asarray(tokens), dtype=torch.long, device="cuda").unsqueeze(0)
+    device = next(model.parameters()).device
+    ids = torch.tensor(np.asarray(tokens), dtype=torch.long, device=device).unsqueeze(0)
     with torch.inference_mode():
         out = model(input_ids=ids, attention_mask=torch.ones_like(ids), use_cache=True)
         logits = out.logits[0].float()
-    torch.cuda.synchronize()
+    if device.type == "cuda":
+        torch.cuda.synchronize()
     return logits
 
 
 def cached_logits(model, tokens, prefill_len: int) -> torch.Tensor:
-    ids = torch.tensor(np.asarray(tokens), dtype=torch.long, device="cuda").unsqueeze(0)
+    device = next(model.parameters()).device
+    ids = torch.tensor(np.asarray(tokens), dtype=torch.long, device=device).unsqueeze(0)
     length = int(ids.shape[1])
     with torch.inference_mode():
         pre = model(input_ids=ids[:, :prefill_len],
-                    attention_mask=torch.ones((1, prefill_len), dtype=torch.long, device="cuda"),
+                    attention_mask=torch.ones((1, prefill_len), dtype=torch.long, device=device),
                     use_cache=True)
         past = pre.past_key_values
         parts = [pre.logits[0].float()]
         for i in range(prefill_len, length):
             step = model(input_ids=ids[:, i:i + 1],
-                         attention_mask=torch.ones((1, i + 1), dtype=torch.long, device="cuda"),
+                         attention_mask=torch.ones((1, i + 1), dtype=torch.long, device=device),
                          past_key_values=past, use_cache=True)
             past = step.past_key_values
             parts.append(step.logits[0].float())
         out = torch.cat(parts, dim=0)
-    torch.cuda.synchronize()
+    if device.type == "cuda":
+        torch.cuda.synchronize()
     return out
 
 
@@ -175,7 +181,7 @@ def load_model(path, dtype):
 
 
 def release(model):
-    del model
+    model.to("cpu")  # Caller may retain a reference; actually release GPU parameters.
     gc.collect()
     torch.cuda.empty_cache()
     torch.cuda.synchronize()
@@ -184,9 +190,7 @@ def release(model):
 def admission_record(locks, label: str, checks: list) -> dict:
     rec = evaluate.gpu_admission(locks["resource"]["gpu_uuid"],
                                  free_mib_min=FREE_MIB_MIN,
-                                 util_max=UTIL_MAX,
-                                 required_consecutive=ADMISSION_SAMPLES,
-                                 max_samples=10, interval=1.0)
+                                 util_max=UTIL_MAX)
     rec["label"] = label
     rec["created_at"] = utcnow()
     checks.append(rec)
@@ -351,32 +355,31 @@ def token_weighted(blocks):
 
 
 def paired_bootstrap(blocks_by_model, reps=2000, seed=20261021):
+    from itertools import combinations
     keys = sorted(blocks_by_model)
     n = len(blocks_by_model[keys[0]])
-    rng = np.random.default_rng(seed)
-    results = {}
-    for j in range(1, len(keys)):
-        a, b = keys[0], keys[j]
-        deltas = []
-        for _ in range(reps):
-            idx = rng.integers(0, n, n)
-            na = sum(blocks_by_model[a][i][0] for i in idx)
-            da = sum(blocks_by_model[a][i][1] for i in idx)
-            nb = sum(blocks_by_model[b][i][0] for i in idx)
-            db = sum(blocks_by_model[b][i][1] for i in idx)
-            deltas.append(nb / db - na / da)
-        deltas = np.asarray(deltas)
-        results[f"{b}-{a}"] = {
-            "observed_delta_nll": (token_weighted(blocks_by_model[b])[0]
-                                   - token_weighted(blocks_by_model[a])[0]),
-            "bootstrap_mean": float(deltas.mean()),
-            "ci95_low": float(np.percentile(deltas, 2.5)),
-            "ci95_high": float(np.percentile(deltas, 97.5)),
-            "replicates": int(reps),
-            "seed": int(seed),
-            "method": "paired contiguous-block resampling; sum NLL / sum tokens in each resample",
-        }
-    return results
+    if not n:
+        raise ValueError("no paired blocks")
+    counts = [int(b[1]) for b in blocks_by_model[keys[0]]]
+    for key in keys:
+        if len(blocks_by_model[key]) != n or [int(b[1]) for b in blocks_by_model[key]] != counts:
+            raise ValueError("unpaired block counts")
+        if any(c <= 0 or not math.isfinite(float(a)) for a,c in blocks_by_model[key]):
+            raise ValueError("invalid NLL/count")
+    idx = np.random.default_rng(seed).integers(0, n, size=(reps, n))
+    totals = {}
+    for key in keys:
+        values = np.asarray(blocks_by_model[key], dtype=np.float64)
+        totals[key] = values[idx, 0].sum(axis=1) / values[idx, 1].sum(axis=1)
+    out = {}
+    for a,b in combinations(keys,2):
+        d = totals[b] - totals[a]
+        out[f"{b}-{a}"] = {
+            "observed_delta_nll": token_weighted(blocks_by_model[b])[0]-token_weighted(blocks_by_model[a])[0],
+            "bootstrap_mean": float(d.mean()), "ci95_low": float(np.percentile(d,2.5)),
+            "ci95_high": float(np.percentile(d,97.5)), "replicates": reps, "seed": seed,
+            "method": "shared paired contiguous-block draws; sum NLL/sum tokens per draw"}
+    return out
 
 
 def phase_analysis(run_dir, actual_loss=None):
@@ -494,7 +497,6 @@ def run_dtype(model, dtype_name, blocks, seq_blocks, model_dir: Path,
             "token_endianness": "little",
             "token_ids_sha256_i32le": sha256_np(tokens.astype("<i4")),
             "target_ids_sha256_i32le": sha256_np(tokens[1:].astype("<i4")),
-            "tokens": [int(x) for x in tokens],
         }
         full = full_logits(model, tokens)
         c1 = cached_logits(model, tokens, 1)
@@ -575,6 +577,7 @@ def phase_diagnostics(locks, run_dir, model_paths, blocks, seq_blocks, admission
             fp32_seconds = time.time() - t0
             fp32_peak = evaluate.peak_mem_gib()
             release(model)
+            model = None
         except Exception as exc:
             out["status"] = "failed"
             out["failure"] = {"model": f"{key}/float32", "error": repr(exc)}
@@ -685,6 +688,7 @@ def phase_diagnostics(locks, run_dir, model_paths, blocks, seq_blocks, admission
             print(f"[diag] {key} fp32_nll={fp32_agg:.9f} bf16_nll={bf16_agg:.9f} "
                   f"delta={bf16_agg-fp32_agg:.3e}", flush=True)
             release(model)
+            model = None
         except Exception as exc:
             out["status"] = "failed"
             out["failure"] = {"model": f"{key}/bfloat16", "error": repr(exc)}
@@ -729,6 +733,7 @@ def phase_timing(model, block, model_key, peak_before):
     model.config.eos_token_id = None
     raw = []
     lengths = []
+    all_repeat_seconds = []
     for r in range(13):
         torch.cuda.synchronize()
         t0 = time.perf_counter()
@@ -741,6 +746,7 @@ def phase_timing(model, block, model_key, peak_before):
         torch.cuda.synchronize()
         dt = time.perf_counter() - t0
         lengths.append(int(gen.shape[1]))
+        all_repeat_seconds.append(dt)
         if r >= 3:
             raw.append(dt)
         del gen
@@ -759,6 +765,7 @@ def phase_timing(model, block, model_key, peak_before):
         "expected_output_length": 160,
         "output_length_ok": all(x == 160 for x in lengths),
         "raw_seconds": [float(x) for x in raw],
+        "all_repeat_seconds": all_repeat_seconds,
         "median_seconds": float(np.median(arr)),
         "p90_seconds": float(np.percentile(arr, 90)),
         "peak_memory_gib": peak,
@@ -792,6 +799,7 @@ def phase_timing_all(locks, run_dir, model_paths, blocks, admissions):
             print(f"[timing] {key} median={rec['median_seconds']:.4f}s p90={rec['p90_seconds']:.4f}s", flush=True)
         finally:
             release(model)
+            model = None
     out["status"] = "complete"
     out["created_at_finished"] = utcnow()
     atomic_json(run_dir / "timing.json", out)
@@ -886,7 +894,6 @@ def main():
     model_paths = evaluate.resolve_model_paths(locks)
     print(f"[v2] run={run_dir.name} phase={args.phase} dtype={args.dtype} head={evaluate.git_state()['head_commit']}", flush=True)
 
-    pre = phase_preflight(locks, run_dir, model_paths)
     data, manifest = evaluate.prepare_data(locks, run_dir, "smoke")
     atomic_json(run_dir / "data-manifest.json", manifest)
     tok = phase_tokenizer(locks, run_dir, model_paths, manifest)
@@ -895,6 +902,11 @@ def main():
         print("[v2] non-GPU phase done", flush=True)
         return
 
+    initial = evaluate.gpu_admission(locks["resource"]["gpu_uuid"], FREE_MIB_MIN, UTIL_MAX)
+    atomic_json(run_dir / "initial-admission.json", initial)
+    if not initial["passed"]:
+        raise RuntimeError("initial GPU admission failed; no retries")
+    pre = phase_preflight(locks, run_dir, model_paths)
     admissions = []
     diag = None
     actual_loss = None
@@ -931,6 +943,8 @@ def main():
     wall = time.time() - wall_start
     gpu_seconds = sum(sum(v.get("compute_seconds", {}).values()) + sum(v.get("load_seconds", {}).values())
                       for v in (diag or {}).get("models", {}).values())
+    gpu_seconds += sum(v.get("load_seconds", 0) + sum(v.get("all_repeat_seconds", []))
+                       for v in (timing or {}).get("models", {}).values())
     ledger = {
         "schema_version": 1,
         "run_id": run_dir.name,
@@ -940,7 +954,7 @@ def main():
         "gpu_active_seconds_observed_estimate": gpu_seconds,
         "gpu_hours_observed_estimate": gpu_seconds / 3600.0,
         "gpu_hours_ceiling": 0.25,
-        "method": "sum of recorded per-model load+compute seconds for FP32/BF16 diagnostics; generation timing and tokenizer CPU time excluded from GPU active estimate",
+        "method": "sum of recorded per-model load+compute seconds for FP32/BF16 diagnostics; including timing loads and all warmup/measured generation repeats; excludes tokenizer CPU time",
         "peak_memory_gib": {k: v.get("peak_memory_gib") for k, v in (diag or {}).get("models", {}).items()},
         "admission_checks": admissions,
         "uncertainty": "GPU-hour value is a wall-clock activity estimate for this run, not an independently metered integral; prior project totals must be reconciled by GPT.",
