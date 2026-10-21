@@ -24,7 +24,6 @@ def compute(data):
         task = data['tasks'][name]
         n = COUNTS[name]
         assert len(task['doc_ids']) == len(set(task['doc_ids'])) == n
-        assert len(task['gold']) == n
         correct = np.asarray([task['correctness'][m] for m in MODELS])
         assert correct.shape == (4, n) and np.isin(correct, [0, 1]).all()
         task_means.append(correct.mean(axis=1))

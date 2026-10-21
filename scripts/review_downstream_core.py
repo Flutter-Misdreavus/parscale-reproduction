@@ -132,7 +132,7 @@ def main():
     a.output.write_text(json.dumps(report,indent=2,ensure_ascii=False)+'\n')
     # Compact per-item correctness only: permits public CI recomputation without text.
     compact = {'run_id': result['run_id'], 'task_order': TASKS, 'models': MODELS,
-               'tasks': {t: {'doc_ids': ids[t], 'gold': golds[t],
+               'tasks': {t: {'doc_ids': ids[t],
                              'metric': accuracy[t]['P1']['metric'],
                              'correctness': {m: outcomes[t][m].astype(int).tolist() for m in MODELS}}
                          for t in TASKS}}
