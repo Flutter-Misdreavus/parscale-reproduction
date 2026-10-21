@@ -1,5 +1,9 @@
 # Parallel Scaling 最小复现状态
 
+2026-10-21 18:24后更新：主控明确批准一次修复后v3 GPU验证。
+`parscale-20261021-cache-diagnostic-v3` 已固定为单次执行，沿用18GiB/10%单次准入、
+16GiB cap及BF16 .03门槛；正在提交/同步，尚未宣称启动或通过。旧v2取消仅结束旧任务。
+
 最新执行更新：用户已授权继续 validation 诊断与修复。已设计
 `parscale-20261021-cache-diagnostic-v2`，资源准入明确修订为每模型
 free>=18GiB（18432MiB）、util<=10%，16GiB cap 不变；科学门槛 .03 不变。

@@ -185,6 +185,9 @@ def release(model):
     gc.collect()
     torch.cuda.empty_cache()
     torch.cuda.synchronize()
+    # Fixed cooldown, never a retry: expire the preceding model's utilization
+    # sample before the next single admission observation (v3 task amendment).
+    time.sleep(1.2)
 
 
 def admission_record(locks, label: str, checks: list) -> dict:
@@ -841,7 +844,7 @@ def write_report(run_dir, pre, tok, ana, diag, timing, started_wall):
             "Raw logit arrays remain in the run directory with hashes/shapes; compact metrics are in this run."
         ) if status == "SUCCEEDED" else f"Diagnostic did not complete: {failures}",
         "executed_commands": [
-            "python3 scripts/cache_diagnostic_v2.py --run-dir runs/parscale-20261021-cache-diagnostic-v2 --phase all",
+            f"python3 scripts/cache_diagnostic_v2.py --run-dir {run_dir} --phase all",
         ],
         "metrics": metrics,
         "artifacts": ["report.json", "preflight.json", "diagnostics.json",
@@ -959,8 +962,8 @@ def main():
         "admission_checks": admissions,
         "uncertainty": "GPU-hour value is a wall-clock activity estimate for this run, not an independently metered integral; prior project totals must be reconciled by GPT.",
         "disk": {"raw_diagnostics_bytes": sum(p.stat().st_size for p in (run_dir / "raw" / "diagnostics").rglob("*") if p.is_file())},
-        "project_known_prior_active_wall_seconds": 4353.574,
-        "project_active_hours_if_prior_plus_this": (4353.574 + wall) / 3600.0,
+        "project_known_prior_wrapper_wall_seconds": 4912.960,
+        "project_wrapper_hours_if_prior_plus_this": (4912.960 + wall) / 3600.0,
     }
     atomic_json(run_dir / "resource-ledger.json", ledger)
     report = write_report(run_dir, pre, tok, ana, diag or {"status": "not_run"}, timing, wall_start)
