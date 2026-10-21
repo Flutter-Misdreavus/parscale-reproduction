@@ -1,0 +1,33 @@
+{
+  "run_id": "parscale-20261021-downstream-rest",
+  "recorded_at": "2026-10-21T14:44:38.764875+00:00",
+  "actual_run_commit": "34d4a1f9464562d563320c871e1ca1db6f2282d3",
+  "branch": "exp/parscale-20261021",
+  "git_status_clean_before_launch": true,
+  "task_sha256": "4766a90efeb4341a9e08ea119287562b6165c6dbf3e89ace5029c6bfc21b8428",
+  "task_matches_frozen_copy": true,
+  "prepared_artifact_hashes_match": true,
+  "validated_source_hashes_match": true,
+  "scorer_validation_status": "SUCCEEDED",
+  "scorer_gates_all_true": true,
+  "preflight_gpu": {
+    "free_mib": 19053,
+    "free_mib_min": 18432,
+    "total_mib": 24576,
+    "uuid_matches": true,
+    "passed": true
+  },
+  "scoring_service": {
+    "unit": "parscale-20261021-downstream-rest-score.service",
+    "runtime_max_seconds": 31708,
+    "launched_at": "2026-10-21T14:27:31.466080+00:00",
+    "independent_of_executor": true
+  },
+  "scoring_wall_limit_seconds": 30600,
+  "scoring_deadline_utc": "2026-10-21T23:15:00+00:00",
+  "limitations": [
+    "Shared GPU; timings are descriptive.",
+    "One checkpoint per P.",
+    "No inference computed by executor."
+  ]
+}
