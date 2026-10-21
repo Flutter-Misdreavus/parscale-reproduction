@@ -52,7 +52,10 @@ def extract_literals(path: Path):
     tree = ast.parse(path.read_text(encoding="utf-8"))
     wanted = {"params", "p", "stack_loss", "pile_loss"}
     found = {}
-    for node in tree.body:
+    # The published tables live inside ``if __name__ == "__main__":``, so walk
+    # the whole module tree instead of only top-level statements.  Only simple
+    # literal assignments to the four known names are considered.
+    for node in ast.walk(tree):
         if isinstance(node, ast.Assign) and len(node.targets) == 1:
             target = node.targets[0]
             if isinstance(target, ast.Name) and target.id in wanted:
