@@ -1,0 +1,27 @@
+{
+  "status": "PASSED",
+  "at": "2026-10-21T19:10:27.850517+00:00",
+  "kind": "supervisor_read_only_data_audit",
+  "method": "Direct PyArrow reads: ARC choice-label index of answerKey; HellaSwag integer label; original row indices, lexicographic doc-id ordering. No scoring-helper import.",
+  "prepared_manifest_sha256": "b97cce837c654445aaee3fa1ba3e8c0aefa128e39a85fa73693eb5f6189904e8",
+  "checks": {
+    "arc_easy": {
+      "rows": 2376,
+      "raw_parquet_sha256": "4160597d618ae851c7eb04e281574f3f654776216ac6b6641588d64527b47177",
+      "raw_gold_sha256": "ce9e48449b232b1e07dc287ea579d8642eb13dabe3a6ae4773352aea2ef37304",
+      "matches_frozen_pretest_manifest": true
+    },
+    "arc_challenge": {
+      "rows": 1172,
+      "raw_parquet_sha256": "62f03257e737aed263f55c6abf87c7bb0028a44a6bdd2a26eb1279eb42c1d1e9",
+      "raw_gold_sha256": "2f258d30630bdf3fb23b57ded6f88ebe3556f1391a73dc5bd4705db5284895f9",
+      "matches_frozen_pretest_manifest": true
+    },
+    "hellaswag": {
+      "rows": 10042,
+      "raw_parquet_sha256": "899813071e1e95efafec90f856e1987d2150fa4d020fc005df6962c259f660cd",
+      "raw_gold_sha256": "4675c87d6342d0fdebaf149592fb1d2974501e10dfd6999d202d825bd6649259",
+      "matches_frozen_pretest_manifest": true
+    }
+  }
+}
