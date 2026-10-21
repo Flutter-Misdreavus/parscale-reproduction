@@ -1,0 +1,321 @@
+{
+  "batch_size": 1,
+  "context_max": 2048,
+  "created_at": "2026-10-21T12:51:25.770556+00:00",
+  "data": {
+    "by_task": {
+      "arc_challenge": {
+        "documents": 1172,
+        "input_tokens": 4412526,
+        "max_total_tokens": 1262,
+        "requests": 4687,
+        "requests_truncated": 0
+      },
+      "arc_easy": {
+        "documents": 2376,
+        "input_tokens": 7763482,
+        "max_total_tokens": 1107,
+        "requests": 9501,
+        "requests_truncated": 0
+      },
+      "hellaswag": {
+        "documents": 10042,
+        "input_tokens": 33866059,
+        "max_total_tokens": 1194,
+        "requests": 40168,
+        "requests_truncated": 0
+      },
+      "openbookqa": {
+        "documents": 500,
+        "input_tokens": 191758,
+        "max_total_tokens": 164,
+        "requests": 2000,
+        "requests_truncated": 0
+      },
+      "piqa": {
+        "documents": 1838,
+        "input_tokens": 788690,
+        "max_total_tokens": 623,
+        "requests": 3676,
+        "requests_truncated": 0
+      },
+      "sciq": {
+        "documents": 1000,
+        "input_tokens": 1730506,
+        "max_total_tokens": 1166,
+        "requests": 4000,
+        "requests_truncated": 0
+      },
+      "winogrande": {
+        "documents": 1267,
+        "input_tokens": 326493,
+        "max_total_tokens": 162,
+        "requests": 2534,
+        "requests_truncated": 0
+      }
+    },
+    "input_tokens": 49079514,
+    "requests": 66566,
+    "requests_truncated": 0
+  },
+  "gpu": {
+    "free_mib": 19053,
+    "free_mib_min": 18432,
+    "name": "NVIDIA GeForce RTX 3090",
+    "passed": true,
+    "sampled_at": "2026-10-21T12:51:03.786164+00:00",
+    "total_mib": 24576,
+    "utilization_percent": 1.0,
+    "uuid_matches": true
+  },
+  "memory_cap": {
+    "cap_gib": 16.0,
+    "fraction": 0.6788709999041815
+  },
+  "models": {
+    "P1": {
+      "estimated_gpu_hours": 0.9947120546717104,
+      "estimated_seconds": 3580.9633968181574,
+      "fit_intercept_seconds": 0.029779354731241884,
+      "fit_r2": 0.9724258536265107,
+      "fit_seconds_per_token": 3.2552296207064684e-05,
+      "latency_rows": [
+        {
+          "forward_seconds": [
+            0.03619050979614258
+          ],
+          "label": "exact_128",
+          "median_seconds": 0.03880715370178223,
+          "score_softmax_seconds": [
+            0.0026166439056396484
+          ],
+          "seconds": [
+            0.03880715370178223
+          ],
+          "tokens": 128
+        },
+        {
+          "forward_seconds": [
+            0.03795599937438965
+          ],
+          "label": "exact_512",
+          "median_seconds": 0.04036974906921387,
+          "score_softmax_seconds": [
+            0.0024137496948242188
+          ],
+          "seconds": [
+            0.04036974906921387
+          ],
+          "tokens": 512
+        },
+        {
+          "forward_seconds": [
+            0.08711051940917969
+          ],
+          "label": "exact_2048",
+          "median_seconds": 0.09766173362731934,
+          "score_softmax_seconds": [
+            0.010551214218139648
+          ],
+          "seconds": [
+            0.09766173362731934
+          ],
+          "tokens": 2048
+        }
+      ],
+      "load_seconds": 1.0199923515319824,
+      "peak_memory_gib": {
+        "allocated_gib": 4.171308994293213,
+        "reserved_gib": 5.25
+      }
+    },
+    "P2": {
+      "estimated_gpu_hours": 1.308390673440118,
+      "estimated_seconds": 4710.206424384425,
+      "fit_intercept_seconds": 0.024572292963663766,
+      "fit_r2": 0.9691189617221425,
+      "fit_seconds_per_token": 6.262310558841343e-05,
+      "latency_rows": [
+        {
+          "forward_seconds": [
+            0.04136538505554199
+          ],
+          "label": "exact_128",
+          "median_seconds": 0.04250144958496094,
+          "score_softmax_seconds": [
+            0.0011360645294189453
+          ],
+          "seconds": [
+            0.04250144958496094
+          ],
+          "tokens": 128
+        },
+        {
+          "forward_seconds": [
+            0.04157209396362305
+          ],
+          "label": "exact_512",
+          "median_seconds": 0.044243574142456055,
+          "score_softmax_seconds": [
+            0.002671480178833008
+          ],
+          "seconds": [
+            0.044243574142456055
+          ],
+          "tokens": 512
+        },
+        {
+          "forward_seconds": [
+            0.1468048095703125
+          ],
+          "label": "exact_2048",
+          "median_seconds": 0.1553027629852295,
+          "score_softmax_seconds": [
+            0.008497953414916992
+          ],
+          "seconds": [
+            0.1553027629852295
+          ],
+          "tokens": 2048
+        }
+      ],
+      "load_seconds": 1.0155835151672363,
+      "peak_memory_gib": {
+        "allocated_gib": 4.176235675811768,
+        "reserved_gib": 5.2890625
+      }
+    },
+    "P4": {
+      "estimated_gpu_hours": 2.0853399060963955,
+      "estimated_seconds": 7507.223661947024,
+      "fit_intercept_seconds": 0.016355951627095577,
+      "fit_r2": 0.9947712001804364,
+      "fit_seconds_per_token": 0.00013075640336388637,
+      "latency_rows": [
+        {
+          "forward_seconds": [
+            0.040578365325927734
+          ],
+          "label": "exact_128",
+          "median_seconds": 0.04149961471557617,
+          "score_softmax_seconds": [
+            0.0009212493896484375
+          ],
+          "seconds": [
+            0.04149961471557617
+          ],
+          "tokens": 128
+        },
+        {
+          "forward_seconds": [
+            0.06987643241882324
+          ],
+          "label": "exact_512",
+          "median_seconds": 0.07279467582702637,
+          "score_softmax_seconds": [
+            0.002918243408203125
+          ],
+          "seconds": [
+            0.07279467582702637
+          ],
+          "tokens": 512
+        },
+        {
+          "forward_seconds": [
+            0.27475953102111816
+          ],
+          "label": "exact_2048",
+          "median_seconds": 0.28624677658081055,
+          "score_softmax_seconds": [
+            0.011487245559692383
+          ],
+          "seconds": [
+            0.28624677658081055
+          ],
+          "tokens": 2048
+        }
+      ],
+      "load_seconds": 1.0126564502716064,
+      "peak_memory_gib": {
+        "allocated_gib": 4.180366516113281,
+        "reserved_gib": 5.259765625
+      }
+    },
+    "P8": {
+      "estimated_gpu_hours": 3.567111239380567,
+      "estimated_seconds": 12841.600461770042,
+      "fit_intercept_seconds": 0.009116570154825955,
+      "fit_r2": 0.999923361751052,
+      "fit_seconds_per_token": 0.00024917242782456547,
+      "latency_rows": [
+        {
+          "forward_seconds": [
+            0.041808128356933594
+          ],
+          "label": "exact_128",
+          "median_seconds": 0.042945146560668945,
+          "score_softmax_seconds": [
+            0.0011370182037353516
+          ],
+          "seconds": [
+            0.042945146560668945
+          ],
+          "tokens": 128
+        },
+        {
+          "forward_seconds": [
+            0.13150286674499512
+          ],
+          "label": "exact_512",
+          "median_seconds": 0.13427472114562988,
+          "score_softmax_seconds": [
+            0.0027718544006347656
+          ],
+          "seconds": [
+            0.13427472114562988
+          ],
+          "tokens": 512
+        },
+        {
+          "forward_seconds": [
+            0.5088474750518799
+          ],
+          "label": "exact_2048",
+          "median_seconds": 0.5199053287506104,
+          "score_softmax_seconds": [
+            0.011057853698730469
+          ],
+          "seconds": [
+            0.5199053287506104
+          ],
+          "tokens": 2048
+        }
+      ],
+      "load_seconds": 5.4851930141448975,
+      "peak_memory_gib": {
+        "allocated_gib": 4.189238548278809,
+        "reserved_gib": 5.603515625
+      }
+    }
+  },
+  "pending_models": [],
+  "project_budget": {
+    "prior_used_seconds": 6613.323,
+    "project_cap_seconds": 14400.0,
+    "remaining_after_smoke_seconds": 7765.11407537651,
+    "source": "task controls; conservative prior usage"
+  },
+  "projection": {
+    "all_models_gpu_hours": 7.955553873588791,
+    "all_models_seconds": 28639.993944919646,
+    "assumption": "Linear fit to exact 128/512/2048-token latency including float32 log-softmax scoring cost; shared GPU, descriptive only.",
+    "core_four_tasks_gpu_hours": 0.6739695727243097,
+    "core_four_tasks_seconds": 2426.290461807515,
+    "fits_remaining_project_budget": false,
+    "scope": "batch=1, all held-out requests for the models verified above; excludes later analysis and any retries"
+  },
+  "run_id": "parscale-20261021-downstream-smoke",
+  "schema_version": 1,
+  "smoke_gpu_seconds": 21.56292462348938,
+  "status": "SUCCEEDED"
+}

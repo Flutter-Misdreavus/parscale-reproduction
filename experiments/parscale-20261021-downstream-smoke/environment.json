@@ -1,0 +1,49 @@
+{
+  "created_at": "2026-10-21T12:52:11.391495+00:00",
+  "cuda": {
+    "cuda_available": true,
+    "cudnn_version": 8902,
+    "torch_cuda_version": "12.1"
+  },
+  "determinism": {
+    "batch_size": 1,
+    "cudnn_deterministic": false,
+    "float32_matmul_precision": "highest",
+    "numpy_seed": 20261021,
+    "padding": "none",
+    "torch_seed": 20261021
+  },
+  "git": {
+    "branch": "exp/parscale-20261021",
+    "head": "aa8d32efcdb5b3784cb8223823ed2f883e417ae1",
+    "working_tree_clean": true
+  },
+  "gpu": {
+    "authorized_uuid_redacted": true,
+    "count_visible": 1,
+    "driver_version": "570.211.01",
+    "memory_cap_gib": 16.0,
+    "name": "NVIDIA GeForce RTX 3090",
+    "total_memory_mib": "24576 MiB"
+  },
+  "notes": [
+    "Sanitized environment record; machine paths, GPU UUID and credentials omitted.",
+    "Smoke ran offline against pinned local weights and parquet datasets."
+  ],
+  "packages": {
+    "accelerate": "1.6.0",
+    "datasets": "3.5.0",
+    "huggingface-hub": "0.30.2",
+    "lm-eval": "0.4.8",
+    "numpy": "1.26.3",
+    "pyarrow": "25.0.1",
+    "safetensors": "0.8.0",
+    "tokenizers": "0.21.4",
+    "torch": "2.2.2+cu121",
+    "transformers": "4.51.3"
+  },
+  "platform": "Linux-6.8.0-111-generic-x86_64-with-glibc2.35",
+  "python": "3.10.12",
+  "run_id": "parscale-20261021-downstream-smoke",
+  "schema_version": 1
+}
