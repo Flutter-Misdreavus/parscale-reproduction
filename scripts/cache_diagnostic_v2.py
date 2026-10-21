@@ -119,14 +119,14 @@ def cached_logits(model, tokens, prefill_len: int) -> torch.Tensor:
                     attention_mask=torch.ones((1, prefill_len), dtype=torch.long, device="cuda"),
                     use_cache=True)
         past = pre.past_key_values
-        parts = [pre.logits[0, 0].float()]
+        parts = [pre.logits[0].float()]
         for i in range(prefill_len, length):
             step = model(input_ids=ids[:, i:i + 1],
                          attention_mask=torch.ones((1, i + 1), dtype=torch.long, device="cuda"),
                          past_key_values=past, use_cache=True)
             past = step.past_key_values
-            parts.append(step.logits[0, 0].float())
-        out = torch.stack(parts, dim=0)
+            parts.append(step.logits[0].float())
+        out = torch.cat(parts, dim=0)
     torch.cuda.synchronize()
     return out
 
