@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "run_id": "parscale-20261021-downstream-smoke",
+  "parent_run_id": "parscale-20261021-downstream-prep-r2",
+  "ready": true,
+  "hypothesis": "Validate that the frozen 0.7B downstream scorer matches independent answer-token logprob and fits one RTX3090 before full test.",
+  "baseline": "P1 fixed official weights; P1 FP32 small sensitivity.",
+  "intervention": "P2/P4/P8 BF16 fixed official weights on training/synthetic smoke cases only. No full held-out scoring.",
+  "dataset": "Reuse complete parent data-manifest.json/model-manifest.json copied into this run; all7 datasets prepared, no new downloads or installs. Official lm-eval0.4.8 templates and pinned local parquet, paper shots unchanged for future full stage.",
+  "split": "Smoke: first4 training examples per task with0-shot plus fixed synthetic scoring cases. No test accuracies.",
+  "primary_metric": "Max absolute independent manual vs adapter answer logprob difference, tolerance1e-5; finite values and memory/resource gates.",
+  "decision_rule": "All smoke gates must pass before supervisor authorizes full test. BF16/FP32 P1 sensitivity tolerance0.1 nats per fixed answer; report actual deviations. Do not loosen gates.",
+  "controls": [
+    "Current conversation sole supervisor; no background Codex. Existing public sanitized repository, user explicitly authorized publication; never merge original private archive history.",
+    "Only authorized GPU via environment,16GiB cap, free>=18432MiB; utilization alone does not stop. GPU smoke <=180seconds, entire task <=600seconds, project remains4GPUh/6active hours. Prior conservative GPU usage6613.323seconds; downstream preparation did no model GPU scoring.",
+    "Execute existing committed smoke only. Do not rerun prepare, install dependencies, rebuild held-out requests or redownload verified weights. No full evaluation in this task.",
+    "Actual run SHA must be recorded before command. Only one GPU smoke attempt here; if it fails, return artifacts for supervisor diagnosis, do not silently retry or spend another180seconds.",
+    "Fresh learned-prefix cache per full forward; BF16weights withfloat32softmax/sum; no incremental decoding. Original historical incremental-cache gate remains failed.",
+    "Source cleanup fixes retain noGPUmodelstorage across admissions. Keep raw paths/UUIDs/logs outsideGit, publish only sanitized small outputs. Explicit staging, no amend/forcepush."
+  ],
+  "seeds": [
+    42,
+    20261021
+  ],
+  "code_revision": "Current committed supervisor cleanup fix atop438d84d; record full runtime HEAD before smoke.",
+  "environment": "Reuse PARSCALE_RUNTIME_DIR/downstream-pkgs and existing torch site from PARSCALE_TORCH_SITE; all data offline.",
+  "experiment_commands": [
+    "Check cleanHEAD and copied parent manifests. Execute timeout --signal=TERM --kill-after=5 175 bash scripts/run_downstream_prep.sh runs/parscale-20261021-downstream-smoke smoke once. Do not run prepare.",
+    "Inspect scorer-validation.json andpreflight.json; write report.json with actual runSHA, GPU seconds, peaks, forecast and failures. Commit sanitized JSON summaries if time permits, then stop. No full test."
+  ],
+  "budget": {
+    "gpu_count": 1,
+    "gpu_hours": 0.05,
+    "wall_seconds": 600,
+    "max_attempts": 1,
+    "model_cost_limit": "One existing-provider execution-only DSH session<=600s; no purchases."
+  },
+  "stop_conditions": [
+    "OOM/NaN/hash/admission/scorer mismatch or180GPUseconds/600wallseconds. No retry inside thisrun."
+  ],
+  "required_outputs": [
+    "report.json",
+    "scorer-validation.json",
+    "preflight.json",
+    "raw/smoke.log kept outsideGit",
+    "actual runSHA and sanitized summary"
+  ],
+  "version_control": {
+    "repository": "Flutter-Misdreavus/parscale-reproduction",
+    "visibility": "public",
+    "branch": "exp/parscale-20261021",
+    "push_mode": "relay",
+    "checkpoint_minutes": 15,
+    "public_authorized_by_owner": true
+  }
+}

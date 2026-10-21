@@ -642,6 +642,9 @@ def release(model, lm=None):
             lm.model = None
         except Exception:
             pass
+    # The caller can still hold a reference; move storage off the GPU before
+    # empty_cache so the next admission check sees genuinely released memory.
+    model.to("cpu")
     del model
     gc.collect()
     torch.cuda.empty_cache()
