@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "run_id": "parscale-20261021-downstream-rest",
+  "parent_run_id": "parscale-20261021-downstream-core",
+  "ready": true,
+  "extension_protocol": "remaining-three-v1",
+  "full_test_authorized_by_supervisor": true,
+  "hypothesis": "On the previously unscored HellaSwag and ARC tasks, the official 0.7B P4 checkpoint improves normalized accuracy over P1.",
+  "baseline": "Official 0.7B-Pile P1. The prior four-task result is preserved as inconclusive.",
+  "intervention": "Official same nominal 0.7B P2/P4/P8. No training or model-size expansion. P4-P1 remains the comparison designated before the earlier core test.",
+  "dataset": "Full HellaSwag validation 10042 (10-shot), ARC-Easy test 2376 and ARC-Challenge test 1172 (both 25-shot), from already prepared pinned local parquet. Exact request and gold hashes are in the accepted manifest.",
+  "split": "Held-out official splits with few-shot examples drawn from train; seed 20261021. No sampled subset or shortened prompt. Known ARC-Easy has two exact question+choices overlaps with train; retain official primary set, report an independently computed sensitivity excluding these two rows. HellaSwag ind is not globally unique; exact context+choices has zero train/eval overlap.",
+  "primary_metric": "Prospective extension only: P4-P1 in percentage points for 0.5*HellaSwag acc_norm +0.25*ARC-Easy acc_norm +0.25*ARC-Challenge acc_norm. Paired by item within dataset, independent dataset resampling, 2000 percentile-bootstrap replicates, seed 20261022.",
+  "decision_rule": "Positive extension evidence requires delta>=1 percentage point AND paired 95% CI lower>0. Missing any required full pair means incomplete, not a positive decision. P2/P8 and individual tasks descriptive. Also reconstruct paper six-group General=(previous four core task accuracies + HellaSwag + mean of ARC-Easy/Challenge)/6, but label it an expanded descriptive analysis designed after core results, never a replacement for the failed core primary test.",
+  "controls": [
+    "User explicitly changed remaining budget to 2026-10-22 08:00 Asia/Shanghai. This supersedes the former 4-GPU-hour/6-active-hour ceiling for the remaining phase. Retain one authorized RTX3090, batch1 and existing compute/provider; no purchases or extra GPUs.",
+    "Current conversation is sole supervisor via MCP. Use new run directory, preserve earlier runs and original core primary outcome. Public repository authorized by owner; sanitized public history only, relay push.",
+    "Use only committed supervised_downstream_extension.py with unchanged validated scoring helper and upstream model code. Existing all-P scorer smoke includes ARC training examples and synthetic long contexts; all gates passed. Reuse offline verified data/weights, no downloads/installs or task-template changes.",
+    "Phases: ARC-Easy and ARC-Challenge for P1/P4/P2/P8, then HellaSwag for P1/P4/P2/P8. All 12 pairs required. Every64 candidates persisted. No automatic restart, new seed, task replacement, or result-driven early success declaration.",
+    "Before GPU, rehash model weights/local parquet, verify the frozen complete request streams and gold hashes, record dataset overlap audit. ARC-Easy two exact train/test overlaps are a known pretest limitation, not grounds to silently alter the official primary benchmark. Any unexpected file/request mismatch or extra exact overlap stops.",
+    "BF16 weights with float32 log-softmax and sum; fresh learned-prefix cache each full teacher-forced forward. Same tokenizer, context2048, no added BOS/EOS, no padding; original incremental BF16 cache gate remains failed.",
+    "GPU allocator cap16GiB, memory admission free>=18432MiB; utilization alone is not a stop signal. Scoring phase wall<=30600s and absolute stop 2026-10-21T23:15:00+00:00 (07:15 CST). Wrapper<=32400s and service absolute cutoff07:30 CST. Preserve partials on interruption; no automatic retry.",
+    "Do not compute inferential statistics or publish full prompts, labels, weights, server identities or raw DSH logs. Executor assembles report and small sanitized result summary only. Supervisor independently audits all candidate files and bootstrap. Keep actual run SHA distinct from result HEAD.",
+    "Independent score service has its own systemd RuntimeMaxSec and control-group cleanup. If DSH/wrapper stops first, supervisor checks this exact service before any action; no duplicate GPU launch. The scoring service absolute ceiling is 07:16 CST including shutdown grace, independent of monitoring availability."
+  ],
+  "seeds": [
+    20261021,
+    20261022
+  ],
+  "code_revision": "Committed supervised extension driver derived from core run e2978d6; only frozen scope/deadline/provenance audit changed. Validated scoring source hashes below; record exact clean HEAD before command.",
+  "environment": "Existing isolated dependencies, models and local data through runtime environment; HF offline; approved GPU from existing private adapter.",
+  "experiment_commands": [
+    "Verify clean committed HEAD, frozen task and copied preparation artifacts. Launch exactly once: python3 scripts/launch_downstream_extension.py --run-dir runs/parscale-20261021-downstream-rest. It creates the independent bounded service parscale-20261021-downstream-rest-score.service. Do not launch the driver directly or create a second scoring process.",
+    "Monitor the same scoring service, full-results.json and progress.json until all12 pairs or explicit failure/budget stop. The scoring service is independent of DSH lifetime; foreground tool completion is not experiment completion. Use long waits between remote polls (up to the tools supported foreground window) rather than frequent model calls. If executor/reporting fails, the supervisor may recover reporting while the one bounded scoring job continues; never rerun GPU scoring.",
+    "Write schema1 report.json listing full-results.json, request-verification.json, sources-recheck.json, split-id-check.json, progress.json, all12 outcomes/*.json, all12 candidates/*.jsonl, raw/full.run.sha, and optionally raw/full.log. Keep per-item evidence outside Git. Include score-service.json and score-service-exit.json when present. Keep scientific driver status distinct from executor/wrapper status.",
+    "Commit small sanitized full-results summary under experiments/parscale-20261021-downstream-rest; record actual runSHA, result commit, status and relay push pending. No test-dependent changes or extra run; stop after reporting."
+  ],
+  "budget": {
+    "gpu_count": 1,
+    "gpu_hours": 8.5,
+    "wall_seconds": 32400,
+    "max_attempts": 1,
+    "model_cost_limit": "One bounded existing-provider DSH execution session; no new paid service or purchase."
+  },
+  "user_deadline_local": "2026-10-22T08:00:00+08:00",
+  "scoring_deadline_utc": "2026-10-21T23:15:00+00:00",
+  "supervision_deadline_utc": "2026-10-21T23:30:00+00:00",
+  "scoring_wall_seconds": 30600,
+  "minimum_scoring_start_seconds": 27000,
+  "evaluation_tasks": [
+    "arc_easy",
+    "arc_challenge",
+    "hellaswag"
+  ],
+  "evaluation_models": [
+    1,
+    4,
+    2,
+    8
+  ],
+  "dataset_overlap_expectations": {
+    "arc_easy": 2,
+    "arc_challenge": 0,
+    "hellaswag": 0
+  },
+  "prepared_artifact_sha256": {
+    "scorer-validation.json": "114e06f127a619333fab56a658625a7ff1ec8ace64664265d73aca041bfac989",
+    "preflight.json": "ba8a74cbfadb9a97b656c26f4b8ab332fd42c980d8508d41da1c4545e48779df",
+    "data-manifest.json": "b97cce837c654445aaee3fa1ba3e8c0aefa128e39a85fa73693eb5f6189904e8",
+    "model-manifest.json": "8bcaa815b4694094d8afbfb02f5c882611874dc4a2d00dc1074a27028220f992"
+  },
+  "validated_source_sha256": {
+    "scripts/downstream_evaluation.py": "797694bea083df7d68bb187106597f693802e6d8812bae063f873e5d6c5bb8ed",
+    "upstream/modeling_qwen2_parscale.py": "b246ba04c4ccd20237a75d184424815602762044a54974caf0d6115fca07eb39",
+    "upstream/configuration_qwen2_parscale.py": "6973a771bf5f9fa4e1451bbff78d849d4a3b4df31050a532891fd315f557daef",
+    "configs/downstream/tasks/arc_challenge.yaml": "eeec8ede58b7441bcd791e64d5b38828b995aa38b378ccc380b3915813b71ef1",
+    "configs/downstream/tasks/arc_easy.yaml": "2195967b87241242f92a68567113ac20d19d45695178bd1bf700e3cb15bee260",
+    "configs/downstream/tasks/hellaswag.yaml": "c8f7aa3c79a7455411bac4d72ad2106618678983bcda21ab2d06c22da6dfa93b",
+    "configs/downstream/tasks/openbookqa.yaml": "17f7977e042302b9e11c0d014a10bafb3ce8879b0f35be59d67cb95c5ec1cddd",
+    "configs/downstream/tasks/piqa.yaml": "97c54f668aea8e746f35b09e780546c9e63335a4bc3b893e7b43a423a9717e70",
+    "configs/downstream/tasks/preprocess_winogrande.py": "e55327629264a98f1d383fda24645b6779afb53fa0bce2150042b9416b1ae006",
+    "configs/downstream/tasks/sciq.yaml": "40745074742cba5cdad315cc665471bd8e9c608a9061dece4ae5954d47e23b20",
+    "configs/downstream/tasks/utils.py": "07d23b60b28f2a4f658dcf8440623a63fe6644854ce9b846a114dde980dc1214",
+    "configs/downstream/tasks/winogrande.yaml": "bdeb55cdbaf08c2f0ae41f63560e9727b0c8ed1e756b1c73d641834326914808",
+    "scripts/supervised_downstream_extension.py": "fa9e1c2ed2ca1538f143134d932d1a916a52fdcd98cac3f8e24b902a01962086",
+    "scripts/run_downstream_extension.sh": "d965d551eb701b224b28b07fb9e8c77be5bf6945c5a6c3e8ea11117f7ea4886a",
+    "scripts/launch_downstream_extension.py": "718837cb8b027ce587a7fa257541930302375897dd0fff7ba00b6d2797bf08d4",
+    "scripts/downstream_extension_service.py": "cf9212bf26fda371fdc4356c3562e7d07357c80430d02f3dc4c1fc9f1e1a2386"
+  },
+  "stop_conditions": [
+    "OOM, nonfinite scores, unexpected hash/identity/overlap mismatch, time cap or absolute deadline. Preserve partial results and return diagnosis without retry."
+  ],
+  "required_outputs": [
+    "report.json",
+    "full-results.json",
+    "request-verification.json",
+    "sources-recheck.json",
+    "split-id-check.json",
+    "progress.json",
+    "all candidate and outcome files outside Git",
+    "raw/full.run.sha",
+    "sanitized result commit",
+    "score-service.json",
+    "score-service-exit.json"
+  ],
+  "version_control": {
+    "repository": "Flutter-Misdreavus/parscale-reproduction",
+    "visibility": "public",
+    "branch": "exp/parscale-20261021",
+    "push_mode": "relay",
+    "checkpoint_minutes": 15,
+    "public_authorized_by_owner": true
+  }
+}
