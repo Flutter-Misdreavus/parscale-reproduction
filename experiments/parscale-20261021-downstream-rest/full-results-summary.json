@@ -1,0 +1,387 @@
+{
+  "schema_version": 1,
+  "run_id": "parscale-20261021-downstream-rest",
+  "status": "SUCCEEDED",
+  "summary_created_at": "2026-10-21T22:10:19.491578+00:00",
+  "actual_run_sha": "34d4a1f9464562d563320c871e1ca1db6f2282d3",
+  "branch": "exp/parscale-20261021",
+  "scope": [
+    "arc_easy",
+    "arc_challenge",
+    "hellaswag"
+  ],
+  "document_counts": {
+    "arc_easy": 2376,
+    "arc_challenge": 1172,
+    "hellaswag": 10042
+  },
+  "request_counts": {
+    "arc_easy": 9501,
+    "arc_challenge": 4687,
+    "hellaswag": 40168
+  },
+  "documents_per_model": 13590,
+  "requests_per_model": 54356,
+  "candidate_rows_total": 217424,
+  "metrics": {
+    "P1": {
+      "arc_easy": {
+        "documents": 2376,
+        "candidates": 9501,
+        "acc": 0.5113636363636364,
+        "acc_norm": 0.4911616161616162,
+        "primary_metric": "acc_norm",
+        "seconds": 488.23063680529594,
+        "peak_memory_gib": {
+          "allocated": 3.621284008026123,
+          "reserved": 10.302734375
+        },
+        "metric_consistent": true
+      },
+      "arc_challenge": {
+        "documents": 1172,
+        "candidates": 4687,
+        "acc": 0.2098976109215017,
+        "acc_norm": 0.24914675767918087,
+        "primary_metric": "acc_norm",
+        "seconds": 264.6160119641572,
+        "peak_memory_gib": {
+          "allocated": 3.9474239349365234,
+          "reserved": 15.716796875
+        },
+        "metric_consistent": true
+      },
+      "hellaswag": {
+        "documents": 10042,
+        "candidates": 40168,
+        "acc": 0.3091017725552679,
+        "acc_norm": 0.35660227046405096,
+        "primary_metric": "acc_norm",
+        "seconds": 2461.826279146597,
+        "peak_memory_gib": {
+          "allocated": 3.7874813079833984,
+          "reserved": 15.36328125
+        },
+        "metric_consistent": true
+      },
+      "extension_composite_acc_norm": 0.36337822869222475
+    },
+    "P4": {
+      "arc_easy": {
+        "documents": 2376,
+        "candidates": 9501,
+        "acc": 0.5378787878787878,
+        "acc_norm": 0.5218855218855218,
+        "primary_metric": "acc_norm",
+        "seconds": 1071.2586019858718,
+        "peak_memory_gib": {
+          "allocated": 3.6303415298461914,
+          "reserved": 10.513671875
+        },
+        "metric_consistent": true
+      },
+      "arc_challenge": {
+        "documents": 1172,
+        "candidates": 4687,
+        "acc": 0.23037542662116042,
+        "acc_norm": 0.26109215017064846,
+        "primary_metric": "acc_norm",
+        "seconds": 626.2551155723631,
+        "peak_memory_gib": {
+          "allocated": 3.956481456756592,
+          "reserved": 15.923828125
+        },
+        "metric_consistent": true
+      },
+      "hellaswag": {
+        "documents": 10042,
+        "candidates": 40168,
+        "acc": 0.32284405496912966,
+        "acc_norm": 0.3772156940848437,
+        "primary_metric": "acc_norm",
+        "seconds": 5312.117245301604,
+        "peak_memory_gib": {
+          "allocated": 3.796355724334717,
+          "reserved": 15.576171875
+        },
+        "metric_consistent": true
+      },
+      "extension_composite_acc_norm": 0.3843522650564644
+    },
+    "P2": {
+      "arc_easy": {
+        "documents": 2376,
+        "candidates": 9501,
+        "acc": 0.5248316498316499,
+        "acc_norm": 0.5075757575757576,
+        "primary_metric": "acc_norm",
+        "seconds": 653.525581644848,
+        "peak_memory_gib": {
+          "allocated": 3.6262106895446777,
+          "reserved": 10.359375
+        },
+        "metric_consistent": true
+      },
+      "arc_challenge": {
+        "documents": 1172,
+        "candidates": 4687,
+        "acc": 0.21928327645051193,
+        "acc_norm": 0.2593856655290102,
+        "primary_metric": "acc_norm",
+        "seconds": 386.90839717537165,
+        "peak_memory_gib": {
+          "allocated": 3.952350616455078,
+          "reserved": 15.783203125
+        },
+        "metric_consistent": true
+      },
+      "hellaswag": {
+        "documents": 10042,
+        "candidates": 40168,
+        "acc": 0.31517625970922125,
+        "acc_norm": 0.3664608643696475,
+        "primary_metric": "acc_norm",
+        "seconds": 3312.2961846776307,
+        "peak_memory_gib": {
+          "allocated": 3.792224884033203,
+          "reserved": 15.451171875
+        },
+        "metric_consistent": true
+      },
+      "extension_composite_acc_norm": 0.3749707879610157
+    },
+    "P8": {
+      "arc_easy": {
+        "documents": 2376,
+        "candidates": 9501,
+        "acc": 0.5307239057239057,
+        "acc_norm": 0.5147306397306397,
+        "primary_metric": "acc_norm",
+        "seconds": 1840.2206097785383,
+        "peak_memory_gib": {
+          "allocated": 3.6392135620117188,
+          "reserved": 10.666015625
+        },
+        "metric_consistent": true
+      },
+      "arc_challenge": {
+        "documents": 1172,
+        "candidates": 4687,
+        "acc": 0.2150170648464164,
+        "acc_norm": 0.25853242320819114,
+        "primary_metric": "acc_norm",
+        "seconds": 1116.8188620042056,
+        "peak_memory_gib": {
+          "allocated": 3.965353488922119,
+          "reserved": 15.361328125
+        },
+        "metric_consistent": true
+      },
+      "hellaswag": {
+        "documents": 10042,
+        "candidates": 40168,
+        "acc": 0.32443736307508464,
+        "acc_norm": 0.3852818163712408,
+        "primary_metric": "acc_norm",
+        "seconds": 9285.600023461506,
+        "peak_memory_gib": {
+          "allocated": 3.805227756500244,
+          "reserved": 15.8359375
+        },
+        "metric_consistent": true
+      },
+      "extension_composite_acc_norm": 0.3859566739203281
+    }
+  },
+  "primary_extension": {
+    "definition": "0.5*HellaSwag acc_norm + 0.25*ARC-Easy acc_norm + 0.25*ARC-Challenge acc_norm",
+    "values": {
+      "P1": 0.36337822869222475,
+      "P4": 0.3843522650564644,
+      "P2": 0.3749707879610157,
+      "P8": 0.3859566739203281
+    },
+    "P4_minus_P1_pp": 2.0974036364239668,
+    "P2_minus_P1_pp": 1.1592559268790936,
+    "P8_minus_P1_pp": 2.257844522810337,
+    "decision_note": "Executor computed point estimates only. The pre-specified paired 2000-replicate bootstrap CI and the >=1 pp / lower>0 decision are left to the independent supervisor audit."
+  },
+  "arc_easy_overlap_sensitivity": {
+    "excluded_doc_ids": [
+      242,
+      493
+    ],
+    "values": {
+      "P1": 0.4907329401853412,
+      "P4": 0.5214827295703454,
+      "P2": 0.5075821398483572,
+      "P8": 0.514743049705139
+    },
+    "note": "Descriptive sensitivity only; official primary benchmark is unchanged. The supervisor should independently confirm row identity.",
+    "doc_id_sequence_is_0_to_n": true,
+    "P4_minus_P1_pp": 3.0749789385004167
+  },
+  "expanded_six_group_general": {
+    "label": "expanded descriptive analysis designed after the core result; NOT a replacement for the failed core primary test",
+    "definition": "(PIQA + SciQ + WinoGrande + OpenBookQA + HellaSwag + mean(ARC-Easy, ARC-Challenge))/6",
+    "values": {
+      "P1": 0.4948435358993071,
+      "P4": 0.5088355448012479,
+      "P2": 0.5028699675821326,
+      "P8": 0.5060874877960454
+    },
+    "prior_core_summary": "experiments/parscale-20261021-downstream-core/full-results-summary.json"
+  },
+  "verification": {
+    "request_verification_all_true": true,
+    "source_rehash_all_true": true,
+    "candidate_and_outcome_hash_checks": [
+      {
+        "pair": "P1-arc_easy",
+        "candidates_sha256_match": true,
+        "outcomes_sha256_match": true
+      },
+      {
+        "pair": "P1-arc_challenge",
+        "candidates_sha256_match": true,
+        "outcomes_sha256_match": true
+      },
+      {
+        "pair": "P1-hellaswag",
+        "candidates_sha256_match": true,
+        "outcomes_sha256_match": true
+      },
+      {
+        "pair": "P4-arc_easy",
+        "candidates_sha256_match": true,
+        "outcomes_sha256_match": true
+      },
+      {
+        "pair": "P4-arc_challenge",
+        "candidates_sha256_match": true,
+        "outcomes_sha256_match": true
+      },
+      {
+        "pair": "P4-hellaswag",
+        "candidates_sha256_match": true,
+        "outcomes_sha256_match": true
+      },
+      {
+        "pair": "P2-arc_easy",
+        "candidates_sha256_match": true,
+        "outcomes_sha256_match": true
+      },
+      {
+        "pair": "P2-arc_challenge",
+        "candidates_sha256_match": true,
+        "outcomes_sha256_match": true
+      },
+      {
+        "pair": "P2-hellaswag",
+        "candidates_sha256_match": true,
+        "outcomes_sha256_match": true
+      },
+      {
+        "pair": "P8-arc_easy",
+        "candidates_sha256_match": true,
+        "outcomes_sha256_match": true
+      },
+      {
+        "pair": "P8-arc_challenge",
+        "candidates_sha256_match": true,
+        "outcomes_sha256_match": true
+      },
+      {
+        "pair": "P8-hellaswag",
+        "candidates_sha256_match": true,
+        "outcomes_sha256_match": true
+      }
+    ],
+    "all_hashes_match": true,
+    "all_metrics_reproduce_from_outcomes": true,
+    "missing_pairs": [],
+    "candidate_rows": 217424,
+    "outcome_documents": 54360,
+    "nonfinite_candidate_scores": 0,
+    "invalid_outcome_rows_or_counts": 0,
+    "split_id_check": {
+      "arc_challenge": {
+        "duplicate_eval_contexts": 2,
+        "duplicate_eval_exact_cases": 0,
+        "identity": "canonical question/context plus all choices; not dataset ind",
+        "train_eval_context_overlap": 6,
+        "train_eval_exact_case_overlap": 0,
+        "train_overlap_eval_row_indices": []
+      },
+      "arc_easy": {
+        "duplicate_eval_contexts": 5,
+        "duplicate_eval_exact_cases": 0,
+        "identity": "canonical question/context plus all choices; not dataset ind",
+        "train_eval_context_overlap": 7,
+        "train_eval_exact_case_overlap": 2,
+        "train_overlap_eval_row_indices": [
+          242,
+          493
+        ]
+      },
+      "hellaswag": {
+        "duplicate_eval_contexts": 24,
+        "duplicate_eval_exact_cases": 0,
+        "identity": "canonical question/context plus all choices; not dataset ind",
+        "train_eval_context_overlap": 23,
+        "train_eval_exact_case_overlap": 0,
+        "train_overlap_eval_row_indices": []
+      }
+    },
+    "dataset_overlap_expectations": {
+      "arc_easy": 2,
+      "arc_challenge": 0,
+      "hellaswag": 0
+    }
+  },
+  "resource": {
+    "scoring_wall_seconds": 26840.722113844007,
+    "scoring_wall_limit_seconds": 30600.0,
+    "gpu_hours": 7.4557561427344465,
+    "started_at": "2026-10-21T14:42:27.202376+00:00",
+    "finished_at": "2026-10-21T22:09:47.924770+00:00",
+    "completed_pairs": [
+      "P1-arc_easy",
+      "P1-arc_challenge",
+      "P4-arc_easy",
+      "P4-arc_challenge",
+      "P2-arc_easy",
+      "P2-arc_challenge",
+      "P8-arc_easy",
+      "P8-arc_challenge",
+      "P1-hellaswag",
+      "P4-hellaswag",
+      "P2-hellaswag",
+      "P8-hellaswag"
+    ],
+    "service": {
+      "launch": {
+        "run_id": "parscale-20261021-downstream-rest",
+        "unit": "parscale-20261021-downstream-rest-score.service",
+        "runtime_max_seconds": 31708,
+        "launched_at": "2026-10-21T14:27:31.466080+00:00",
+        "head_commit": "34d4a1f9464562d563320c871e1ca1db6f2282d3",
+        "independent_of_executor": true
+      },
+      "exit": {
+        "run_id": "parscale-20261021-downstream-rest",
+        "command_exit_code": 0,
+        "started_at": "2026-10-21T14:27:31.474978+00:00",
+        "finished_at": "2026-10-21T22:09:49.936493+00:00"
+      }
+    }
+  },
+  "limitations": [
+    "One pretrained checkpoint per P; no training-seed replication.",
+    "Shared-GPU timings are descriptive.",
+    "Executor did not compute the paired bootstrap CI; the decision rule is applied by the supervisor.",
+    "The expanded six-group General is post hoc descriptive and does not replace the failed core primary test.",
+    "ARC-Easy has 2 known exact question+choice train/eval overlaps; the official primary set retains them.",
+    "HellaSwag ind is not globally unique; the audit used canonical context+all choices."
+  ]
+}
