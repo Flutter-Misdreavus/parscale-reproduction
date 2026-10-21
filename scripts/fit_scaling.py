@@ -48,6 +48,29 @@ def atomic_json(path: Path, obj):
     os.replace(tmp, path)
 
 
+def _safe_literal(node):
+    """ast.literal_eval plus list repetition, used by the published ``p`` table.
+
+    The upstream file writes ``[1] * 6``; that is still source-derived literal
+    data (no manual transcription), so evaluate only the narrow, safe subset:
+    constants, unary minus, list/tuple displays and list*int repetition.
+    """
+    if isinstance(node, (ast.List, ast.Tuple)):
+        return [_safe_literal(v) for v in node.elts]
+    if isinstance(node, ast.UnaryOp) and isinstance(node.op, ast.USub):
+        return -_safe_literal(node.operand)
+    if isinstance(node, ast.BinOp) and isinstance(node.op, ast.Mult):
+        left, right = _safe_literal(node.left), _safe_literal(node.right)
+        if isinstance(left, list) and isinstance(right, int):
+            return left * right
+        if isinstance(left, int) and isinstance(right, list):
+            return right * left
+        if isinstance(left, (int, float)) and isinstance(right, (int, float)):
+            return left * right
+        raise ValueError(f"unsupported multiplication at {ast.dump(node)}")
+    return ast.literal_eval(node)
+
+
 def extract_literals(path: Path):
     tree = ast.parse(path.read_text(encoding="utf-8"))
     wanted = {"params", "p", "stack_loss", "pile_loss"}
@@ -59,7 +82,7 @@ def extract_literals(path: Path):
         if isinstance(node, ast.Assign) and len(node.targets) == 1:
             target = node.targets[0]
             if isinstance(target, ast.Name) and target.id in wanted:
-                found[target.id] = ast.literal_eval(node.value)
+                found[target.id] = _safe_literal(node.value)
     missing = wanted - set(found)
     if missing:
         raise RuntimeError(f"missing literals in {path}: {sorted(missing)}")
@@ -208,7 +231,7 @@ def main():
         "source": {
             "path": str(upstream.relative_to(ROOT)) if upstream.is_relative_to(ROOT) else str(upstream),
             "sha256": sha256_file(upstream),
-            "method": "ast.literal_eval",
+            "method": "ast.literal_eval with safe list-repeat evaluation",
         },
         "method": {
             "formula": "E + (A_abs / (params_non_embedding * (log(P)*k + 1)))**alpha",
