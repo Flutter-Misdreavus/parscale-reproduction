@@ -48,7 +48,7 @@ left.set_xticks(range(4), models)
 left.set_xlim(-.3, 3.3)
 span = max(float(np.ptp(values)), .8)
 left.set_ylim(values.min()-.3*span, values.max()+.55*span)
-left.set_title('Paper six-group General · descriptive', loc='left', fontsize=12, weight='bold', pad=20)
+left.set_title('Six-group General · descriptive', loc='left', fontsize=12, weight='bold', pad=20)
 left.set_ylabel('Accuracy (%) · higher is better')
 left.set_xlabel('Parallel streams')
 for j, (mean, bounds) in enumerate(zip(means, intervals)):

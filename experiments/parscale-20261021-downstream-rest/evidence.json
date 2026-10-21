@@ -1,0 +1,201 @@
+{
+  "run_id": "parscale-20261021-downstream-rest",
+  "event_id": "1660a23c9f0bd4d3f89ff19afec244979b5a56f82d05c844e9dddcb0d40d4f50",
+  "status": "SUCCEEDED",
+  "task_sha256": "575238640228563047c1225d2d8a00b4702d42465c0aad65203064edf63d279c",
+  "verified_at": "2026-10-21T22:12:16.644474+00:00",
+  "actual_run_commit": "34d4a1f9464562d563320c871e1ca1db6f2282d3",
+  "worker_pre_run_record_commit": "42854b59f9e64fe3f08307ae2ea0e8fecc1975d0",
+  "worker_result_commit": "c84a9685858cc7529bd1c1f335e6ac4a0808ca0f",
+  "analysis_commit": "4a0e3c1abb0ba438ccf89b7b6f8a51ad42010800",
+  "artifact_hashes": [
+    {
+      "bytes": 8921,
+      "path": "full-results.json",
+      "sha256": "4ad3c163965ec41fb760a28287896de5d5e0756b63766716d72bfeb9e0485b42"
+    },
+    {
+      "bytes": 723,
+      "path": "request-verification.json",
+      "sha256": "4f4522ed4ee25f77dc37317e870b36a3bae61f68e1cb7c3fe2325413929f00f5"
+    },
+    {
+      "bytes": 252,
+      "path": "sources-recheck.json",
+      "sha256": "96b0741b222daef62cf3c0ac2c3cd44e33663877be4f5dfbad25b361d32abdb0"
+    },
+    {
+      "bytes": 907,
+      "path": "split-id-check.json",
+      "sha256": "31700fe13bea0ad3a44b18ab5c0e8571def9faca0d2337aece9e1a6eac30e700"
+    },
+    {
+      "bytes": 436,
+      "path": "progress.json",
+      "sha256": "3eab76d629122017e9093142542019e62f69ffa1491d23734a54e77fbedb4364"
+    },
+    {
+      "bytes": 41,
+      "path": "raw/full.run.sha",
+      "sha256": "28ce37449e8cdf1c9674b50f0c4b014e95a06d995e2082cd1be7192fe043875c"
+    },
+    {
+      "bytes": 150406,
+      "path": "raw/full.log",
+      "sha256": "23db08d830410c148145d7a34dcaeed20fcd314bae8ebc71e862973a1988c4e4"
+    },
+    {
+      "bytes": 294,
+      "path": "score-service.json",
+      "sha256": "e4abd492919a2b0df7f0ea85dd583e86dde369c67df9cc32e8c0f5bbe0f03f99"
+    },
+    {
+      "bytes": 183,
+      "path": "score-service-exit.json",
+      "sha256": "83ab11ab8cf8875b2ca84ea888a5637966675fd70d04bc2a9a7a9260b7164dcf"
+    },
+    {
+      "bytes": 672649,
+      "path": "outcomes/P1-arc_easy.json",
+      "sha256": "048c4124f974c308c29a86753ba13e6d149dabc7fd74cfb9193a896792da2ff7"
+    },
+    {
+      "bytes": 331795,
+      "path": "outcomes/P1-arc_challenge.json",
+      "sha256": "22439b414947bbea88693f73ea762f84286f46832a8c4a518b48be2705cdbc8a"
+    },
+    {
+      "bytes": 2879342,
+      "path": "outcomes/P1-hellaswag.json",
+      "sha256": "314471cc6cd0b4e0e21346acdad6e558ec05345474e9d4b7f14a65f6ac1d4f96"
+    },
+    {
+      "bytes": 672578,
+      "path": "outcomes/P4-arc_easy.json",
+      "sha256": "5f6cbf189ca23cefed98273a9cb210f2eacd471a5db3b9776a4bf6e783424f22"
+    },
+    {
+      "bytes": 331901,
+      "path": "outcomes/P4-arc_challenge.json",
+      "sha256": "322310193c5d81bf36ca02a9fe29dfa77da6e1a640183653516bb01f752fad5a"
+    },
+    {
+      "bytes": 2878825,
+      "path": "outcomes/P4-hellaswag.json",
+      "sha256": "aa5af32bf7d5209deaf68837202b6d25fee9f8f2ae293723e4250053e0c63091"
+    },
+    {
+      "bytes": 672762,
+      "path": "outcomes/P2-arc_easy.json",
+      "sha256": "68ece566d01147364d889a80fc4576200eee66612053da6ece1c7173490f2475"
+    },
+    {
+      "bytes": 331871,
+      "path": "outcomes/P2-arc_challenge.json",
+      "sha256": "5f91ce765f52df526043800f13f493c152d388f8f10e2f8b356ec5be001b8be4"
+    },
+    {
+      "bytes": 2879086,
+      "path": "outcomes/P2-hellaswag.json",
+      "sha256": "b5c2aadcf373ef7a058f0a6d1f432b25c3ea34ce7d04ab855f6153238f9e996b"
+    },
+    {
+      "bytes": 672680,
+      "path": "outcomes/P8-arc_easy.json",
+      "sha256": "435b7562333c907744e2a4c45e44904109e4db70a27f61c59a267f50bffbf46d"
+    },
+    {
+      "bytes": 331985,
+      "path": "outcomes/P8-arc_challenge.json",
+      "sha256": "8311850ae2d029e2bdce91e4b4b8cf9395eae0570e385d1ac6f087f9ed1bae1f"
+    },
+    {
+      "bytes": 2879426,
+      "path": "outcomes/P8-hellaswag.json",
+      "sha256": "425941b43cc4140c6bc8fa448f5c2d003d9049ff292a48cbbd42f25c78bc43b1"
+    },
+    {
+      "bytes": 2450603,
+      "path": "candidates/P1-arc_easy.jsonl",
+      "sha256": "fc1af557b6e095e19ffffc7726022abf208fc01469893afa11e00d5364360f5f"
+    },
+    {
+      "bytes": 1206784,
+      "path": "candidates/P1-arc_challenge.jsonl",
+      "sha256": "726101cdd6ceab781447d39d114f53ba22539d40137d9efa9a072ee511a722e9"
+    },
+    {
+      "bytes": 10370187,
+      "path": "candidates/P1-hellaswag.jsonl",
+      "sha256": "76c73c7813b8dfa1d5e18e4aa99efb68beecdb141bd26bf44bd1f67441eeeb86"
+    },
+    {
+      "bytes": 2450526,
+      "path": "candidates/P4-arc_easy.jsonl",
+      "sha256": "e8f28b1d9208b0dec0c745eac07f6c888c720c1be5cbfd2dc32db6ee37b4b674"
+    },
+    {
+      "bytes": 1206884,
+      "path": "candidates/P4-arc_challenge.jsonl",
+      "sha256": "bb2eb1269b5b7f0e23ce94e7ff1f5c8eb78ab7e514a71f37e581a74823eb9070"
+    },
+    {
+      "bytes": 10369670,
+      "path": "candidates/P4-hellaswag.jsonl",
+      "sha256": "e88460333e0a88986ec5158a68fed0c393372379774ea5c3dd84225a490fb1e2"
+    },
+    {
+      "bytes": 2450711,
+      "path": "candidates/P2-arc_easy.jsonl",
+      "sha256": "5d9b081e1571b2329284cd094b0e0262cd94adbae1f02bce6299417d773410eb"
+    },
+    {
+      "bytes": 1206861,
+      "path": "candidates/P2-arc_challenge.jsonl",
+      "sha256": "0ad1c79a83997c86361147ba0f2562aabbddb28b6e0e4e0178fcc5bdcdf0c530"
+    },
+    {
+      "bytes": 10369932,
+      "path": "candidates/P2-hellaswag.jsonl",
+      "sha256": "e435e272218cc527f3bbab5dce182f2a9f28ee94c0b0ed2eea06852c3de49431"
+    },
+    {
+      "bytes": 2450629,
+      "path": "candidates/P8-arc_easy.jsonl",
+      "sha256": "80d7536978914fff9512fcdcceee369c9a96821731b27b784fbaa2ff555cc7da"
+    },
+    {
+      "bytes": 1206962,
+      "path": "candidates/P8-arc_challenge.jsonl",
+      "sha256": "41bed01afff3c7688aa15e6834e73ee7ced22db632a829839b9a068975da2552"
+    },
+    {
+      "bytes": 10370272,
+      "path": "candidates/P8-hellaswag.jsonl",
+      "sha256": "3be79d79b16537f590323d5f0f23e2eae51c1848ddca0d35f1bc7d03c2af9cfa"
+    },
+    {
+      "bytes": 306,
+      "path": "started.json",
+      "sha256": "2c338befd1da2d953b402ae4648f5ab3a070afe38b8816aed72601d59e7e3106"
+    },
+    {
+      "bytes": 8459,
+      "path": "report.json",
+      "sha256": "4fbeeee1c76ea664564452ac76b9fbcb83570ef41bfe77509545e6a02f97c186"
+    }
+  ],
+  "artifacts_verified": 35,
+  "bytes_verified": 71815849,
+  "wrapper_wall_seconds": 27862.216,
+  "data_manifest_sha256": "b97cce837c654445aaee3fa1ba3e8c0aefa128e39a85fa73693eb5f6189904e8",
+  "cleanup": {
+    "both_services_inactive": true,
+    "main_pids_zero": true,
+    "control_groups_empty": true,
+    "original_processes_absent": true
+  },
+  "scope": "Hashes refer to original private runtime artifacts; raw prompts, labels, candidate scores, weights and executor logs are not published. Correctness-only outcomes are published separately.",
+  "task_sha256_scope": "Canonical task identity from the workflow completion event; distinct from exact JSON file bytes.",
+  "frozen_task_file_sha256": "4766a90efeb4341a9e08ea119287562b6165c6dbf3e89ace5029c6bfc21b8428"
+}
