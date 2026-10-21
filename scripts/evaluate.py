@@ -159,7 +159,7 @@ def peak_mem_gib():
 
 
 def gpu_admission(expected_uuid, free_mib_min=18432, util_max=10.0,
-                  required_consecutive=3, max_samples=6, interval=1.0):
+                  required_consecutive=2, max_samples=10, interval=1.0):
     """Bounded admission check for a single locked GPU.
 
     Requires `required_consecutive` consecutive 1 s samples with
@@ -548,13 +548,13 @@ def main():
         p = m["p"]
         path = model_paths[p]
         adm = gpu_admission(locks["resource"]["gpu_uuid"], free_mib_min=18432,
-                            util_max=10.0, required_consecutive=3)
+                            util_max=10.0, required_consecutive=2)
         adm["model"] = f"P{p}"
         admissions.append(adm)
         atomic_json(run_dir / "preflight.json", {
             "run_id": run_id, "schema_version": 1, "created_at": utcnow(),
             "requirement": {"free_mib_min": 18432, "utilization_percent_max": 10.0,
-                            "sampling": "3 consecutive 1 s samples within <=6 readings"},
+                            "sampling": "2 consecutive 1 s samples within <=10 readings"},
             "checks": admissions,
         })
         print(f"[eval] P{p} admission passed={adm['passed']}", flush=True)

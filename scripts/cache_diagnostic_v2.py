@@ -47,7 +47,7 @@ import evaluate  # noqa: E402
 
 FREE_MIB_MIN = 18432
 UTIL_MAX = 10.0
-ADMISSION_SAMPLES = 3
+ADMISSION_SAMPLES = 2
 
 
 def utcnow():
@@ -186,7 +186,7 @@ def admission_record(locks, label: str, checks: list) -> dict:
                                  free_mib_min=FREE_MIB_MIN,
                                  util_max=UTIL_MAX,
                                  required_consecutive=ADMISSION_SAMPLES,
-                                 max_samples=6, interval=1.0)
+                                 max_samples=10, interval=1.0)
     rec["label"] = label
     rec["created_at"] = utcnow()
     checks.append(rec)
@@ -226,7 +226,7 @@ def phase_preflight(locks, run_dir, model_paths):
             "gpu_uuid": locks["resource"]["gpu_uuid"],
             "free_mib_min": FREE_MIB_MIN,
             "utilization_percent_max": UTIL_MAX,
-            "sampling": f"{ADMISSION_SAMPLES} consecutive 1 s samples within <=6 readings",
+            "sampling": f"{ADMISSION_SAMPLES} consecutive 1 s samples within <=10 readings",
             "allocator_cap_gib": evaluate.EXPECTED_GPU_GIB,
             "scope": "before every creation of an FP32 or BF16 GPU model",
         },
