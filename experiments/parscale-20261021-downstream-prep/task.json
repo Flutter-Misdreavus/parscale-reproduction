@@ -6,19 +6,7 @@
   "hypothesis": "At fixed official 0.7B-Pile checkpoint family, increased P improves downstream multiple-choice accuracy; no training or size scaling claim.",
   "baseline": "Official ParScale-0.7B-P1-Pile, existing pinned weights; paper nonembedding N=0.5B column.",
   "intervention": "Official P2/P4/P8 same 42B-token Pile family. PREPARATION ONLY: implement, pin data, validate scorer, benchmark; no full test evaluation until supervisor gate.",
-  "dataset": {
-    "tasks": {
-      "piqa": 5,
-      "sciq": 3,
-      "winogrande": 5,
-      "openbookqa": 5,
-      "hellaswag": 10,
-      "arc_easy": 25,
-      "arc_challenge": 25
-    },
-    "framework": "EleutherAI lm-evaluation-harness; choose compatible immutable release/commit, pin all dataset revisions and task configs before any scored test. Prefer HF mirror; identical immutable upstream fallback allowed. Download data outside Git.",
-    "models": "Reuse P1/P2/P4 runtime/models. Download P8 ParScale/ParScale-0.7B-P8-Pile revision 2cf8614c5ac7b0edab5912ed1d07aecc3b800f53, verify actual files and SHA256. No Python-family or other model sizes."
-  },
+  "dataset": "{\"tasks\": {\"piqa\": 5, \"sciq\": 3, \"winogrande\": 5, \"openbookqa\": 5, \"hellaswag\": 10, \"arc_easy\": 25, \"arc_challenge\": 25}, \"framework\": \"EleutherAI lm-evaluation-harness; choose compatible immutable release/commit, pin all dataset revisions and task configs before any scored test. Prefer HF mirror; identical immutable upstream fallback allowed. Download data outside Git.\", \"models\": \"Reuse P1/P2/P4 runtime/models. Download P8 ParScale/ParScale-0.7B-P8-Pile revision 2cf8614c5ac7b0edab5912ed1d07aecc3b800f53, verify actual files and SHA256. No Python-family or other model sizes.\"}",
   "split": "Official lm-eval default held-out splits. Smoke on training/fewshot-source examples where available; otherwise synthetic inputs without reporting test accuracies. Freeze fewshot seed 20261021 and exact rendered requests, truncation policy and sample IDs before test. Full input length audit CPU-only permitted.",
   "primary_metric": "Future full-stage primary: equal-weight macro of six paper task groups (PIQA,SciQ,WinoGrande,OpenBookQA,HellaSwag,ARC mean) P4 minus P1 percentage points. Prep gate is numerical correctness and resource feasibility, not accuracy.",
   "decision_rule": "Full-stage descriptive positive >=1 percentage point macro improvement with paired stratified bootstrap 95% CI lower>0; otherwise inconclusive/negative. No requirement of monotonic single-task scores. Secondary all P vs P1 and individual tasks, no selective omission. For prep require manual answer-token logprob agreement with adapter, candidate alignment/truncation/padding verified, immutable dataset/model manifests, and runtime prediction.",
@@ -72,5 +60,18 @@
     "push_mode": "relay",
     "checkpoint_minutes": 15,
     "public_authorized_by_owner": true
+  },
+  "task_settings": {
+    "tasks": {
+      "piqa": 5,
+      "sciq": 3,
+      "winogrande": 5,
+      "openbookqa": 5,
+      "hellaswag": 10,
+      "arc_easy": 25,
+      "arc_challenge": 25
+    },
+    "framework": "EleutherAI lm-evaluation-harness; choose compatible immutable release/commit, pin all dataset revisions and task configs before any scored test. Prefer HF mirror; identical immutable upstream fallback allowed. Download data outside Git.",
+    "models": "Reuse P1/P2/P4 runtime/models. Download P8 ParScale/ParScale-0.7B-P8-Pile revision 2cf8614c5ac7b0edab5912ed1d07aecc3b800f53, verify actual files and SHA256. No Python-family or other model sizes."
   }
 }
