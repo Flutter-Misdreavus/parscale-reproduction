@@ -1,0 +1,104 @@
+{
+  "run_id": "parscale-20261021-cache-diagnostic-v4",
+  "all_raw_hashes_verified": true,
+  "raw_files_verified": [
+    "raw/diagnostics/P1/P_float32_seq0.npz",
+    "raw/diagnostics/P1/P_bfloat16_seq0.npz",
+    "raw/diagnostics/P1/P_float32_seq1.npz",
+    "raw/diagnostics/P1/P_bfloat16_seq1.npz",
+    "raw/diagnostics/P1/P_float32_loss_b0.npy",
+    "raw/diagnostics/P1/P_float32_loss_b1.npy",
+    "raw/diagnostics/P2/P_float32_seq0.npz",
+    "raw/diagnostics/P2/P_bfloat16_seq0.npz",
+    "raw/diagnostics/P2/P_float32_seq1.npz",
+    "raw/diagnostics/P2/P_bfloat16_seq1.npz",
+    "raw/diagnostics/P2/P_float32_loss_b0.npy",
+    "raw/diagnostics/P2/P_float32_loss_b1.npy",
+    "raw/diagnostics/P4/P_float32_seq0.npz",
+    "raw/diagnostics/P4/P_bfloat16_seq0.npz",
+    "raw/diagnostics/P4/P_float32_seq1.npz",
+    "raw/diagnostics/P4/P_bfloat16_seq1.npz",
+    "raw/diagnostics/P4/P_float32_loss_b0.npy",
+    "raw/diagnostics/P4/P_float32_loss_b1.npy"
+  ],
+  "validation_text_and_token_hashes_reconstructed": true,
+  "models": {
+    "P1": {
+      "tokens_scored": 2046,
+      "fp32_nll_reconstructed_from_raw_logits": 2.663731906635974,
+      "bf16_nll_recomputed_from_saved_target_logprobs": 2.6630698427179063,
+      "max_fp32_cache_error": 2.288818359375e-05,
+      "max_bf16_cache_error": 0.203125,
+      "sequences": [
+        {
+          "sequence": 0,
+          "token_count": 64,
+          "raw_comparisons_verified": true
+        },
+        {
+          "sequence": 1,
+          "token_count": 64,
+          "raw_comparisons_verified": true
+        }
+      ]
+    },
+    "P2": {
+      "tokens_scored": 2046,
+      "fp32_nll_reconstructed_from_raw_logits": 2.5922216152168445,
+      "bf16_nll_recomputed_from_saved_target_logprobs": 2.592252201696371,
+      "max_fp32_cache_error": 2.384185791015625e-05,
+      "max_bf16_cache_error": 0.21875,
+      "sequences": [
+        {
+          "sequence": 0,
+          "token_count": 64,
+          "raw_comparisons_verified": true
+        },
+        {
+          "sequence": 1,
+          "token_count": 64,
+          "raw_comparisons_verified": true
+        }
+      ]
+    },
+    "P4": {
+      "tokens_scored": 2046,
+      "fp32_nll_reconstructed_from_raw_logits": 2.571514077606174,
+      "bf16_nll_recomputed_from_saved_target_logprobs": 2.571956151391614,
+      "max_fp32_cache_error": 2.86102294921875e-05,
+      "max_bf16_cache_error": 0.1875,
+      "sequences": [
+        {
+          "sequence": 0,
+          "token_count": 64,
+          "raw_comparisons_verified": true
+        },
+        {
+          "sequence": 1,
+          "token_count": 64,
+          "raw_comparisons_verified": true
+        }
+      ]
+    }
+  },
+  "review_code_commit": "c6a28df97623a4ad9f40ea5403178301eb085c47",
+  "model_inference_rerun": false,
+  "cuda_visible_devices": "",
+  "diagnostic_status": "complete",
+  "missing_models": [],
+  "timing_recomputed": {
+    "P1": {
+      "median_seconds": 1.2052614782005548,
+      "p90_seconds": 1.232173859141767
+    },
+    "P2": {
+      "median_seconds": 1.2362126260995865,
+      "p90_seconds": 1.2707581667229533
+    },
+    "P4": {
+      "median_seconds": 1.223817785270512,
+      "p90_seconds": 1.26149311773479
+    }
+  },
+  "timing_available": true
+}

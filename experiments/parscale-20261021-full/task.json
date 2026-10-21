@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "run_id": "parscale-20261021-full",
+  "parent_run_id": "parscale-20261021-cache-diagnostic-v4",
+  "ready": false,
+  "execution_status": "DRAFT_WAITING_FOR_INDEPENDENT_V4_REVIEW",
+  "hypothesis": "At fixed official ~0.7B weights, increasing parallel streams from1 to2/4 reduces teacher-forced prediction NLL on the locked complete WikiText2 test split.",
+  "baseline": "Official ParScale0.7B P1; BF16 primary and independently scored FP32 sensitivity.",
+  "intervention": "Official same-family P2 andP4 checkpoints; no training or checkpoint selection.",
+  "dataset": "Salesforce/wikitext wikitext-2-raw-v1 at b08601e04326c79dfdd32d625aee71d232d685c3; same locked P1/P2/P4 models and HF LFS hashes in locks.json and configs/model-sources.json.",
+  "split": "First validate new scoring entry against two previously reviewed validation blocks; only after exact agreement within1e-5 nats/token score all test blocks, contiguous1024 and final remainder>=2. No test-driven selection.",
+  "primary_metric": "Token-weighted test BF16 NLL P2 minusP1; paired2000 block-bootstrap95% percentile CI seed20261021. FP32 is prespecified sensitivity; allP comparisons reported.",
+  "decision_rule": "Promising at this corpus/scale if BF16 P2 NLL relative reduction>=0.5%, paired CI upper<0, P4<=P2. Report same rule separately forFP32 and flag precision-dependent conclusions. No claim of new scaling law, independent training replication or clean efficiency scaling.",
+  "controls": [
+    "Current conversation is sole supervisor and waits through MCP; do not launch background Codex reviewers.",
+    "Keep locked weights/data revisions, tokenizer mapping, double-newline text join, no added special tokens, batch1/context1024, shifted targets and token weighting.",
+    "BF16 primary plus all-test FP32 sensitivity. Each scoring forward starts a new official learned-prefix cache; no incremental decoding or cross-block cache reuse forNLL. Original BF16 .03 incremental cache gate remains failed and is not a prerequisite for this separately reviewed teacher-forced protocol.",
+    "Before test, new entry must reproduce allP1/P2/P4 validation BF16/FP32 NLLs from v4 within1e-5. Full entry verifies successful pretest under identical commit. Test authorization depends on supervisor independent v4review.",
+    "GPU0 fixed UUID,16GiB cap, free>=18432MiB permodel, utilization telemetry only. OOM/NaN/data mismatch stops. Shared-GPU generation timing128prompt+32greedy,3warmup10repeats is descriptive only.",
+    "Only existing environments/checkpoints; no downloads/training. Rehashweights. Per-run <=1740s wall/0.5GPUh,1800s systemd cgroup; project<=4GPUh/6active hours and today21:30CST.",
+    "Keep every block metric and partial progress. Do not automatically rerun/choose models after test results. On routine failure preserve evidence and ask current GPT for specific guidance, not the user.",
+    "Commit only explicit small sanitizedJSON/Markdown/config/source, neverlogs/rawtokens/weights/arrays/credentials. Relaypush pending fromworker.",
+    "Do not write extra review/recomputation scripts or repeat CPU audits after scoring. The current GPT supervisor runs committed review_full_results.py independently. Assemble report and commit results promptly."
+  ],
+  "seeds": [
+    42,
+    20261021
+  ],
+  "code_revision": "Use committed full_evaluation.py/run_full_evaluation.sh on reviewed v4 parent; exact runtimeHEAD recorded before pretest and full.",
+  "environment": "Existing remote /path/to/parscale-reproduction checkout and /path/to/parscale-runtime; torch2.2.2+cu121, Transformers4.51.3, SDPA. Reuse runtime/pkgs and previously authorized read-only MemLoop torch path. All GPU accesses restricted to locked UUID. Existing complete model paths runtime/models/P1,P2,P4.",
+  "experiment_commands": [
+    "Check frozen task ready=true/full_test_authorized_by_supervisor=true, cleanHEAD, no duplicate run. Reuse committed code and prepared raw/downloads/model_paths.json.",
+    "Execute bash scripts/run_full_evaluation.sh runs/parscale-20261021-full once. This hashesweights, runs validation-only scoring against reviewedv4, verifiesagreement, then scores fixedtest inBF16 andFP32 andtimesBF16generation. Do not changeprotocol afterseeingtest.",
+    "Onsuccess inspect full-results and report; ensure three models/two precisions/allblocks/paired2000resamples exist and persist command-to-SHA pluswall/peakmemory.",
+    "Onexception write schema1 FAILED/BLOCKED report with exactcause and availablepartial artifacts. Do notcallpartial success.",
+    "Write small sanitized summary under experiments/parscale-20261021-full plusJSONmetrics/manifests. Commitexplicitpaths (NO.log), recordresultHEAD separately fromrunSHA andrelaypushpending. StopforGPT independentreview."
+  ],
+  "budget": {
+    "gpu_count": 1,
+    "gpu_hours": 0.5,
+    "wall_seconds": 1740,
+    "max_attempts": 1,
+    "model_cost_limit": "One bounded existing-provider DSH session1740s, no spending; allGPUwork inside1800s service and projectremainingbudget."
+  },
+  "stop_conditions": [
+    "OOM/NaN/tokenizer/hash/label-loss mismatch, memorybelow18432MiB, timebudget or16GiBcap reached. Utilization alone is not a stop.",
+    "Pretestdisagreement or incompletev4review prohibits test; preservefailure.",
+    "No test-result-driven changes or automaticreruns."
+  ],
+  "required_outputs": [
+    "report.json",
+    "model-manifest.json",
+    "pretest-validation.json and validation-data-manifest.json",
+    "full-results.json with all per-block metrics, pairedCI, timingrawrepeats andresourcechecks",
+    "test-data-manifest.json",
+    "raw/full.log kept outsideGit",
+    "sanitized experiment summary, actualrunSHA andresultHEAD"
+  ],
+  "version_control": {
+    "repository": "Flutter-Misdreavus/parscale-reproduction",
+    "visibility": "private",
+    "branch": "exp/parscale-20261021",
+    "push_mode": "relay",
+    "checkpoint_minutes": 15
+  },
+  "protocol_amendment": "experiments/parscale-20261021-full/protocol-v2.md",
+  "full_test_authorized_by_supervisor": false
+}
