@@ -1,0 +1,17 @@
+{
+  "code_commit_at_test": "851ce50fb7aee79d071c0d6eb90df671c3f3b955",
+  "command": "CUDA_VISIBLE_DEVICES= PYTHONPATH=/path/to/parscale-runtime/pkgs:/path/to/python/site-packages:$PWD python3 scripts/test_diagnostic_cpu.py",
+  "created_at": "2026-10-21T10:44:23.886825+00:00",
+  "errors": 0,
+  "failures": 0,
+  "log_sha256": "0c57ff08a7d9f9b547bc3aea97c374035919af102ff4434513cc8408ef99bec1",
+  "log_tail": [
+    "Ran 7 tests in 0.164s",
+    "",
+    "OK"
+  ],
+  "run_id": "parscale-20261021-cache-diagnostic-v4",
+  "schema_version": 1,
+  "status": "PASSED",
+  "tests_run": 7
+}
