@@ -1,0 +1,33 @@
+{
+  "attention": "sdpa",
+  "dtype_primary": "bfloat16",
+  "dtype_sensitivity": "float32",
+  "gpu": {
+    "device_count_visible": 1,
+    "device_name": "NVIDIA GeForce RTX 3090",
+    "device_uuid_torch": null,
+    "expected_gpu_uuid": "GPU-REDACTED",
+    "torch_cuda_version": "12.1",
+    "total_memory_gib": 23.56854248046875,
+    "uuid_matches_lock": true
+  },
+  "gpu_memory_cap_gib": 16,
+  "packages": {
+    "datasets": "3.5.0",
+    "einops": "0.8.1",
+    "huggingface-hub": "0.30.2",
+    "numpy": "1.26.4",
+    "pandas": "2.3.3",
+    "pyarrow": "25.0.1",
+    "regex": "2026.7.19",
+    "safetensors": "0.8.0",
+    "scipy": "1.14.1",
+    "tokenizers": "0.21.4",
+    "torch": "2.2.2+cu121",
+    "transformers": "4.51.3"
+  },
+  "python": "3.10.12",
+  "run_id": "parscale-20261021-full",
+  "schema_version": 1,
+  "tf32_matmul": false
+}
