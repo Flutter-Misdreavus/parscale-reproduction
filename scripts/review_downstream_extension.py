@@ -16,16 +16,32 @@ REQUESTS = dict(arc_easy=9501, arc_challenge=4687, hellaswag=40168)
 def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
+def verify_candidate_identity(rows, candidates, expected_gold_sha):
+    gold_vector = [[str(r['doc_id']), r['gold']]
+                   for r in sorted(rows, key=lambda r: str(r['doc_id']))]
+    encoded = json.dumps(gold_vector, sort_keys=True, separators=(',', ':'),
+                         ensure_ascii=False).encode()
+    assert hashlib.sha256(encoded).hexdigest() == expected_gold_sha, 'Frozen gold identity mismatch'
+    expected = {(r['doc_id'], i) for r in rows for i in range(len(r['scores']))}
+    assert set(candidates) == expected, 'Missing or extra candidate identity'
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--run-dir', type=Path, required=True)
     ap.add_argument('--output', type=Path, required=True)
     ap.add_argument('--core-outcomes', type=Path, required=True)
+    ap.add_argument('--data-manifest', type=Path, help='Original prepared manifest; defaults to run-dir/data-manifest.json')
     ap.add_argument('--reps', type=int, default=2000)
     a = ap.parse_args(); root = a.run_dir
     if a.reps != 2000:
         raise ValueError('The frozen confirmatory analysis requires 2000 resamples')
     result = json.loads((root / 'full-results.json').read_text())
+    assert result['run_id'] == 'parscale-20261021-downstream-rest'
+    frozen_path = Path(__file__).resolve().parents[1]/'experiments'/result['run_id']/'task.json'
+    frozen = json.loads(frozen_path.read_text())
+    manifest_path = a.data_manifest or root/'data-manifest.json'
+    assert sha(manifest_path) == frozen['prepared_artifact_sha256']['data-manifest.json']
+    manifest = json.loads(manifest_path.read_text())
     assert result['status'] == 'SUCCEEDED', result['status']
     assert (root/'raw/full.run.sha').read_text().strip() == result['run_git']['head_commit']
     assert set(result['completed_pairs']) == {m+'-'+t for m in MODELS for t in TASKS}
@@ -62,6 +78,9 @@ def main():
                     candidate[key] = c['logprob']
                     stream_hashes[key] = (c['context_sha256'], c['continuation_sha256'])
             assert len(candidate) == REQUESTS[name]
+            assert COUNTS[name] == manifest['tasks'][name]['documents']
+            assert REQUESTS[name] == manifest['tasks'][name]['requests']
+            verify_candidate_identity(rows, candidate, manifest['tasks'][name]['gold_index_sha256'])
             if name in request_hashes:
                 assert stream_hashes == request_hashes[name]
             else:
@@ -97,6 +116,8 @@ def main():
             accuracy[name][model] = {'metric': metric, 'accuracy': float(values.mean()),
                                      'correct': int(values.sum()), 'n': len(values)}
             checks.append({'pair': pair, 'all_candidate_scores_matched': True,
+                           'gold_identity_matches_frozen_pretest_manifest': True,
+                           'candidate_identity_set_exact': True,
                            'identical_request_hashes_across_models': True,
                            'all_item_metrics_reconstructed': True,
                            'outcomes_sha256': sha(path), 'candidates_sha256': sha(candpath)})
@@ -116,6 +137,8 @@ def main():
                                ['git', 'rev-parse', 'HEAD'],
                                cwd=Path(__file__).resolve().parents[1], text=True).strip()},
               'full_results_sha256': sha(root/'full-results.json'),
+              'data_manifest_sha256': sha(manifest_path),
+              'frozen_task_file_sha256': sha(frozen_path),
               'checks': checks, 'accuracy': accuracy,
               'statistics': statistics,
               'primary': {'comparison': 'P4-P1', 'tasks': TASKS,
