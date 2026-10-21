@@ -31,6 +31,14 @@ class ToyCausal(torch.nn.Module):
 
 
 class Regression(unittest.TestCase):
+    def test_utilization_telemetry_preserves_memory_gate(self):
+        for free, expected in [(19055, True), (18431, False)]:
+            with patch.object(evaluate.subprocess, "check_output", return_value=f"GPU-test, {free}, 95\n"):
+                result = evaluate.gpu_admission("GPU-test", 18432, util_max=None)
+                self.assertEqual(result["passed"], expected)
+                self.assertEqual(result["samples"][0]["utilization_percent"], 95)
+                self.assertTrue(result["requirement"]["utilization_record_only"])
+
     def test_single_failed_admission_does_not_poll(self):
         with patch.object(evaluate.subprocess, "check_output",
                           side_effect=["GPU-test, 19055, 12\n", "GPU-test, 19055, 0\n"]) as command:

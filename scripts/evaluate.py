@@ -170,10 +170,11 @@ def gpu_admission(expected_uuid, free_mib_min=20480, util_max=10.0):
     rec = {"uuid": parts[0].strip(), "free_mib": int(parts[1]),
            "utilization_percent": float(parts[2]), "sampled_at": utcnow()}
     passed = (rec["free_mib"] >= free_mib_min
-              and rec["utilization_percent"] <= util_max)
+              and (util_max is None or rec["utilization_percent"] <= util_max))
     return {"passed": passed, "samples": [rec],
             "requirement": {"free_mib_min": free_mib_min,
-                            "utilization_percent_max": util_max, "max_samples": 1},
+                            "utilization_percent_max": util_max, "max_samples": 1,
+                            "utilization_record_only": util_max is None},
             "decision": "admit" if passed else "stop: admission not met"}
 
 

@@ -233,7 +233,8 @@ def phase_preflight(locks, run_dir, model_paths):
             "gpu_uuid": locks["resource"]["gpu_uuid"],
             "free_mib_min": FREE_MIB_MIN,
             "utilization_percent_max": UTIL_MAX,
-            "sampling": f"{ADMISSION_SAMPLES} consecutive 1 s samples within <=10 readings",
+            "sampling": "one observation before each model; no conditional retry",
+            "utilization_record_only": UTIL_MAX is None,
             "allocator_cap_gib": evaluate.EXPECTED_GPU_GIB,
             "scope": "before every creation of an FP32 or BF16 GPU model",
         },
@@ -881,13 +882,18 @@ def write_report(run_dir, pre, tok, ana, diag, timing, started_wall):
 
 
 def main():
+    global UTIL_MAX
     ap = argparse.ArgumentParser()
     ap.add_argument("--run-dir", required=True)
+    ap.add_argument("--record-utilization-only", action="store_true",
+                    help="Explicit v4 resource amendment: utilization is telemetry, not a correctness gate")
     ap.add_argument("--phase", default="all",
                     choices=["all", "preflight", "tokenizer", "analysis", "diagnostics", "timing"])
     ap.add_argument("--dtype", default="paired", choices=["paired", "float32", "bfloat16"],
                     help="paired (default) runs both explicit precision paths; single dtype is a separate explicit mode")
     args = ap.parse_args()
+    if args.record_utilization_only:
+        UTIL_MAX = None
     run_dir = Path(args.run_dir).resolve()
     run_dir.mkdir(parents=True, exist_ok=True)
     os.environ["EVAL_RUN_DIR"] = str(run_dir)
