@@ -14,7 +14,7 @@
 
 ```bash
 python3 scripts/review_downstream_extension.py \
-  --run-dir runs/parscale-20261021-downstream-rest-received/artifacts \
+  --run-dir runs/parscale-20261021-downstream-rest-received \
   --core-outcomes experiments/parscale-20261021-downstream-core/paired-outcomes.json \
   --output experiments/parscale-20261021-downstream-rest/supervisor-independent.json
 python3 scripts/bootstrap_downstream_extension.py \

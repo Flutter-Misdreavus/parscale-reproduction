@@ -107,10 +107,10 @@ def main():
                'arc_easy_train_overlap_doc_ids': overlap['arc_easy']['train_overlap_eval_row_indices']}
     core = json.loads(a.core_outcomes.read_text())
     statistics = compute(compact, core)
-    primary = statistics['extension']['comparisons']['P4-P1']
     report = {'run_id': result['run_id'], 'status': 'ACCEPTED',
               'actual_run_commit': result['run_git']['head_commit'],
               'analysis': {'script_sha256': sha(Path(__file__)),
+                           'bootstrap_script_sha256': sha(Path(__file__).with_name('bootstrap_downstream_extension.py')),
                            'numpy_version': np.__version__,
                            'source_commit': subprocess.check_output(
                                ['git', 'rev-parse', 'HEAD'],
