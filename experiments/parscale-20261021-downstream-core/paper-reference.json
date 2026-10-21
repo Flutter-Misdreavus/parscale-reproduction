@@ -1,0 +1,47 @@
+{
+  "source": "https://arxiv.org/html/2505.10475v1",
+  "tables": [
+    24,
+    25,
+    26,
+    27,
+    28,
+    29
+  ],
+  "model": "ParScale-0.7B-Pile, paper nonembedding N=0.5B",
+  "metrics_percent": {
+    "P1": {
+      "winogrande": 51.9,
+      "hellaswag": 35.7,
+      "openbookqa": 26.0,
+      "piqa": 65.0,
+      "arc_mean": 36.9,
+      "sciq": 78.9
+    },
+    "P2": {
+      "winogrande": 51.0,
+      "hellaswag": 36.8,
+      "openbookqa": 26.8,
+      "piqa": 65.7,
+      "arc_mean": 38.6,
+      "sciq": 80.8
+    },
+    "P4": {
+      "winogrande": 52.4,
+      "hellaswag": 37.4,
+      "openbookqa": 26.6,
+      "piqa": 65.8,
+      "arc_mean": 39.1,
+      "sciq": 82.3
+    },
+    "P8": {
+      "winogrande": 51.7,
+      "hellaswag": 38.6,
+      "openbookqa": 26.8,
+      "piqa": 66.5,
+      "arc_mean": 39.4,
+      "sciq": 81.3
+    }
+  },
+  "note": "Published rounded percentages, not individual predictions; differences cannot be independently significance-tested against paper."
+}

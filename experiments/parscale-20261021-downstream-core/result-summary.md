@@ -15,8 +15,10 @@ Primary endpoint: P4-P1 = **+1.0501 percentage points** (threshold >=1.0 pp: Tru
 
 Descriptive: P2-P1 = +0.6243 pp; P8-P1 = +0.5577 pp.
 
-Verification: all eight frozen fields matched for all four tasks (`request-verification.json`), all 16 outcome/candidate file hashes match `full-results.json`, and no non-finite values or memory-admission failures occurred. Peak reserved GPU memory was 15.859 GiB under the 16 GiB cap; scoring wall was 2,508.1 s of the 4,800 s cap and wrapper wall 2,625 s of the 5,400 s cap (~0.697 GPU-hours).
+Verification: all eight frozen fields matched for all four tasks (`request-verification.json`), all 16 outcome/candidate file hashes match `full-results.json`, and no non-finite values or memory-admission failures occurred. Peak reserved GPU memory was 15.859 GiB under the 16 GiB cap; scoring wall was 2,508.1 s of the 4,800 s cap and executor-reported evaluation command wall 2,625 s; validated supervision-wrapper wall was 2,776.481 s of the 5,400 s cap (scoring phase ~0.697 GPU-hours).
 
 Limitations: one checkpoint per P, shared-GPU timing is descriptive, and this four-task mean must not be reported as the paper six-group General average. `progress.json` is the last 64-candidate checkpoint (15 completed pairs); the final `full-results.json` lists all 16.
 
 Git: run executed at `e2978d61162225cc5f3b82951f1852f94df2e95e`; this result summary is committed after the run. Relay push is pending for the local supervisor.
+
+Supervisor follow-up: the paired P4-P1 95% interval is [−0.1188, +2.1787] pp and includes zero, so the frozen primary criterion is not met. See [independent review](review.md). Both executor commits were relayed to the public branch by the supervisor.

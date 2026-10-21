@@ -1,0 +1,208 @@
+{
+  "run_id": "parscale-20261021-downstream-core",
+  "event_id": "dc5f615ef737815260475bb1d02dcd8702d900984f644e91c91ed1671f804e2b",
+  "task_sha256": "0519d27670bd8eec1058a15070f99baa02e97e8ad11377aa5187c40b36ec0bcb",
+  "status": "SUCCEEDED",
+  "verified_at": "2026-10-21T13:43:09.114216+00:00",
+  "actual_run_commit": "e2978d61162225cc5f3b82951f1852f94df2e95e",
+  "worker_result_commit": "e38a3844d3cd637d51cebeecd0c38b4191dfa8cd",
+  "analysis_commit": "2349fad474c8448f16bcd6a6952796ba8c4165cb",
+  "artifact_hashes": [
+    {
+      "bytes": 10386,
+      "path": "full-results.json",
+      "sha256": "906a0f5cff00d882f6379046aa240b555edbde6b86668142e1272ee6e8d2dfde"
+    },
+    {
+      "bytes": 951,
+      "path": "request-verification.json",
+      "sha256": "e6fae613da5016de61ebb22e596619a8ffca2704277b7ade9d67d4342238a1ac"
+    },
+    {
+      "bytes": 469,
+      "path": "progress.json",
+      "sha256": "448c457f77347f23c73a260b7e852448ff8e44465fdb3da8f0a9454a44391ea7"
+    },
+    {
+      "bytes": 389069,
+      "path": "outcomes/P1-piqa.json",
+      "sha256": "678959baa56d39032e4d9d564eab6f8898d5ff1504e9ebd7b50429e37d0d3d15"
+    },
+    {
+      "bytes": 281006,
+      "path": "outcomes/P1-sciq.json",
+      "sha256": "b3a15cf1b0eccfe6dadbda327c742e84940e005d958a0ad307136181961d81a2"
+    },
+    {
+      "bytes": 241370,
+      "path": "outcomes/P1-winogrande.json",
+      "sha256": "70eee6bc7ccad0f4e20141b064e74ffc8ed57525c1a815def803ba051729773c"
+    },
+    {
+      "bytes": 141035,
+      "path": "outcomes/P1-openbookqa.json",
+      "sha256": "34245560c9d56f36a74723097462b43e17cfdd4c1b292fbbe1c4fc026f17c32a"
+    },
+    {
+      "bytes": 389068,
+      "path": "outcomes/P2-piqa.json",
+      "sha256": "ba44cea19e24ab6ed91f6593f08a039ba5ab6c7ed5dedc39add27a6b16c88dc3"
+    },
+    {
+      "bytes": 281122,
+      "path": "outcomes/P2-sciq.json",
+      "sha256": "dc14a950eb6b92cdc17701a9f8101324e5973b71d8e9084ba090c1ec035e4480"
+    },
+    {
+      "bytes": 241296,
+      "path": "outcomes/P2-winogrande.json",
+      "sha256": "7f5816f4904269c01004ab1533b88fc41ef113b9cf8fcd0eaa30ca662be23fb8"
+    },
+    {
+      "bytes": 141116,
+      "path": "outcomes/P2-openbookqa.json",
+      "sha256": "35ecf306895b789ec03f9e28eda61b84e40e98b81b40d91b5a9f8d2e70599512"
+    },
+    {
+      "bytes": 389019,
+      "path": "outcomes/P4-piqa.json",
+      "sha256": "639434d2dfa05b4ada829b8cb3b7c68457318ce8644323fe12e3f2cb3f590984"
+    },
+    {
+      "bytes": 281233,
+      "path": "outcomes/P4-sciq.json",
+      "sha256": "ac38ab991fbe67842bc531758c950c3c94b94c60eed7c951bfed8b776ad398a2"
+    },
+    {
+      "bytes": 241315,
+      "path": "outcomes/P4-winogrande.json",
+      "sha256": "b07420c78e4935cf8d2d1cbe4537084054cf2a79752360f5c5f3993d37d6b5b5"
+    },
+    {
+      "bytes": 141054,
+      "path": "outcomes/P4-openbookqa.json",
+      "sha256": "64e6e9edf8874636e9bfc81afc4e0f7a044c8a971c3b6e80d0222f74ac46eaa6"
+    },
+    {
+      "bytes": 388904,
+      "path": "outcomes/P8-piqa.json",
+      "sha256": "324fa75ad7a6dc765449f65ac0d7a5b9be701fe13e578fb691b69f593111abb9"
+    },
+    {
+      "bytes": 281133,
+      "path": "outcomes/P8-sciq.json",
+      "sha256": "1d729ad8c8633d1966708af3dc94a63b7d9d703baf9d30c5aa5560ca8aaccdf2"
+    },
+    {
+      "bytes": 241344,
+      "path": "outcomes/P8-winogrande.json",
+      "sha256": "1956ed6e696246207b221e7f5f53c67ddd28afbf6391afdd863be3380fb9c2b1"
+    },
+    {
+      "bytes": 141061,
+      "path": "outcomes/P8-openbookqa.json",
+      "sha256": "a60515c123633657ed38660c12531d05e74de2e9eaa41a23fcb372041c342f11"
+    },
+    {
+      "bytes": 947306,
+      "path": "candidates/P1-piqa.jsonl",
+      "sha256": "b35316ba61eaf51310d6052cdd1b5af92ffe2357c31ac054689d991d7c1dce3f"
+    },
+    {
+      "bytes": 1028639,
+      "path": "candidates/P1-sciq.jsonl",
+      "sha256": "f5ec359d89db36c942e502a2a91853223db5275f6a557d375f4a88183314fec0"
+    },
+    {
+      "bytes": 652923,
+      "path": "candidates/P1-winogrande.jsonl",
+      "sha256": "7df1e10e2e8b82290686473ff6de72fbb116a27c3f25e0c9c0fe9222f68e5b80"
+    },
+    {
+      "bytes": 514413,
+      "path": "candidates/P1-openbookqa.jsonl",
+      "sha256": "b40e01b7e4d5217ae30ad5db629a25732a0db4c1dec4f7b7a91a7ad142a264e3"
+    },
+    {
+      "bytes": 947305,
+      "path": "candidates/P2-piqa.jsonl",
+      "sha256": "a5191197b8b4b85aa54dc138fda02f3cbcd2095f084bfe676d6d3614ac3eadb2"
+    },
+    {
+      "bytes": 1028737,
+      "path": "candidates/P2-sciq.jsonl",
+      "sha256": "8d59c0b65b409405025d45b257baf939094914c4dfec5e27adc7221c2e921e80"
+    },
+    {
+      "bytes": 652850,
+      "path": "candidates/P2-winogrande.jsonl",
+      "sha256": "87bb9141e0218ab97d30ae349bd0cf91ea8089c9044f836b7dbdf7baa1003245"
+    },
+    {
+      "bytes": 514496,
+      "path": "candidates/P2-openbookqa.jsonl",
+      "sha256": "271edb48a98285b367bebd0e9dc6252edb1a5021ffc49887d564f5285c6bd68d"
+    },
+    {
+      "bytes": 947256,
+      "path": "candidates/P4-piqa.jsonl",
+      "sha256": "c0428a61d2d7c78efaf9b8f2dd792704e7789d18085817b068dbc1daeb12f35e"
+    },
+    {
+      "bytes": 1028852,
+      "path": "candidates/P4-sciq.jsonl",
+      "sha256": "7b8dba0f3dc9031b977abc868be59c965ad2eaec2f3a94729168f68504b4baf0"
+    },
+    {
+      "bytes": 652871,
+      "path": "candidates/P4-winogrande.jsonl",
+      "sha256": "13afb79a93958a03f549dfc8e7644555ef5c9c39434c2a6a104368e85bcdce9f"
+    },
+    {
+      "bytes": 514434,
+      "path": "candidates/P4-openbookqa.jsonl",
+      "sha256": "ea44cfdb46b2c93e8f4819d807e76a0178fbcdc45492156ceaa598f3c4ec28fb"
+    },
+    {
+      "bytes": 947141,
+      "path": "candidates/P8-piqa.jsonl",
+      "sha256": "897ed13dcb3461ab28e4cf657b9f15256ef1e5c0074a5c766c3005c72aadb7f8"
+    },
+    {
+      "bytes": 1028749,
+      "path": "candidates/P8-sciq.jsonl",
+      "sha256": "91b220f66caca4b5fcbb22801aed573a1fc2fadfdad06aa0ca8726b430e1a8aa"
+    },
+    {
+      "bytes": 652900,
+      "path": "candidates/P8-winogrande.jsonl",
+      "sha256": "840558b967227f93b5acb3666dba2782c8e1b540a877b9a7c7e97b9a654cfe79"
+    },
+    {
+      "bytes": 514444,
+      "path": "candidates/P8-openbookqa.jsonl",
+      "sha256": "ca00d711efa140990484ebadae7388b6746a024976edbab120dc7a7dac39e41b"
+    },
+    {
+      "bytes": 20578,
+      "path": "raw/full.log",
+      "sha256": "c0ba79e19c1cf03ec4afa8f419eebf031af3ebb0ed00145b033d1acb5a0491aa"
+    },
+    {
+      "bytes": 41,
+      "path": "raw/full.run.sha",
+      "sha256": "ce85843319b5fee9487a42bda57122aa8cb1c6ae091ed95685e6f40acd8de65f"
+    },
+    {
+      "bytes": 306,
+      "path": "started.json",
+      "sha256": "7d744119a293a385e41dc5cc78227c268b410012163ae8d361cc8cb1022cbc86"
+    },
+    {
+      "bytes": 8904,
+      "path": "report.json",
+      "sha256": "b0f3103247a1187073f201b0863ab4c3405f13cad9aa2024ecb16c84600f9689"
+    }
+  ],
+  "scope": "Original private runtime artifact hashes; raw data, candidate scores and executor logs are not published."
+}

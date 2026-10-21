@@ -1,5 +1,7 @@
 # Parallel Scaling 最小复现结果
 
+后续已完成 0.7B 的四项下游任务 × P1/P2/P4/P8，共 16 组评测；结果与独立复核见 [DOWNSTREAM.md](DOWNSTREAM.md)。下游主要区间包含零，未达到预设判据。
+
 2026-10-21 19:07（北京时间）完成 GPU 全量评分，独立 CPU 复算通过。官方约 0.7B 的 P1/P2/P4 在固定 WikiText-2 测试集上呈现损失依次下降的趋势，BF16 与 FP32 结论一致，满足测试前固定的最小验证判据。结果支持这些 checkpoint 在本语料和规模下的趋势；没有重新训练模型，不能据此宣称完整复现论文的 scaling law 或效率倍数。
 
 本次 run 为 `parscale-20261021-full`，共293个连续文本块、每模型/精度298,785个计分 target tokens，六组均使用同一数据和 tokenizer。上下文1024，batch1，保留末尾短块，NLL按token加权（越低越好）。完整协议见 [protocol-v2.md](experiments/parscale-20261021-full/protocol-v2.md)。

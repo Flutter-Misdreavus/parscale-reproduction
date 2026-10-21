@@ -200,5 +200,7 @@
   "started_at": "2026-10-21T12:59:16.388898+00:00",
   "status": "SUCCEEDED",
   "task_sha256": "accbc3b0005084ed5a32c74e1ada9c109edaac307f8c1b05796221338d381ed5",
-  "wrapper_wall_seconds": 2625
+  "executor_reported_command_wall_seconds": 2625,
+  "supervision_wrapper_wall_seconds": 2776.481,
+  "supervisor_timing_note": "2625 seconds is executor-reported evaluation command time; validated completion event measures 2776.481 seconds for the supervision wrapper."
 }
