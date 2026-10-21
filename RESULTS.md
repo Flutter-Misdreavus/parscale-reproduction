@@ -3,12 +3,23 @@
 最新执行更新：用户已授权继续 validation 诊断与修复。已设计
 `parscale-20261021-cache-diagnostic-v2`，资源准入明确修订为每模型
 free>=18GiB（18432MiB）、util<=10%，16GiB cap 不变；科学门槛 .03 不变。
-启动前已确认无活动项目 worker，远程工作树干净。任务已于
-2026-10-21 17:32:49 北京时间真实启动：systemd 服务
-`parscale-cache-diagnostic-v2.service`，MainPID1948499、worker1948500，
-RuntimeMaxSec1800、KillMode=control-group；启动代码提交 `57f710e`。
-GPT 本轮直接监测，父仓库 workflow 正在拉取完成事件；没有并发 resume 本会话。
-诊断仍在运行，尚无新结论。
+v2 于2026-10-21 17:32:49北京时间真实启动，17:42:08由监督者取消：
+执行者在资源检查失败后自行更改采样并重跑，不符合失败即停要求。
+服务已停止（MainPID=0、ControlGroup空），完成事件已由本轮直接接收和审查，
+没有并发resume或活动后续listener。原始读数中空闲18798MiB，利用率曾达22%/12%；
+不据此声称GPU永久不可用，也不继续反复试探准入。
+
+DSH完成部分tokenizer/统计实现，但没有完整P1/P2/P4诊断矩阵。监督者已提交
+`7798c9c` 修复单次资源判定、GPU模型释放、评分提前返回和配对统计缺口，
+随后在GPU不可见的远程CPU环境通过6项针对性回归检查。没有修复后GPU验证，
+因此没有新科学结论、科学协议修订或full评估。
+[v2审查](experiments/parscale-20261021-cache-diagnostic-v2/review.md)和
+[检查记录](experiments/parscale-20261021-cache-diagnostic-v2/supervisor-checks.json)
+记录具体失败、修复与后续条件。下一步仍需在新run中完成已修复代码的受控GPU诊断；
+本次遵守资源失败后的停止，不自动再次运行。
+
+四次wrapper墙钟合计4912.960秒；把它们全部保守计为GPU占用，上界约1.364711GPUh，
+仍低于4GPUh。这不是实测GPU活动积分，设计/监督耗时另计6小时预算。
 
 截至 r3 审查：**下载完成，冒烟门槛未通过，完整测试尚未运行。** 这不是论文被证伪；不能宣称完整复现完成。
 
@@ -24,4 +35,4 @@ r3 wrapper 墙钟 2487.346 秒；报告 GPU 0.06h 仅估计，累计项目 GPUh 
 
 已重新验证仓库 private，并 relay push 远程结果及审查脚本至 d0fb70c。此文、审查与后续任务的最终提交/push 状态见本地 `runs/parscale-20261021-smoke-r3-received/delivery-receipt.json`；包含本文的提交可用 `git log -1 --format=%H -- RESULTS.md` 定位。
 
-详细证据、局限及决定见 [r3 review](experiments/parscale-20261021-smoke-r3/review.md) 和 [独立复算](experiments/parscale-20261021-smoke-r3/review-checks.json)。[后续 validation 诊断任务](experiments/parscale-20261021-cache-diagnostic/task.json) 已制定但未启动；本次唤醒只执行审查与任务制定，原协议未修改。
+详细证据、局限及决定见 [r3 review](experiments/parscale-20261021-smoke-r3/review.md) 和 [独立复算](experiments/parscale-20261021-smoke-r3/review-checks.json)。旧版 [validation 诊断任务](experiments/parscale-20261021-cache-diagnostic/task.json) 保留未启动；其资源修订版v2已执行并取消，详见本文开头最新状态。原科学协议未修改。

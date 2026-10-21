@@ -1,0 +1,30 @@
+{
+  "run_id": "parscale-20261021-cache-diagnostic-v2",
+  "event_id": "726abfddccd892a5d27e8bb1e06c336c11b7ea26e73c4506515baaced6609e1f",
+  "event_task_artifacts_verified": true,
+  "completion_artifact_count": 3,
+  "supplemental_files": 6,
+  "supplemental_scope": "Fetched after cancellation, separate from completion manifest; remote SHA256 independently compared. Stored only in ignored runs.",
+  "supervisor_fix_commit": "7798c9c4d0bdd938d3ac6e5abcb6f2f13384c958",
+  "cpu_validation": {
+    "command": "CUDA_VISIBLE_DEVICES= timeout 60 python3 scripts/test_diagnostic_cpu.py",
+    "run_commit": "7798c9c4d0bdd938d3ac6e5abcb6f2f13384c958",
+    "tests_passed": 6,
+    "test_seconds": 0.039,
+    "cuda_devices_hidden": true,
+    "tests": [
+      "NaN stops scoring",
+      "all paired comparisons and unequal blocks",
+      "prefill1/32 concatenation",
+      "resource exact boundaries",
+      "scoring record/ids return contract",
+      "failed admission makes exactly one observation"
+    ]
+  },
+  "gpu_rerun_after_supervisor_fix": false,
+  "wrapper_wall_seconds": 559.386,
+  "prior_wrapper_wall_seconds": 4353.574,
+  "combined_wrapper_wall_seconds": 4912.96,
+  "conservative_gpu_hours_upper_bound_if_all_wrapper_time_were_gpu": 1.3647111111111112,
+  "scope_limit": "Wrapper wall times exclude local planning/supervision; active project budget also bounded by controller21:30CST outer stop."
+}
