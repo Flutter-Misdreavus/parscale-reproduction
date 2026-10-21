@@ -3,6 +3,7 @@
 import argparse
 import hashlib
 import json
+import subprocess
 from pathlib import Path
 import numpy as np
 
@@ -111,6 +112,11 @@ def main():
     primary = comparisons['P4-P1']
     report = {'run_id': result['run_id'], 'status': 'ACCEPTED',
               'actual_run_commit': result['run_git']['head_commit'],
+              'analysis': {'script_sha256': sha(Path(__file__)),
+                           'numpy_version': np.__version__,
+                           'source_commit': subprocess.check_output(
+                               ['git', 'rev-parse', 'HEAD'],
+                               cwd=Path(__file__).resolve().parents[1], text=True).strip()},
               'full_results_sha256': sha(root/'full-results.json'),
               'checks': checks, 'accuracy': accuracy,
               'macro_accuracy': macros, 'macro_comparisons': comparisons,
